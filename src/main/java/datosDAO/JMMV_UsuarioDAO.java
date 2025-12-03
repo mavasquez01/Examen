@@ -6,28 +6,29 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
+
+
 public class JMMV_UsuarioDAO {
 
-    //instanciar conexión
     private JMMV_Conexion conexion;
 
-    //constructor para iniciar la conexión
     public JMMV_UsuarioDAO() {
 
         conexion = new JMMV_Conexion();
 
     }
 
-    //método para verificar credenciales en login
+    //método para verificar si el usuario tiene acceso al módulo de Gestión
+    //acceso: su rol es Administrador y (su username y contraseña son correctas)
     public String JMMV_VerificarLogin(String user, String pass) {
-        
-        //variable String para retornar el rol del usuario
-        String JMMV_nombreRolUsuario = null;
 
-        String sql = "SELECT r.JMMV_roles_nombre AS rol_usuario, u.JMMV_usuarios_nom_usuario AS nombre_usuario\n"
+        //variable para retornar el nombre de usuario
+        String nomUsuario = null;
+
+        String sql = "SELECT r.JMMV_roles_id_rol AS rol_usuario, u.JMMV_usuarios_nom_usuario AS nombre_usuario\n"
                 + "FROM JMMV_usuarios u\n"
                 + "JOIN JMMV_roles r ON u.JMMV_usuarios_id_rol = r.JMMV_roles_id_rol\n"
-                + "WHERE u.JMMV_usuarios_nom_usuario = ? AND u.JMMV_usuarios_contrasena = ?";
+                + "WHERE r.JMMV_roles_id_rol = 1 AND u.JMMV_usuarios_nom_usuario = ? AND u.JMMV_usuarios_contrasena = ?;";
 
         try (Connection conn = conexion.JMMV_Conectar(); PreparedStatement stmt = conn.prepareStatement(sql)) {
 
@@ -38,7 +39,7 @@ public class JMMV_UsuarioDAO {
 
                 if (rs.next()) {
 
-                    JMMV_nombreRolUsuario = rs.getString("rol_usuario");
+                    nomUsuario = rs.getString("nombre_usuario");
 
                 }
 
@@ -49,14 +50,11 @@ public class JMMV_UsuarioDAO {
             JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
 
         }
-        
-        System.out.println("Test JM | UsuarioDAO | rol de usuario: "+JMMV_nombreRolUsuario);
-        
-        return JMMV_nombreRolUsuario;
+
+        System.out.println("Test JM | UsuarioDAO | username: " + nomUsuario);
+
+        return nomUsuario;
 
     }
-    
-    //método para listar todos los clientes
-    
 
 }

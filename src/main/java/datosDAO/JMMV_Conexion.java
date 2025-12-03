@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
+
+
 public class JMMV_Conexion {
 
     //parámetros para la conexión a la BD
@@ -22,14 +24,12 @@ public class JMMV_Conexion {
 
             conexion = DriverManager.getConnection(url, user, pass);
 
-            
-
             //manejo de error en la conexión
         } catch (SQLException e) {
 
             JOptionPane.showMessageDialog(null, "Error en la conexión: " + e.getMessage());
         }
-        
+
         System.out.println("Test JM | JMMV_Conexion | :Conexión exitosa");
         return conexion;
 

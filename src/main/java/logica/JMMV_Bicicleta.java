@@ -1,6 +1,7 @@
 package logica;
 
 
+
 public class JMMV_Bicicleta {
 
     private int JMMV_Bicicleta_idBicicleta;
@@ -45,6 +46,6 @@ public class JMMV_Bicicleta {
 
     public void setJMMV_Bicicleta_estaDisponible(boolean JMMV_Bicicleta_estaDisponible) {
         this.JMMV_Bicicleta_estaDisponible = JMMV_Bicicleta_estaDisponible;
-    }    
-    
+    }
+
 }
