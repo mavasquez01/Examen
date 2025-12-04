@@ -6,10 +6,10 @@ public class JMMV_Bicicleta {
 
     private int JMMV_Bicicleta_idBicicleta;
     private String JMMV_Bicicleta_nombre;
-    private int JMMV_Bicicleta_tipoBicicleta;
+    private String JMMV_Bicicleta_tipoBicicleta;
     private boolean JMMV_Bicicleta_estaDisponible;
 
-    public JMMV_Bicicleta(int JMMV_Bicicleta_idBicicleta, String JMMV_Bicicleta_nombre, int JMMV_Bicicleta_tipoBicicleta, boolean JMMV_Bicicleta_estaDisponible) {
+    public JMMV_Bicicleta(int JMMV_Bicicleta_idBicicleta, String JMMV_Bicicleta_nombre, String JMMV_Bicicleta_tipoBicicleta, boolean JMMV_Bicicleta_estaDisponible) {
         this.JMMV_Bicicleta_idBicicleta = JMMV_Bicicleta_idBicicleta;
         this.JMMV_Bicicleta_nombre = JMMV_Bicicleta_nombre;
         this.JMMV_Bicicleta_tipoBicicleta = JMMV_Bicicleta_tipoBicicleta;
@@ -32,11 +32,11 @@ public class JMMV_Bicicleta {
         this.JMMV_Bicicleta_nombre = JMMV_Bicicleta_nombre;
     }
 
-    public int getJMMV_Bicicleta_tipoBicicleta() {
+    public String getJMMV_Bicicleta_tipoBicicleta() {
         return JMMV_Bicicleta_tipoBicicleta;
     }
 
-    public void setJMMV_Bicicleta_tipoBicicleta(int JMMV_Bicicleta_tipoBicicleta) {
+    public void setJMMV_Bicicleta_tipoBicicleta(String JMMV_Bicicleta_tipoBicicleta) {
         this.JMMV_Bicicleta_tipoBicicleta = JMMV_Bicicleta_tipoBicicleta;
     }
 
