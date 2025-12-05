@@ -10,12 +10,14 @@ CREATE TABLE JMMV_usuarios(
     JMMV_usuarios_nom_usuario VARCHAR(75) NOT NULL UNIQUE,
     JMMV_usuarios_contrasena VARCHAR(20) NOT NULL,
     JMMV_usuarios_correo VARCHAR(50) NOT NULL,
-    JMMV_usuarios_id_rol INT NOT NULL
+    JMMV_usuarios_id_rol INT NOT NULL,
+    JMMV_usuarios_esta_activo BOOLEAN NOT NULL
     );
 
 CREATE TABLE JMMV_roles(
     JMMV_roles_id_rol INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    JMMV_roles_nombre VARCHAR(75) NOT NULL UNIQUE
+    JMMV_roles_nombre VARCHAR(75) NOT NULL UNIQUE,
+    JMMV_roles_esta_activo BOOLEAN NOT NULL
     );
     
 CREATE TABLE JMMV_clientes(
@@ -34,7 +36,8 @@ CREATE TABLE JMMV_clientes(
     
 CREATE TABLE JMMV_comunas(
     JMMV_comunas_id_comuna INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    JMMV_comunas_nombre VARCHAR(75) NOT NULL UNIQUE
+    JMMV_comunas_nombre VARCHAR(75) NOT NULL UNIQUE,
+    JMMV_comunas_esta_activo BOOLEAN NOT NULL
     );
     
 CREATE TABLE JMMV_reservas(
@@ -42,7 +45,8 @@ CREATE TABLE JMMV_reservas(
     JMMV_reservas_id_cliente INT NOT NULL,
     JMMV_reservas_id_bicicleta INT NOT NULL,
     JMMV_reservas_fecha_inicio DATE NOT NULL,
-    JMMV_reservas_fecha_fin DATE NOT NULL
+    JMMV_reservas_fecha_fin DATE NOT NULL,
+    JMMV_reservas_esta_activo BOOLEAN NOT NULL
     );
 
 CREATE TABLE JMMV_bicicletas(
@@ -56,7 +60,8 @@ CREATE TABLE JMMV_bicicletas(
 CREATE TABLE JMMV_tipos_bicicletas(
     JMMV_tipos_bicicletas_id_tipo_bicicleta INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     JMMV_tipos_bicicletas_nombre VARCHAR(75) NOT NULL UNIQUE,
-    JMMV_tipos_bicicletas_descripcion TEXT
+    JMMV_tipos_bicicletas_descripcion TEXT,
+    JMMV_tipos_bicicletas_esta_activo BOOLEAN NOT NULL
     );
 
 #Creación de FKs
@@ -99,70 +104,70 @@ REFERENCES JMMV_bicicletas(JMMV_bicicletas_id_bicicleta);
 
 INSERT INTO JMMV_roles
 VALUES
-(NULL,'Administrador'),
-(NULL,'Cliente')
+(NULL,'Administrador',TRUE),
+(NULL,'Cliente',TRUE)
 ;
 
 INSERT INTO JMMV_comunas
 VALUES
-(NULL,'Cauquenes'),
-(NULL,'Chanco'),
-(NULL,'Pelluhue'),
-(NULL,'Curicó'),
-(NULL,'Hualañé'),
-(NULL,'Licantén'),
-(NULL,'Molina'),
-(NULL,'Rauco'),
-(NULL,'Romeral'),
-(NULL,'Sagrada Familia'),
-(NULL,'Teno'),
-(NULL,'Vichuquén'),
-(NULL,'Colbún'),
-(NULL,'Linares'),
-(NULL,'Longaví'),
-(NULL,'Parral'),
-(NULL,'Retiro'),
-(NULL,'San Javier'),
-(NULL,'Villa Alegre'),
-(NULL,'Yerbas Buenas'),
-(NULL,'Constitución'),
-(NULL,'Curepto'),
-(NULL,'Empedrado'),
-(NULL,'Maule'),
-(NULL,'Pelarco'),
-(NULL,'Pencahue'),
-(NULL,'Río Claro'),
-(NULL,'San Clemente'),
-(NULL,'San Rafael'),
-(NULL,'Talca')
+(NULL,'Cauquenes',TRUE),
+(NULL,'Chanco',TRUE),
+(NULL,'Pelluhue',TRUE),
+(NULL,'Curicó',TRUE),
+(NULL,'Hualañé',TRUE),
+(NULL,'Licantén',TRUE),
+(NULL,'Molina',TRUE),
+(NULL,'Rauco',TRUE),
+(NULL,'Romeral',TRUE),
+(NULL,'Sagrada Familia',TRUE),
+(NULL,'Teno',TRUE),
+(NULL,'Vichuquén',TRUE),
+(NULL,'Colbún',TRUE),
+(NULL,'Linares',TRUE),
+(NULL,'Longaví',TRUE),
+(NULL,'Parral',TRUE),
+(NULL,'Retiro',TRUE),
+(NULL,'San Javier',TRUE),
+(NULL,'Villa Alegre',TRUE),
+(NULL,'Yerbas Buenas',TRUE),
+(NULL,'Constitución',TRUE),
+(NULL,'Curepto',TRUE),
+(NULL,'Empedrado',TRUE),
+(NULL,'Maule',TRUE),
+(NULL,'Pelarco',TRUE),
+(NULL,'Pencahue',TRUE),
+(NULL,'Río Claro',TRUE),
+(NULL,'San Clemente',TRUE),
+(NULL,'San Rafael',TRUE),
+(NULL,'Talca',TRUE)
 ;
 
 INSERT INTO JMMV_tipos_bicicletas
 VALUES
-(NULL,'Urbana','desc 1'),
-(NULL,'Ruta','desc 2'),
-(NULL,'Montaña','desc 3'),
-(NULL,'Triatlón','desc 4'),
-(NULL,'Plegable','desc 5'),
-(NULL,'BMX',NULL)
+(NULL,'Urbana','desc 1',TRUE),
+(NULL,'Ruta','desc 2',TRUE),
+(NULL,'Montaña','desc 3',TRUE),
+(NULL,'Triatlón','desc 4',TRUE),
+(NULL,'Plegable','desc 5',TRUE),
+(NULL,'BMX',NULL,TRUE)
 ;
 
 INSERT INTO JMMV_usuarios
 VALUES
-(NULL,'admin','123','correo1@dominio.com',1),
-(NULL,'admin2','a222','correo2@dominio.com',1),
-(NULL,'usuarioC3','a333','correo3@dominio.com',2),
-(NULL,'usuarioC4','a444','correo4@dominio.com',2),
-(NULL,'usuarioC5','a555','correo5@dominio.com',2),
-(NULL,'usuarioC6','a666','correo6@dominio.com',2),
-(NULL,'usuarioC777','a777','correo7@dominio.com',2),
-(NULL,'usuarioC8','a888','correo8@dominio.com',2),
-(NULL,'usuarioC9','a999','correo9@dominio.com',2),
-(NULL,'usuarioC10','a1010','correo10@dominio.com',2),
-(NULL,'usuarioC11','a1111','correo11@dominio.com',2),
-(NULL,'usuarioC12','a1212','correo12@dominio.com',2),
-(NULL,'usuarioC13','a1111','correo13@dominio.com',2),
-(NULL,'usuarioC14','a1212','correo14@dominio.com',2)
+(NULL,'admin','123','correo1@dominio.com',1,TRUE),
+(NULL,'admin2','a222','correo2@dominio.com',1,TRUE),
+(NULL,'usuarioC3','a333','correo3@dominio.com',2,TRUE),
+(NULL,'usuarioC4','a444','correo4@dominio.com',2,TRUE),
+(NULL,'usuarioC5','a555','correo5@dominio.com',2,TRUE),
+(NULL,'usuarioC6','a666','correo6@dominio.com',2,TRUE),
+(NULL,'usuarioC777','a777','correo7@dominio.com',2,TRUE),
+(NULL,'usuarioC8','a888','correo8@dominio.com',2,TRUE),
+(NULL,'usuarioC9','a999','correo9@dominio.com',2,TRUE),
+(NULL,'usuarioC10','a1010','correo10@dominio.com',2,TRUE),
+(NULL,'usuarioC11','a1111','correo11@dominio.com',2,TRUE),
+(NULL,'usuarioC12','a1212','correo12@dominio.com',2,TRUE),
+(NULL,'usuarioC13','a1111','correo13@dominio.com',2,TRUE),
+(NULL,'usuarioC14','a1212','correo14@dominio.com',2,TRUE)
 ;
 
 INSERT INTO JMMV_clientes
@@ -206,22 +211,22 @@ VALUES
 
 INSERT INTO JMMV_reservas
 VALUES
-(NULL,3,2,'2025-10-01','2025-10-08'),
-(NULL,4,1,'2025-10-02','2025-10-09'),
-(NULL,5,5,'2025-10-02','2025-10-09'),
-(NULL,6,1,'2025-10-03','2025-10-10'),
-(NULL,3,2,'2025-10-04','2025-10-11'),
-(NULL,8,3,'2025-10-04','2025-10-11'),
-(NULL,9,4,'2025-10-05','2025-10-12'),
-(NULL,10,5,'2025-10-06','2025-10-13'),
-(NULL,11,6,'2025-10-06','2025-10-13'),
-(NULL,12,7,'2025-10-07','2025-10-14'),
-(NULL,3,8,'2025-10-08','2025-10-15'),
-(NULL,10,9,'2025-10-08','2025-12-15'),
-(NULL,4,10,'2025-10-09','2025-10-16'),
-(NULL,5,11,'2025-10-10','2025-10-17'),
-(NULL,6,12,'2025-10-10','2025-10-17'),
-(NULL,3,13,'2025-10-11','2025-10-18'),
-(NULL,8,14,'2025-10-30','2025-11-06'),
-(NULL,4,13,'2025-12-08','2025-10-11')
+(NULL,3,2,'2025-10-01','2025-10-08',TRUE),
+(NULL,4,1,'2025-10-02','2025-10-09',TRUE),
+(NULL,5,5,'2025-10-02','2025-10-09',TRUE),
+(NULL,6,1,'2025-10-03','2025-10-10',TRUE),
+(NULL,3,2,'2025-10-04','2025-10-11',TRUE),
+(NULL,8,3,'2025-10-04','2025-10-11',TRUE),
+(NULL,9,4,'2025-10-05','2025-10-12',TRUE),
+(NULL,10,5,'2025-10-06','2025-10-13',TRUE),
+(NULL,11,6,'2025-10-06','2025-10-13',TRUE),
+(NULL,12,7,'2025-10-07','2025-10-14',TRUE),
+(NULL,3,8,'2025-10-08','2025-10-15',TRUE),
+(NULL,10,9,'2025-10-08','2025-12-15',TRUE),
+(NULL,4,10,'2025-10-09','2025-10-16',TRUE),
+(NULL,5,11,'2025-10-10','2025-10-17',TRUE),
+(NULL,6,12,'2025-10-10','2025-10-17',TRUE),
+(NULL,3,13,'2025-10-11','2025-10-18',TRUE),
+(NULL,8,14,'2025-10-30','2025-11-06',TRUE),
+(NULL,4,13,'2025-12-08','2025-10-11',TRUE)
 ;

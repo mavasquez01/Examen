@@ -18,7 +18,7 @@ public class JMMV_ReservaDAO {
         conexion = new JMMV_Conexion();
     }
 
-    public List<JMMV_Reserva> JMMV_ObtenerTodasLasReservas() {
+    public List<JMMV_Reserva> JMMV_ObtenerTodasLasReservasActivas() {
 
         List<JMMV_Reserva> listaReservas = new ArrayList<>();
 
@@ -36,6 +36,7 @@ public class JMMV_ReservaDAO {
                 + "FROM JMMV_reservas r\n"
                 + "JOIN JMMV_clientes c ON r.JMMV_reservas_id_cliente = c.JMMV_clientes_id_cliente\n"
                 + "JOIN JMMV_bicicletas b ON r.JMMV_reservas_id_bicicleta = b.JMMV_bicicletas_id_bicicleta\n"
+                + "WHERE r.JMMV_reservas_esta_activo = TRUE\n"
                 + "ORDER BY r.JMMV_reservas_id_reserva ASC";
 
         try (Connection conn = conexion.JMMV_Conectar(); Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
@@ -64,10 +65,8 @@ public class JMMV_ReservaDAO {
 
     public boolean JMMV_AgregarReserva(JMMV_Reserva reserva) {
 
-        String sql = "INSERT INTO JMMV_reservas "
-                + "(JMMV_reservas_id_cliente, JMMV_reservas_id_bicicleta, "
-                + "JMMV_reservas_fecha_inicio,JMMV_reservas_fecha_fin)\n"
-                + "VALUES(?,?,?,?)";
+        String sql = "INSERT INTO JMMV_reservas (JMMV_reservas_id_cliente, JMMV_reservas_id_bicicleta, JMMV_reservas_fecha_inicio,JMMV_reservas_fecha_fin,JMMV_reservas_esta_activo)\n"
+                + "VALUES(?,?,?,?,?)";
 
         try (Connection conn = conexion.JMMV_Conectar(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -76,6 +75,7 @@ public class JMMV_ReservaDAO {
             pstmt.setInt(2, reserva.getJMMV_idBicicleta());
             pstmt.setDate(3, java.sql.Date.valueOf(reserva.getJMMV_fechaInicio()));
             pstmt.setDate(4, java.sql.Date.valueOf(reserva.getJMMV_fechaFin()));
+            pstmt.setBoolean (5, true);
 
             //ejecutar INSERT
             pstmt.executeUpdate();
@@ -122,7 +122,9 @@ public class JMMV_ReservaDAO {
 
     public boolean JMMV_EliminarReserva(int idReserva) {
 
-        String sql = "DELETE FROM JMMV_reservas\n"
+        String sql = "UPDATE JMMV_reservas\n"
+                + "SET\n"
+                + "JMMV_reservas_esta_activo = FALSE\n"
                 + "WHERE JMMV_reservas_id_reserva = ?";
 
         try (Connection conn = conexion.JMMV_Conectar(); PreparedStatement pstmt = conn.prepareStatement(sql)) {

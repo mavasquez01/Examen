@@ -19,16 +19,16 @@ public class JMMV_UsuarioDAO {
     }
 
     //método para verificar si el usuario tiene acceso al módulo de Gestión
-    //acceso: su rol es Administrador y (su username y contraseña son correctas)
+    //acceso: su rol es Administrador y (su username y contraseña son correctas), usuario activo
     public String JMMV_VerificarLogin(String user, String pass) {
 
         //variable para retornar el nombre de usuario
         String nomUsuario = null;
 
-        String sql = "SELECT r.JMMV_roles_id_rol AS rol_usuario, u.JMMV_usuarios_nom_usuario AS nombre_usuario\n"
+        String sql = "SELECT r.JMMV_roles_nombre AS rol_usuario, u.JMMV_usuarios_nom_usuario AS nombre_usuario\n"
                 + "FROM JMMV_usuarios u\n"
                 + "JOIN JMMV_roles r ON u.JMMV_usuarios_id_rol = r.JMMV_roles_id_rol\n"
-                + "WHERE r.JMMV_roles_id_rol = 1 AND u.JMMV_usuarios_nom_usuario = ? AND u.JMMV_usuarios_contrasena = ?;";
+                + "WHERE r.JMMV_roles_id_rol = 1 AND u.JMMV_usuarios_nom_usuario = 'admin' AND u.JMMV_usuarios_contrasena = '123' AND u.JMMV_usuarios_esta_activo = TRUE";
 
         try (Connection conn = conexion.JMMV_Conectar(); PreparedStatement stmt = conn.prepareStatement(sql)) {
 

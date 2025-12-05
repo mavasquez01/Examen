@@ -26,8 +26,11 @@ public class JMMV_BicicletaDAO {
         List<JMMV_Bicicleta> listaBicicletas = new ArrayList<>();
 
         //preparar consulta        
-        String sql = "SELECT b.JMMV_bicicletas_id_bicicleta AS id, b.JMMV_bicicletas_nombre AS nombre, "
-                + "t.JMMV_tipos_bicicletas_nombre AS tipo, b.JMMV_bicicletas_esta_disponible AS disponibilidad, "
+        String sql = "SELECT "
+                + "b.JMMV_bicicletas_id_bicicleta AS id, "
+                + "b.JMMV_bicicletas_nombre AS nombre, "
+                + "t.JMMV_tipos_bicicletas_nombre AS tipo, "
+                + "b.JMMV_bicicletas_esta_disponible AS disponibilidad, "
                 + "t.JMMV_tipos_bicicletas_descripcion AS descripcion\n"
                 + "FROM JMMV_bicicletas AS b\n"
                 + "JOIN JMMV_tipos_bicicletas AS t ON b.JMMV_bicicletas_id_tipo_bicicleta = t.JMMV_tipos_bicicletas_id_tipo_bicicleta\n"
@@ -42,14 +45,15 @@ public class JMMV_BicicletaDAO {
                 //obtener datos
                 int JMMV_idBicicleta = rs.getInt("id");
                 String JMMV_nombre = rs.getString("nombre");
-                int JMMV_tipo = rs.getInt("tipo");
+                int JMMV_tipo = rs.getInt("tipo");                
+                String JMMV_descripcion = rs.getString("descripcion");
                 boolean JMMV_estaDisponible = rs.getBoolean("disponibilidad");
 
                 //obtener nombre de tipo de bicicleta
                 String nombreTipo = ObtenerTipoBicicletaPorId(JMMV_tipo);
 
                 //crear objeto de la clase
-                JMMV_Bicicleta bicicleta = new JMMV_Bicicleta(JMMV_idBicicleta, JMMV_nombre, nombreTipo, JMMV_estaDisponible);
+                JMMV_Bicicleta bicicleta = new JMMV_Bicicleta(JMMV_idBicicleta, JMMV_nombre, nombreTipo, JMMV_descripcion, JMMV_estaDisponible);
 
                 //agregar bicicleta a lista
                 listaBicicletas.add(bicicleta);
@@ -65,7 +69,12 @@ public class JMMV_BicicletaDAO {
 
     public boolean JMMV_AgregarBicicleta(JMMV_Bicicleta bicicleta) {
 
-        String sql = "INSERT INTO JMMV_bicicletas (JMMV_bicicletas_nombre,JMMV_bicicletas_id_tipo_bicicleta,JMMV_bicicletas_esta_disponible,JMMV_bicicletas_esta_activo)\n"
+        String sql;
+        sql = "INSERT INTO JMMV_bicicletas ("
+                + "JMMV_bicicletas_nombre,"
+                + "JMMV_bicicletas_id_tipo_bicicleta,"
+                + "JMMV_bicicletas_esta_disponible,"
+                + "JMMV_bicicletas_esta_activo)\n"
                 + "VALUES(?,?,?,?)";
 
         try (Connection conn = conexion.JMMV_Conectar(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -94,7 +103,8 @@ public class JMMV_BicicletaDAO {
 
         //string sql
         String sql = "UPDATE JMMV_bicicletas AS b\n"
-                + "SET b.JMMV_bicicletas_nombre = ?, b.JMMV_bicicletas_id_tipo_bicicleta = ?, b.JMMV_bicicletas_esta_disponible = ?\n"
+                + "SET b.JMMV_bicicletas_nombre = ?, b.JMMV_bicicletas_id_tipo_bicicleta = ?, "
+                + "b.JMMV_bicicletas_esta_disponible = ?\n"
                 + "WHERE JMMV_bicicletas_id_bicicleta = ?";
 
         int idBicicleta = JMMV_ObtenerIdBicicletaPorNombre(bicicleta.getJMMV_Bicicleta_tipoBicicleta());
