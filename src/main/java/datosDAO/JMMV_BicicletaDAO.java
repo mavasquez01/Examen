@@ -20,11 +20,11 @@ public class JMMV_BicicletaDAO {
     
         conexion = new JMMV_Conexion();
     }
-    
-    public List<JMMV_Bicicleta> JMMV_ObtenerTodasLasBicicletasActivas(){
-        
+
+    public List<JMMV_Bicicleta> JMMV_ObtenerTodasLasBicicletasActivas() {
+
         List<JMMV_Bicicleta> listaBicicletas = new ArrayList<>();
-        
+
         //preparar consulta        
         String sql = "SELECT b.JMMV_bicicletas_id_bicicleta AS id, b.JMMV_bicicletas_nombre AS nombre, "
                 + "t.JMMV_tipos_bicicletas_nombre AS tipo, b.JMMV_bicicletas_esta_disponible AS disponibilidad, "
@@ -43,10 +43,10 @@ public class JMMV_BicicletaDAO {
                 int JMMV_idBicicleta = rs.getInt("id");
                 String JMMV_nombre = rs.getString("nombre");
                 int JMMV_tipo = rs.getInt("tipo");
-                boolean JMMV_estaDisponible = rs.getBoolean("disponibilidad");               
-                
+                boolean JMMV_estaDisponible = rs.getBoolean("disponibilidad");
+
                 //obtener nombre de tipo de bicicleta
-                String nombreTipo = ObtenerTipoBicicletaPorId(JMMV_tipo);                      
+                String nombreTipo = ObtenerTipoBicicletaPorId(JMMV_tipo);
 
                 //crear objeto de la clase
                 JMMV_Bicicleta bicicleta = new JMMV_Bicicleta(JMMV_idBicicleta, JMMV_nombre, nombreTipo, JMMV_estaDisponible);
@@ -59,17 +59,17 @@ public class JMMV_BicicletaDAO {
             e.printStackTrace();
         }
 
-        return listaBicicletas;               
-        
+        return listaBicicletas;
+
     }
-    
+
     public boolean JMMV_AgregarBicicleta(JMMV_Bicicleta bicicleta) {
 
         String sql = "INSERT INTO JMMV_bicicletas (JMMV_bicicletas_nombre,JMMV_bicicletas_id_tipo_bicicleta,JMMV_bicicletas_esta_disponible,JMMV_bicicletas_esta_activo)\n"
                 + "VALUES(?,?,?,?)";
 
         try (Connection conn = conexion.JMMV_Conectar(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            
+
             //obtener id de la bicicleta
             int idBicicleta = JMMV_ObtenerIdBicicletaPorNombre(bicicleta.getJMMV_Bicicleta_tipoBicicleta());
 
@@ -82,7 +82,6 @@ public class JMMV_BicicletaDAO {
             //ejecutar INSERT
             pstmt.executeUpdate();
 
-
         } catch (SQLException e) {
             e.printStackTrace();
 
@@ -90,7 +89,7 @@ public class JMMV_BicicletaDAO {
         }
         return true;
     }
-    
+
     public boolean JMMV_ActualizarBicicleta(JMMV_Bicicleta bicicleta) {
 
         //string sql
@@ -142,8 +141,8 @@ public class JMMV_BicicletaDAO {
         }
 
     }
-    
-        public String ObtenerTipoBicicletaPorId(int idBicicleta) {
+
+    public String ObtenerTipoBicicletaPorId(int idBicicleta) {
 
         String sql = "SELECT t.JMMV_tipos_bicicletas_nombre AS tipo\n"
                 + "FROM JMMV_tipos_bicicletas t\n"
@@ -162,7 +161,7 @@ public class JMMV_BicicletaDAO {
             e.printStackTrace();
         }
         return null;
-        
+
     }
 
     public int JMMV_ObtenerIdBicicletaPorNombre(String idBicicleta) {

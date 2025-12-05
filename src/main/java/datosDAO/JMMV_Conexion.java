@@ -30,7 +30,7 @@ public class JMMV_Conexion {
             JOptionPane.showMessageDialog(null, "Error en la conexión: " + e.getMessage());
         }
 
-        System.out.println("Test JM | JMMV_Conexion | :Conexión exitosa");
+        System.out.println("Test JM | JMMV_Conexion | : Conexión exitosa");
         return conexion;
 
     }
