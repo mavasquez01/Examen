@@ -26,21 +26,138 @@ public class JMMV_Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        btnUsuarios = new javax.swing.JButton();
+        btnBicicletas = new javax.swing.JButton();
+        btnReservas = new javax.swing.JButton();
+        btnHomePrincipal = new javax.swing.JButton();
+        lbBienvenida = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        btnUsuarios.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnUsuarios.setText("Gestión de Usuarios");
+        btnUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUsuariosActionPerformed(evt);
+            }
+        });
+
+        btnBicicletas.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnBicicletas.setText("Gestión de Bicicletas");
+        btnBicicletas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBicicletasActionPerformed(evt);
+            }
+        });
+
+        btnReservas.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnReservas.setText("Gestión de Reservas");
+        btnReservas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReservasActionPerformed(evt);
+            }
+        });
+
+        btnHomePrincipal.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnHomePrincipal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/static/home_50dp_1F1F1F_FILL0_wght400_GRAD0_opsz48.png"))); // NOI18N
+        btnHomePrincipal.setText("Inicio");
+        btnHomePrincipal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHomePrincipalActionPerformed(evt);
+            }
+        });
+
+        lbBienvenida.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lbBienvenida.setText("Bienvenido \"Usuario\"");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(72, 72, 72)
+                        .addComponent(btnHomePrincipal))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(btnUsuarios)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(btnBicicletas, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnReservas, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(47, 47, 47)
+                        .addComponent(lbBienvenida, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(14, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(88, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBicicletas, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnReservas, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(83, 83, 83)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbBienvenida, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnHomePrincipal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(86, 86, 86))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuariosActionPerformed
+        JMMV_Gestion gestionUsuarios = new JMMV_Gestion();
+        gestionUsuarios.setTitle("Gestion Usuarios");
+        gestionUsuarios.setLocationRelativeTo(null);
+        gestionUsuarios.setResizable(false);
+        gestionUsuarios.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnUsuariosActionPerformed
+
+    private void btnBicicletasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBicicletasActionPerformed
+        JMMV_Gestion gestionBicicletas = new JMMV_Gestion();
+        gestionBicicletas.setTitle("Gestion Bicicletas");
+        gestionBicicletas.setLocationRelativeTo(null);
+        gestionBicicletas.setResizable(false);
+        gestionBicicletas.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnBicicletasActionPerformed
+
+    private void btnReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReservasActionPerformed
+        JMMV_Gestion gestionReservas = new JMMV_Gestion();
+        gestionReservas.setTitle("Gestion Reservas");
+        gestionReservas.setLocationRelativeTo(null);
+        gestionReservas.setResizable(false);
+        gestionReservas.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnReservasActionPerformed
+
+    private void btnHomePrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomePrincipalActionPerformed
+        JMMV_Principal ventanaPrincipal = new JMMV_Principal();
+        ventanaPrincipal.setTitle("Menu");
+        ventanaPrincipal.setLocationRelativeTo(null);
+        ventanaPrincipal.setResizable(false);
+        ventanaPrincipal.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnHomePrincipalActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +195,11 @@ public class JMMV_Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBicicletas;
+    private javax.swing.JButton btnHomePrincipal;
+    private javax.swing.JButton btnReservas;
+    private javax.swing.JButton btnUsuarios;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lbBienvenida;
     // End of variables declaration//GEN-END:variables
 }
