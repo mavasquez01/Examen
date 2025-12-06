@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 
@@ -19,11 +20,11 @@ public class JMMV_UsuarioDAO {
     }
 
     //método para verificar si el usuario tiene acceso al módulo de Gestión
-    //acceso: su rol es Administrador y (su username y contraseña son correctas), usuario activo
-    public String JMMV_VerificarLogin(String user, String pass) {
+    //acceso: su rol es Administrador y (su username y contraseña son correctas)
+    public List<String> JMMV_VerificarLogin(String user, String pass) throws SQLException {
 
         //variable para retornar el nombre de usuario
-        String nomUsuario = null;
+        List<String> usuario = null;
 
         String sql = "SELECT r.JMMV_roles_nombre AS rol_usuario, u.JMMV_usuarios_nom_usuario AS nombre_usuario\n"
                 + "FROM JMMV_usuarios u\n"
@@ -37,24 +38,23 @@ public class JMMV_UsuarioDAO {
 
             try (ResultSet rs = stmt.executeQuery();) {
 
-                if (rs.next()) {
-
-                    nomUsuario = rs.getString("nombre_usuario");
-
+                if (rs.next()) {}
+                    usuario.add(rs.getString("rolUsuario"));
+                    usuario.add(rs.getString("nombre_usuario"));
+                    
+                    
                 }
-
-            }
-
+            System.out.println("Conexión exitosa");
+            return usuario;
+            
         } catch (SQLException e) {
 
             JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
 
         }
 
-        System.out.println("Test JM | UsuarioDAO | username: " + nomUsuario);
-
-        return nomUsuario;
-
+        System.out.println("Conexión erronea");
+        return null;
     }
 
 }
