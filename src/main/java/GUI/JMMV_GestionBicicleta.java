@@ -8,12 +8,12 @@ package GUI;
  *
  * @author Agustin
  */
-public class JMMV_Gestion extends javax.swing.JFrame {
+public class JMMV_GestionBicicleta extends javax.swing.JFrame {
 
     /**
      * Creates new form JMMV_Gestion
      */
-    public JMMV_Gestion() {
+    public JMMV_GestionBicicleta() {
         initComponents();
     }
 

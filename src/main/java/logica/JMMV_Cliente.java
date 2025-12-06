@@ -53,6 +53,22 @@ public class JMMV_Cliente {
         this.JMMV_Cliente_telefono = JMMV_Cliente_telefono;
     }
 
+    public JMMV_Cliente(String JMMV_Cliente_nomUsuario, String JMMV_Cliente_contrasena, String JMMV_Cliente_correo, int JMMV_Cliente_run, String JMMV_Cliente_nombres, String JMMV_Cliente_apellidoPaterno, String JMMV_Cliente_apellidoMaterno, String JMMV_Cliente_comuna, String JMMV_Cliente_calle, int JMMV_Cliente_numCalle, int JMMV_Cliente_telefono, boolean JMMV_Cliente_estaActivo) {
+        this.JMMV_Cliente_nomUsuario = JMMV_Cliente_nomUsuario;
+        this.JMMV_Cliente_contrasena = JMMV_Cliente_contrasena;
+        this.JMMV_Cliente_correo = JMMV_Cliente_correo;
+        this.JMMV_Cliente_run = JMMV_Cliente_run;
+        this.JMMV_Cliente_nombres = JMMV_Cliente_nombres;
+        this.JMMV_Cliente_apellidoPaterno = JMMV_Cliente_apellidoPaterno;
+        this.JMMV_Cliente_apellidoMaterno = JMMV_Cliente_apellidoMaterno;
+        this.JMMV_Cliente_comuna = JMMV_Cliente_comuna;
+        this.JMMV_Cliente_calle = JMMV_Cliente_calle;
+        this.JMMV_Cliente_numCalle = JMMV_Cliente_numCalle;
+        this.JMMV_Cliente_telefono = JMMV_Cliente_telefono;
+        this.JMMV_Cliente_estaActivo = JMMV_Cliente_estaActivo;
+    }
+    
+
     public int getJMMV_Cliente_idUsuario() {
         return JMMV_Cliente_idUsuario;
     }

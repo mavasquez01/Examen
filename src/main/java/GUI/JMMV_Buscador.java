@@ -4,17 +4,31 @@
  */
 package GUI;
 
+import datosDAO.JMMV_BicicletaDAO;
+import datosDAO.JMMV_ClienteDAO;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Agustin
  */
-public class JMMV_Buscador extends javax.swing.JFrame {
+public class JMMV_Buscador extends javax.swing.JDialog {
 
-    /**
-     * Creates new form JMMV_Buscador
-     */
-    public JMMV_Buscador() {
+    private int seleccion;
+    private JMMV_ClienteDAO clienteDAO;
+    private JMMV_BicicletaDAO BicicletaDAO;
+    private JMMV_ReservaDAO ReservaDAO;
+    public JMMV_Buscador(java.awt.Frame parent, boolean m odal,int seleccion) {
+        super(parent, modal);
         initComponents();
+        switch (seleccion) {
+            case 0 ->{lbBuscar.setText("Buscar Bicicleta por nombre"); this.seleccion = seleccion;}
+            case 1 -> {lbBuscar.setText("Buscar Cliente por nombre:"); this.seleccion = seleccion;}
+            case 2 -> {lbBuscar.setText("Buscar Reserva por nombre de cliente;"); this.seleccion = seleccion;}
+            default -> {
+                JOptionPane.showMessageDialog(this,"Error de inicialización", "ERROR DE SELECCION", JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }
 
     /**
@@ -37,10 +51,15 @@ public class JMMV_Buscador extends javax.swing.JFrame {
         lbBuscar.setText("Buscar \"algo\" por nombre:");
 
         tfBuscar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        tfBuscar.setText("Tu algo aquí");
+        tfBuscar.setText("Nombre");
 
         btnBuscar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -84,10 +103,15 @@ public class JMMV_Buscador extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        if(seleccion == 0) {
+            //
+        } else if (seleccion == 1) {
+            
+        }
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;

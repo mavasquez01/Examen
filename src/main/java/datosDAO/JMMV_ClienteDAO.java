@@ -325,5 +325,22 @@ public class JMMV_ClienteDAO {
         }
         return -1; //retorna valor no válido
     }
+    
+    public List<String> JMMV_ObtenerComunas() {
+        List<String> comunas = new ArrayList<>();
+        String sql = "SELECT JMMV_comunas_nombre AS comuna\n"
+                + "FROM JMMV_comunas\n";
+        try (Connection conn = conexion.JMMV_Conectar(); Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
+
+            if (rs.next()) {
+                comunas.add(rs.getString("comuna"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return comunas;
+
+        
+    }
 
 }

@@ -124,7 +124,7 @@ public class JMMV_Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuariosActionPerformed
-        JMMV_Gestion gestionUsuarios = new JMMV_Gestion();
+        JMMV_GestionUsuarios gestionUsuarios = new JMMV_GestionUsuarios(this, true);
         gestionUsuarios.setTitle("Gestion Usuarios");
         gestionUsuarios.setLocationRelativeTo(null);
         gestionUsuarios.setResizable(false);
@@ -133,7 +133,7 @@ public class JMMV_Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnUsuariosActionPerformed
 
     private void btnBicicletasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBicicletasActionPerformed
-        JMMV_Gestion gestionBicicletas = new JMMV_Gestion();
+        JMMV_GestionBicicleta gestionBicicletas = new JMMV_GestionBicicleta();
         gestionBicicletas.setTitle("Gestion Bicicletas");
         gestionBicicletas.setLocationRelativeTo(null);
         gestionBicicletas.setResizable(false);
@@ -142,7 +142,7 @@ public class JMMV_Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBicicletasActionPerformed
 
     private void btnReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReservasActionPerformed
-        JMMV_Gestion gestionReservas = new JMMV_Gestion();
+        JMMV_GestionBicicleta gestionReservas = new JMMV_GestionBicicleta();
         gestionReservas.setTitle("Gestion Reservas");
         gestionReservas.setLocationRelativeTo(null);
         gestionReservas.setResizable(false);
