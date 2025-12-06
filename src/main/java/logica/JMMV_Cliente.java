@@ -38,6 +38,7 @@ public class JMMV_Cliente {
         this.JMMV_Cliente_estaActivo = JMMV_Cliente_estaActivo;
     }
 
+    //constructor sin: id_usuario, rol, esta_activo
     public JMMV_Cliente(int JMMV_Cliente_idCliente, String JMMV_Cliente_nomUsuario, String JMMV_Cliente_contrasena, String JMMV_Cliente_correo, int JMMV_Cliente_run, String JMMV_Cliente_nombres, String JMMV_Cliente_apellidoPaterno, String JMMV_Cliente_apellidoMaterno, String JMMV_Cliente_comuna, String JMMV_Cliente_calle, int JMMV_Cliente_numCalle, int JMMV_Cliente_telefono) {
         this.JMMV_Cliente_idCliente = JMMV_Cliente_idCliente;
         this.JMMV_Cliente_nomUsuario = JMMV_Cliente_nomUsuario;

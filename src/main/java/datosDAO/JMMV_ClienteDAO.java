@@ -76,48 +76,52 @@ public class JMMV_ClienteDAO {
 
     }
 
-    public boolean JMMV_AgregarCliente(JMMV_Cliente cliente) {
+    public boolean JMMV_AgregarCliente(JMMV_Cliente cliente) throws SQLException {
+        
+        Connection conn = null;
 
         //variable para guardar la PK
         int pkInsertada = -1;
 
         //string para primer INSERT
-        String sqlUno = "INSERT INTO JMMV_usuarios "
+        String sqlUsuarios = "INSERT INTO JMMV_usuarios "
                 + "(JMMV_usuarios_nom_usuario,JMMV_usuarios_contrasena,JMMV_usuarios_correo,JMMV_usuarios_id_rol)\n"
                 + "VALUES(?,?,?,?)";
 
-        try (Connection conn = conexion.JMMV_Conectar(); PreparedStatement pstmtUno = conn.prepareStatement(sqlUno, Statement.RETURN_GENERATED_KEYS)) {
+        //string segundo INSERT            
+        String sqlClientes = "INSERT INTO JMMV_clientes (JMMV_clientes_id_usuario,JMMV_clientes_run,"
+                + "JMMV_clientes_nombres,JMMV_clientes_apellido_paterno,JMMV_clientes_apellido_materno,"
+                + "JMMV_clientes_id_comuna,JMMV_clientes_calle,JMMV_clientes_num_calle,"
+                + "JMMV_clientes_telefono,JMMV_clientes_esta_activo)\n"
+                + "VALUES(?,?,?,?,?,?,?,?,?,?)";
 
+        int idComuna = JMMV_ObtenerIdComunaPorNombre(cliente.getJMMV_Cliente_comuna());
+
+        try {
+            conn = conexion.JMMV_Conectar();
             //desactivar auto commit
             conn.setAutoCommit(false);
 
-            //preparar valores a enviar
-            pstmtUno.setString(1, cliente.getJMMV_Cliente_nomUsuario());
-            pstmtUno.setString(2, cliente.getJMMV_Cliente_contrasena());
-            pstmtUno.setString(3, cliente.getJMMV_Cliente_correo());
-            pstmtUno.setInt(4, 2);
+            try (PreparedStatement pstmtUno = conn.prepareStatement(sqlUsuarios, Statement.RETURN_GENERATED_KEYS); PreparedStatement pstmtDos = conn.prepareStatement(sqlClientes)) {
 
-            //ejecutar primer INSERT
-            pstmtUno.executeUpdate();
+                //preparar valores a enviar
+                pstmtUno.setString(1, cliente.getJMMV_Cliente_nomUsuario());
+                pstmtUno.setString(2, cliente.getJMMV_Cliente_contrasena());
+                pstmtUno.setString(3, cliente.getJMMV_Cliente_correo());
+                pstmtUno.setInt(4, 2);
 
-            //recuperar PK
-            try (ResultSet rs = pstmtUno.getGeneratedKeys()) {
-                if (rs.next()) {
-                    pkInsertada = rs.getInt(1);
+                //ejecutar primer INSERT
+                pstmtUno.executeUpdate();
+
+                //recuperar PK
+                try (ResultSet rs = pstmtUno.getGeneratedKeys()) {
+                    if (rs.next()) {
+                        pkInsertada = rs.getInt(1);
+
+                        System.out.println("Test JM | pk insertada: " + pkInsertada);
+                    }
                 }
-            }
 
-            //string segundo INSERT            
-            String sqlDos = "INSERT INTO JMMV_clientes (JMMV_clientes_id_usuario,JMMV_clientes_run,"
-                    + "JMMV_clientes_nombres,JMMV_clientes_apellido_paterno,JMMV_clientes_apellido_materno,"
-                    + "JMMV_clientes_id_comuna,JMMV_clientes_calle,JMMV_clientes_num_calle,"
-                    + "JMMV_clientes_telefono,JMMV_clientes_esta_activo)\n"
-                    + "VALUES(?,?,?,?,?,?,?,?,?,?)";
-
-            int idComuna = JMMV_ObtenerIdComunaPorNombre(cliente.getJMMV_Cliente_comuna());
-
-            //preparar valores a enviar
-            try (PreparedStatement pstmtDos = conn.prepareStatement(sqlDos)) {
                 pstmtDos.setInt(1, pkInsertada);
                 pstmtDos.setInt(2, cliente.getJMMV_Cliente_run());
                 pstmtDos.setString(3, cliente.getJMMV_Cliente_nombres());
@@ -131,17 +135,26 @@ public class JMMV_ClienteDAO {
 
                 //ejecutar segundo INSERT
                 pstmtDos.executeUpdate();
+
+                //commit
+                conn.commit();
+
+                return true;
+
             }
-
-            //commit
-            conn.commit();
-
         } catch (SQLException e) {
             e.printStackTrace();
+            if (conn != null) {
+                try {
 
+                    //rollback
+                    conn.rollback();
+                } catch (SQLException er) {
+                    er.printStackTrace();
+                }
+            }
             return false;
         }
-        return true;
     }
 
     public boolean JMMV_ActualizarCliente(JMMV_Cliente cliente) {
