@@ -39,7 +39,7 @@ public class JMMV_Cliente {
         this.JMMV_Cliente_estaActivo = JMMV_Cliente_estaActivo;
     }
 
-    //constructor sin: id_usuario, rol, esta_activo
+    //constructor sin: id_usuario, rol, estaActivo
     public JMMV_Cliente(int JMMV_Cliente_idCliente, String JMMV_Cliente_nomUsuario, String JMMV_Cliente_contrasena, String JMMV_Cliente_correo, int JMMV_Cliente_run, String JMMV_Cliente_nombres, String JMMV_Cliente_apellidoPaterno, String JMMV_Cliente_apellidoMaterno, String JMMV_Cliente_comuna, String JMMV_Cliente_calle, int JMMV_Cliente_numCalle, int JMMV_Cliente_telefono) {
         this.JMMV_Cliente_idCliente = JMMV_Cliente_idCliente;
         this.JMMV_Cliente_nomUsuario = JMMV_Cliente_nomUsuario;
@@ -62,7 +62,8 @@ public class JMMV_Cliente {
         this.JMMV_Cliente_nombreCompleto = JMMV_Cliente_nombreCompleto;
     }
     
-    public JMMV_Cliente(String JMMV_Cliente_nomUsuario, String JMMV_Cliente_contrasena, String JMMV_Cliente_correo, int JMMV_Cliente_run, String JMMV_Cliente_nombres, String JMMV_Cliente_apellidoPaterno, String JMMV_Cliente_apellidoMaterno, String JMMV_Cliente_comuna, String JMMV_Cliente_calle, int JMMV_Cliente_numCalle, int JMMV_Cliente_telefono, boolean JMMV_Cliente_estaActivo) {
+    //contructor sin idUsuario, idCliente y estaActivo. Para agregar nuevo.
+    public JMMV_Cliente(String JMMV_Cliente_nomUsuario, String JMMV_Cliente_contrasena, String JMMV_Cliente_correo, int JMMV_Cliente_run, String JMMV_Cliente_nombres, String JMMV_Cliente_apellidoPaterno, String JMMV_Cliente_apellidoMaterno, String JMMV_Cliente_comuna, String JMMV_Cliente_calle, int JMMV_Cliente_numCalle, int JMMV_Cliente_telefono) {
         this.JMMV_Cliente_nomUsuario = JMMV_Cliente_nomUsuario;
         this.JMMV_Cliente_contrasena = JMMV_Cliente_contrasena;
         this.JMMV_Cliente_correo = JMMV_Cliente_correo;
@@ -74,7 +75,6 @@ public class JMMV_Cliente {
         this.JMMV_Cliente_calle = JMMV_Cliente_calle;
         this.JMMV_Cliente_numCalle = JMMV_Cliente_numCalle;
         this.JMMV_Cliente_telefono = JMMV_Cliente_telefono;
-        this.JMMV_Cliente_estaActivo = JMMV_Cliente_estaActivo;
     }
     
 

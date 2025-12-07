@@ -4,9 +4,9 @@
  */
 package GUI;
 
-import datosDAO.JMMV_BicicletaDAO;
-import datosDAO.JMMV_ClienteDAO;
-import datosDAO.JMMV_ReservaDAO;
+import DAO.JMMV_BicicletaDAO;
+import DAO.JMMV_ClienteDAO;
+import DAO.JMMV_ReservaDAO;
 import java.util.List;
 import javax.swing.JOptionPane;
 import logica.JMMV_Cliente;

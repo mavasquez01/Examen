@@ -1,6 +1,8 @@
 
 package GUI;
-import datosDAO.*;
+import DAO.JMMV_BicicletaDAO;
+import DAO.JMMV_ClienteDAO;
+import DAO.JMMV_ReservaDAO;
 import javax.swing.JOptionPane;
 import logica.*;
 
@@ -130,7 +132,7 @@ public class JMMV_Confirmacion extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(this, "Cliente eliminado con exito", "Eliminación exitosa", JOptionPane.ERROR_MESSAGE);
             }
             default -> {
-                reservaDAO.JMMV_EliminarReserva(reserva.getJMMV_idReserva());
+                reservaDAO.JMMV_EliminarReserva(reserva.getJMMV_Reserva_idReserva());
                 JOptionPane.showMessageDialog(this, "Reserva eliminada con exito", "Eliminación exitosa", JOptionPane.ERROR_MESSAGE);
             }
         }

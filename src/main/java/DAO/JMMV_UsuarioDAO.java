@@ -1,4 +1,4 @@
-package datosDAO;
+package DAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -20,18 +20,25 @@ public class JMMV_UsuarioDAO {
     }
 
     //método para verificar si el usuario tiene acceso al módulo de Gestión
-    //acceso: su rol es Administrador y (su username y contraseña son correctas)
+    //acceso: 
+    //su rol es Administrador y (su username y contraseña son correctas)y está activo.
     public List<String> JMMV_VerificarLogin(String user, String pass) throws SQLException {
 
         //variable para retornar el nombre de usuario
         List<String> usuario = null;
 
-        String sql = "SELECT r.JMMV_roles_nombre AS rol_usuario, u.JMMV_usuarios_nom_usuario AS nombre_usuario\n"
-                + "FROM JMMV_usuarios u\n"
-                + "JOIN JMMV_roles r ON u.JMMV_usuarios_id_rol = r.JMMV_roles_id_rol\n"
-                + "WHERE r.JMMV_roles_id_rol = 1 AND u.JMMV_usuarios_nom_usuario = 'admin' AND u.JMMV_usuarios_contrasena = '123' AND u.JMMV_usuarios_esta_activo = TRUE";
+        String sql = "SELECT "
+                + "r.JMMV_roles_nombre AS rol_usuario, "
+                + "u.JMMV_usuarios_nom_usuario AS nombre_usuario"
+                + "FROM JMMV_usuarios u"
+                + "JOIN JMMV_roles r ON u.JMMV_usuarios_id_rol = r.JMMV_roles_id_rol"
+                + "WHERE r.JMMV_roles_id_rol = 1 "
+                + "&& u.JMMV_usuarios_nom_usuario = ? "
+                + "&& u.JMMV_usuarios_contrasena = ? "
+                + "&& u.JMMV_usuarios_esta_activo = TRUE";
 
-        try (Connection conn = conexion.JMMV_Conectar(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = conexion.JMMV_Conectar(); 
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, user);
             stmt.setString(2, pass);
@@ -39,9 +46,8 @@ public class JMMV_UsuarioDAO {
             try (ResultSet rs = stmt.executeQuery();) {
 
                 if (rs.next()) {}
-                    usuario.add(rs.getString("rolUsuario"));
-                    usuario.add(rs.getString("nombre_usuario"));
-                    
+                    usuario.add(rs.getString("rol_usuario"));
+                    usuario.add(rs.getString("nombre_usuario"));                
                     
                 }
             System.out.println("Conexión exitosa");

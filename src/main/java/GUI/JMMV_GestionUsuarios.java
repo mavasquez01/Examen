@@ -2,7 +2,7 @@
 package GUI;
 
 import logica.JMMV_Cliente;
-import datosDAO.JMMV_ClienteDAO;
+import DAO.JMMV_ClienteDAO;
 import java.util.List;
 
 

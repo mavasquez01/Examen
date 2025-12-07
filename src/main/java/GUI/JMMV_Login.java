@@ -1,7 +1,7 @@
 
 package GUI;
 
-import datosDAO.JMMV_UsuarioDAO;
+import DAO.JMMV_UsuarioDAO;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;

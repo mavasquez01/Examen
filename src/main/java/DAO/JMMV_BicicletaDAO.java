@@ -1,4 +1,4 @@
-package datosDAO;
+package DAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -31,14 +31,16 @@ public class JMMV_BicicletaDAO {
                 + "b.JMMV_bicicletas_nombre AS nombre, "
                 + "t.JMMV_tipos_bicicletas_nombre AS tipo, "
                 + "b.JMMV_bicicletas_esta_disponible AS disponibilidad, "
-                + "t.JMMV_tipos_bicicletas_descripcion AS descripcion\n"
-                + "FROM JMMV_bicicletas AS b\n"
-                + "JOIN JMMV_tipos_bicicletas AS t ON b.JMMV_bicicletas_id_tipo_bicicleta = t.JMMV_tipos_bicicletas_id_tipo_bicicleta\n"
-                + "WHERE b.JMMV_bicicletas_esta_activo = TRUE\n"
+                + "t.JMMV_tipos_bicicletas_descripcion AS descripcion"
+                + "FROM JMMV_bicicletas AS b"
+                + "JOIN JMMV_tipos_bicicletas AS t ON b.JMMV_bicicletas_id_tipo_bicicleta = t.JMMV_tipos_bicicletas_id_tipo_bicicleta"
+                + "WHERE b.JMMV_bicicletas_esta_activo = TRUE"
                 + "ORDER BY b.JMMV_bicicletas_id_bicicleta ASC";
 
         //enviar consulta
-        try (Connection conn = conexion.JMMV_Conectar(); Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
+        try (Connection conn = conexion.JMMV_Conectar(); 
+                Statement stmt = conn.createStatement(); 
+                ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
 
@@ -50,7 +52,7 @@ public class JMMV_BicicletaDAO {
                 boolean JMMV_estaDisponible = rs.getBoolean("disponibilidad");
 
                 //obtener nombre de tipo de bicicleta
-                String nombreTipo = ObtenerTipoBicicletaPorId(JMMV_tipo);
+                String nombreTipo = JMMV_ObtenerTipoBicicletaPorId(JMMV_tipo);
 
                 //crear objeto de la clase
                 JMMV_Bicicleta bicicleta = new JMMV_Bicicleta(JMMV_idBicicleta, JMMV_nombre, nombreTipo, JMMV_descripcion, JMMV_estaDisponible);
@@ -74,17 +76,18 @@ public class JMMV_BicicletaDAO {
                 + "JMMV_bicicletas_nombre,"
                 + "JMMV_bicicletas_id_tipo_bicicleta,"
                 + "JMMV_bicicletas_esta_disponible,"
-                + "JMMV_bicicletas_esta_activo)\n"
+                + "JMMV_bicicletas_esta_activo)"
                 + "VALUES(?,?,?,?)";
 
-        try (Connection conn = conexion.JMMV_Conectar(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (Connection conn = conexion.JMMV_Conectar(); 
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            //obtener id de la bicicleta
-            int idBicicleta = JMMV_ObtenerIdBicicletaPorNombre(bicicleta.getJMMV_Bicicleta_tipoBicicleta());
+            //obtener id de tipo de la bicicleta
+            int idTipoBicicleta = JMMV_ObtenerIdBicicletaPorNombre(bicicleta.getJMMV_Bicicleta_tipoBicicleta());
 
             //preparar valores a enviar
             pstmt.setString(1, bicicleta.getJMMV_Bicicleta_nombre());
-            pstmt.setInt(2, idBicicleta);
+            pstmt.setInt(2, idTipoBicicleta);
             pstmt.setBoolean(3, true);
             pstmt.setBoolean(4, true);
 
@@ -102,18 +105,21 @@ public class JMMV_BicicletaDAO {
     public boolean JMMV_ActualizarBicicleta(JMMV_Bicicleta bicicleta) {
 
         //string sql
-        String sql = "UPDATE JMMV_bicicletas AS b\n"
-                + "SET b.JMMV_bicicletas_nombre = ?, b.JMMV_bicicletas_id_tipo_bicicleta = ?, "
-                + "b.JMMV_bicicletas_esta_disponible = ?\n"
+        String sql = "UPDATE JMMV_bicicletas AS b"
+                + "SET "
+                + "b.JMMV_bicicletas_nombre = ?, "
+                + "b.JMMV_bicicletas_id_tipo_bicicleta = ?, "
+                + "b.JMMV_bicicletas_esta_disponible = ?"
                 + "WHERE JMMV_bicicletas_id_bicicleta = ?";
 
-        int idBicicleta = JMMV_ObtenerIdBicicletaPorNombre(bicicleta.getJMMV_Bicicleta_tipoBicicleta());
+        int idTipoBicicleta = JMMV_ObtenerIdBicicletaPorNombre(bicicleta.getJMMV_Bicicleta_tipoBicicleta());
 
-        try (Connection conn = conexion.JMMV_Conectar(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (Connection conn = conexion.JMMV_Conectar(); 
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             //preparar valores a enviar
             pstmt.setString(1, bicicleta.getJMMV_Bicicleta_nombre());
-            pstmt.setInt(2, idBicicleta);
+            pstmt.setInt(2, idTipoBicicleta);
             pstmt.setBoolean(3, bicicleta.isJMMV_Bicicleta_estaDisponible());
             pstmt.setInt(4, bicicleta.getJMMV_Bicicleta_idBicicleta());
 
@@ -128,14 +134,16 @@ public class JMMV_BicicletaDAO {
         return true;
     }
 
+    //eliminar bicicleta por nombre
     public boolean JMMV_EliminarBicicleta(String nombreBicicleta) {
 
-        String sql = "UPDATE JMMV_bicicletas\n"
-                + "SET\n"
-                + "JMMV_bicicletas_esta_activo = FALSE\n"
+        String sql = "UPDATE JMMV_bicicletas"
+                + "SET"
+                + "JMMV_bicicletas_esta_activo = FALSE"
                 + "WHERE JMMV_bicicletas_nombre = ?";
 
-        try (Connection conn = conexion.JMMV_Conectar(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (Connection conn = conexion.JMMV_Conectar(); 
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, nombreBicicleta);
 
@@ -155,11 +163,13 @@ public class JMMV_BicicletaDAO {
     //uso POSIBLE
     public boolean JMMV_CambiarDisponibilidadBicicleta(int idBicicleta){
         
-        String sql = "UPDATE JMMV_bicicletas\n"
-                + "SET JMMV_bicicletas_esta_disponible = NOT JMMV_bicicletas_esta_disponible\n"
+        String sql = "UPDATE JMMV_bicicletas"
+                + "SET "
+                + "JMMV_bicicletas_esta_disponible = NOT JMMV_bicicletas_esta_disponible"
                 + "WHERE JMMV_bicicletas_id_bicicleta = ?";
 
-        try (Connection conn = conexion.JMMV_Conectar(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (Connection conn = conexion.JMMV_Conectar(); 
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setInt(1, idBicicleta);
 
@@ -176,13 +186,14 @@ public class JMMV_BicicletaDAO {
         
     }
     //recibe id de TIPO de bicicleta, retorna el nombre del tipo
-    public String ObtenerTipoBicicletaPorId(int idBicicleta) {
+    public String JMMV_ObtenerTipoBicicletaPorId(int idBicicleta) {
 
-        String sql = "SELECT t.JMMV_tipos_bicicletas_nombre AS nombre_tipo\n"
-                + "FROM JMMV_tipos_bicicletas t\n"
+        String sql = "SELECT t.JMMV_tipos_bicicletas_nombre AS nombre_tipo"
+                + "FROM JMMV_tipos_bicicletas t"
                 + "WHERE t.JMMV_tipos_bicicletas_id_tipo_bicicleta = ?";
 
-        try (Connection conn = conexion.JMMV_Conectar(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (Connection conn = conexion.JMMV_Conectar(); 
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setInt(1, idBicicleta);
 
@@ -199,13 +210,15 @@ public class JMMV_BicicletaDAO {
     }
 
     public int JMMV_ObtenerIdBicicletaPorNombre(String nombreBicicleta) {
-        String sql = "SELECT b.JMMV_bicicletas_id_bicicleta AS id_bicicleta\n"
-                + "FROM JMMV_bicicletas b\n"
+        String sql = "SELECT b.JMMV_bicicletas_id_bicicleta AS id_bicicleta"
+                + "FROM JMMV_bicicletas b"
                 + "WHERE b.JMMV_bicicletas_nombre = ?";
 
-        try (Connection conn = conexion.JMMV_Conectar(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (Connection conn = conexion.JMMV_Conectar(); 
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, nombreBicicleta);
+            
             ResultSet rs = pstmt.executeQuery();
 
             if (rs.next()) {
@@ -218,13 +231,15 @@ public class JMMV_BicicletaDAO {
     }
     
     public String JMMV_ObtenerNombreBicicletaPorId(int idBicicleta) {
-        String sql = "SELECT b.JMMV_bicicletas_nombre AS nombre_bicicleta\n"
-                + "FROM JMMV_bicicletas b\n"
+        String sql = "SELECT b.JMMV_bicicletas_nombre AS nombre_bicicleta"
+                + "FROM JMMV_bicicletas b"
                 + "WHERE b.JMMV_bicicletas_id_bicicleta = ?";
 
-        try (Connection conn = conexion.JMMV_Conectar(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (Connection conn = conexion.JMMV_Conectar(); 
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setInt(1, idBicicleta);
+            
             ResultSet rs = pstmt.executeQuery();
 
             if (rs.next()) {
@@ -239,13 +254,16 @@ public class JMMV_BicicletaDAO {
     
     //recibe nombre de TIPO de bicicleta, retorna el id del tipo
     public int JMMV_ObtenerIdTipoNombre(String tipoBicicleta) {
-        String sql = "SELECT t.JMMV_tipos_bicicletas_id_tipo_bicicleta AS nombre_tipo\n"
-                + "FROM JMMV_tipos_bicicletas t\n"
+        
+        String sql = "SELECT t.JMMV_tipos_bicicletas_id_tipo_bicicleta AS nombre_tipo"
+                + "FROM JMMV_tipos_bicicletas t"
                 + "WHERE t.JMMV_tipos_bicicletas_nombre = ?";
 
-        try (Connection conn = conexion.JMMV_Conectar(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (Connection conn = conexion.JMMV_Conectar(); 
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, tipoBicicleta);
+            
             ResultSet rs = pstmt.executeQuery();
 
             if (rs.next()) {
@@ -257,23 +275,51 @@ public class JMMV_BicicletaDAO {
         return -1; //retorna valor no válido
     }
     
-    //para combobox, todos los tipos de bicicletas activos, ordenados
-    public List<String> JMMV_ObtenerTiposDeBicicletaActivos() {
-        List<String> tipos = new ArrayList<>();
-        String sql = "SELECT t.JMMV_tipos_bicicletas_nombre AS tipo_bicicleta\n"
-                + "FROM JMMV_tipos_bicicletas t\n"
-                + "WHERE t.JMMV_tipos_bicicletas_esta_activo = true\n"
-                + "ORDER BY t.JMMV_tipos_bicicletas_nombre ASC";
-        try (Connection conn = conexion.JMMV_Conectar(); Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
+    //obtener solo nombres de bicicletas activas
+    public List<String> JMMV_ObtenerNombresBicicletasActivas(){
+        
+        List<String> listaNombresBicicletas = new ArrayList<>();
+
+        String sql = "SELECT b.JMMV_bicicletas_nombre AS nombre"
+                + "FROM JMMV_bicicletas AS b"
+                + "WHERE b.JMMV_bicicletas_esta_activo = TRUE"
+                + "ORDER BY b.JMMV_bicicletas_nombre ASC";
+
+        try (Connection conn = conexion.JMMV_Conectar();
+                Statement stmt = conn.createStatement(); 
+                ResultSet rs = stmt.executeQuery(sql)) {
 
             if (rs.next()) {
-                tipos.add(rs.getString("tipo_bicicleta"));
+                listaNombresBicicletas.add(rs.getString("nombre"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return tipos;
+        return listaNombresBicicletas;
+        
+    }
+    
+    //para combobox, todos los tipos de bicicletas activos, ordenados
+    public List<String> JMMV_ObtenerTiposDeBicicletaActivos() {
+        
+        List<String> listaTiposBicicletas = new ArrayList<>();
+        
+        String sql = "SELECT t.JMMV_tipos_bicicletas_nombre AS tipo_bicicleta"
+                + "FROM JMMV_tipos_bicicletas t"
+                + "WHERE t.JMMV_tipos_bicicletas_esta_activo = true"
+                + "ORDER BY t.JMMV_tipos_bicicletas_nombre ASC";
+        
+        try (Connection conn = conexion.JMMV_Conectar(); 
+                Statement stmt = conn.createStatement(); 
+                ResultSet rs = stmt.executeQuery(sql)) {
 
+            if (rs.next()) {
+                listaTiposBicicletas.add(rs.getString("tipo_bicicleta"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listaTiposBicicletas;
         
     }
 

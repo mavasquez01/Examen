@@ -4,7 +4,7 @@
  */
 package GUI;
 
-import datosDAO.JMMV_BicicletaDAO;
+import DAO.JMMV_BicicletaDAO;
 import java.util.List;
 import logica.JMMV_Bicicleta;
 
