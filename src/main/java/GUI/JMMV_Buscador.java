@@ -8,6 +8,8 @@ import controlador.*;
 import java.util.List;
 import javax.swing.JOptionPane;
 import logica.JMMV_Cliente;
+//agregado:
+import controlador.JMMV_Controlador;
 
 /**
  *
