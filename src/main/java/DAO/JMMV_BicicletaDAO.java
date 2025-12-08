@@ -29,7 +29,7 @@ public class JMMV_BicicletaDAO {
         String sql = "SELECT "
                 + "b.JMMV_bicicletas_id_bicicleta AS id, "
                 + "b.JMMV_bicicletas_nombre AS nombre, "
-                + "t.JMMV_tipos_bicicletas_nombre AS tipo, "
+                + "b.JMMV_bicicletas_id_tipo_bicicleta AS tipo, "
                 + "b.JMMV_bicicletas_esta_disponible AS disponibilidad, "
                 + "t.JMMV_tipos_bicicletas_descripcion AS descripcion "
                 + "FROM JMMV_bicicletas AS b "
@@ -234,6 +234,36 @@ public class JMMV_BicicletaDAO {
             e.printStackTrace();
         }
         return -1; //retorna valor no válido
+    }
+    
+    public JMMV_Bicicleta JMMV_ObtenerBicicletaPorNombre(String nombreBicicleta) {
+        String sql = "SELECT b.JMMV_bicicletas_nombre AS nombre, "
+                + "t.JMMV_tipos_bicicletas_nombre as nombreTipo, "
+                + "b.JMMV_bicicletas_esta_disponible AS disponibilidad, "
+                + "b.JMMV_bicicletas_esta_activo AS activo"
+                + "FROM JMMV_bicicletas b "
+                + "JOIN JMMV_tipos_bicicletas t on b.JMMV_bicicletas_id_tipo_bicicleta = t.JMMV_tipos_bicicletas_id_tipo_bicicleta "
+                + "WHERE b.JMMV_bicicletas_nombre = ? && b.JMMV_bicicletas_esta_activo = 1";
+
+        try (Connection conn = conexion.JMMV_Conectar(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, nombreBicicleta);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+
+                if (rs.next()) {
+                    String nombre = rs.getString("nombre");
+                    String nombreTipo = rs.getString("nombreTipo");
+                    boolean disponibilidad = rs.getBoolean("disponibilidad");
+                    boolean activo = rs.getBoolean("activo");
+                    JMMV_Bicicleta bicicleta = new JMMV_Bicicleta(nombreBicicleta, nombreTipo, null, disponibilidad, activo);
+                    return bicicleta;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null; //retorna valor no válido
     }
     
     public String JMMV_ObtenerNombreBicicletaPorId(int idBicicleta) {

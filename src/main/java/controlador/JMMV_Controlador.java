@@ -68,6 +68,7 @@ public class JMMV_Controlador {
         System.out.println("TEST | Controlador | NombreBuscado limpio: "+nombreBuscadoLimpio);
 
         List<JMMV_Cliente> listaClientes = clienteDAO.JMMV_ObtenerClientePorNombre(nombreBuscadoLimpio);
+        System.out.println(listaClientes.size());
         
         return listaClientes;
     }
@@ -169,16 +170,11 @@ public class JMMV_Controlador {
         
     }
     
-    public List <JMMV_Cliente> JMMV_ObtenerClientePorNombre (String nombres) {
-       
-        return clienteDAO.JMMV_ObtenerClientePorNombre(nombres);
+    public JMMV_Bicicleta JMMV_ObtenerBicicletaPorNombre (String bicicleta) {
+        return bicicletaDAO.JMMV_ObtenerBicicletaPorNombre(bicicleta);
     }
     
-    public List <JMMV_Cliente> JMMV_ObtenerClientePorRun (int run) {
-        return clienteDAO.JMMV_ObtenerClientePorRun(run);
-    }
-    
-    public int JMMV_ObtenerBicicletaPorNombre (String bicicleta) {
+    public int JMMV_ObtenerIdBicicletaPorNombre (String bicicleta) {
         return bicicletaDAO.JMMV_ObtenerIdBicicletaPorNombre(bicicleta);
     }
 

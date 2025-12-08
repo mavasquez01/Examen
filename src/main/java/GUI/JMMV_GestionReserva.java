@@ -259,7 +259,7 @@ public class JMMV_GestionReserva extends javax.swing.JFrame {
             LocalDate fechaTerConv = timeMachine.asLocalDate(fechaTer);
             List <JMMV_Cliente> cliente = controlador.JMMV_ObtenerClientePorNombre(nombres);
             int idCliente = cliente.get(0).getJMMV_Cliente_idCliente();
-            int idBicicleta = controlador.JMMV_ObtenerBicicletaPorNombre(bicicleta);
+            int idBicicleta = controlador.JMMV_ObtenerIdBicicletaPorNombre(bicicleta);
             
             if(reserva == null) {
                 reserva = new JMMV_Reserva(idCliente, nombres, idBicicleta, bicicleta, fechaInicConv, fechaTerConv);

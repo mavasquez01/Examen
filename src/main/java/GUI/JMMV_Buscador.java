@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import logica.JMMV_Cliente;
 //agregado:
 import controlador.JMMV_Controlador;
+import logica.JMMV_Bicicleta;
 
 /**
  *
@@ -105,9 +106,10 @@ public class JMMV_Buscador extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
- /*       if(seleccion == 0) {
-            List <JMMV_Bicicleta> bicicleta = controlador**;
-            if(bicicleta.isEmpty()) {
+      if(seleccion == 0) {
+            JMMV_Bicicleta bicicleta = controlador.JMMV_ObtenerBicicletaPorNombre(tfBuscar.getText().toLowerCase());
+            
+            if(bicicleta == null) {
                 JOptionPane.showMessageDialog(this, "No se encontro la bicicleta, intente nuevamente", "BICICLETA NO ENCONTRADO", JOptionPane.ERROR_MESSAGE);
             } else {
                     JMMV_GestionBicicleta gestionBici = new JMMV_GestionBicicleta(bicicleta);
@@ -121,17 +123,18 @@ public class JMMV_Buscador extends javax.swing.JDialog {
             //
         } else if (seleccion == 1) {
             List <JMMV_Cliente> cliente = controlador.JMMV_ObtenerClientePorNombre(tfBuscar.getText().toLowerCase());
-            if(cliente.isEmpty()) {
+            System.out.println(cliente.size());
+            if(!cliente.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "No se encontro al cliente, intente nuevamente", "CLIENTE NO ENCONTRADO", JOptionPane.ERROR_MESSAGE);
             } else {
                 if (cliente.size() > 1) {
                     int run = Integer.parseInt(JOptionPane.showInputDialog(this, "Existe más de un usuario con esta combinación de nombres, favor ingresar el run del cliente."));
                     List <JMMV_Cliente> clienteRun = controlador.JMMV_ObtenerClientePorRun(run);
                     System.out.println("Cliente encontrado");
-                    JMMV_Confirmacion confirmar = new JMMV_Confirmacion(null, true, clienteRun.get(0));
+                    JMMV_Confirmacion confirmar = new JMMV_Confirmacion(null, true, clienteRun.get(1));
                     this.dispose();
                 } else if (cliente.size() == 1) {
-                    JMMV_GestionUsuarios gestionUser = new JMMV_GestionUsuarios(cliente.get(0));
+                    JMMV_GestionUsuarios gestionUser = new JMMV_GestionUsuarios(cliente.get(1));
                     gestionUser.setTitle("Gestión Clientes");
                     gestionUser.setLocationRelativeTo(null);
                     gestionUser.setResizable(false);
@@ -141,11 +144,11 @@ public class JMMV_Buscador extends javax.swing.JDialog {
                 }
                     else {
                     System.out.println("Cliente encontrado");
-                    JMMV_Confirmacion confirmar = new JMMV_Confirmacion(null, true, cliente.get(0));
+                    JMMV_Confirmacion confirmar = new JMMV_Confirmacion(null, true, cliente.get(1));
                     this.dispose();
                 } 
             }
-        }*/
+        }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
    

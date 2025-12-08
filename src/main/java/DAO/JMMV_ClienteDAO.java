@@ -35,7 +35,7 @@ public class JMMV_ClienteDAO {
                 + "c.JMMV_clientes_nombres AS nombres, "
                 + "c.JMMV_clientes_apellido_paterno AS ap_pat, "
                 + "c.JMMV_clientes_apellido_materno AS ap_mat, "
-                + "co.JMMV_comunas_nombre AS comuna, "
+                + "c.JMMV_clientes_id_comuna AS comuna, "
                 + "c.JMMV_clientes_calle AS calle, "
                 + "c.JMMV_clientes_num_calle AS numero, "
                 + "c.JMMV_clientes_telefono AS telefono, "
@@ -44,14 +44,13 @@ public class JMMV_ClienteDAO {
                 + "u.JMMV_usuarios_correo AS correo "
                 + "FROM JMMV_clientes c "
                 + "JOIN JMMV_usuarios u ON c.JMMV_clientes_id_usuario = u.JMMV_usuarios_id_usuario "
-                + "JOIN JMMV_comunas co ON c.JMMV_clientes_id_comuna = co.JMMV_comunas_id_comuna "
                 + "WHERE c.JMMV_clientes_esta_activo = TRUE "
                 + "ORDER BY c.JMMV_clientes_id_cliente ASC";
 
         //enviar consulta
         try (Connection conn = conexion.JMMV_Conectar(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            pstmt.setBoolean(1, true);
+            
 
             try (ResultSet rs = pstmt.executeQuery()) {
 
@@ -86,7 +85,7 @@ public class JMMV_ClienteDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
+        System.out.println(listaClientes.size());
         return listaClientes;
 
     }
@@ -502,6 +501,7 @@ public class JMMV_ClienteDAO {
 
                     //agregar cliente a lista
                     listaClientes.add(cliente);
+                    listaClientes.size();
                 }
             }
 

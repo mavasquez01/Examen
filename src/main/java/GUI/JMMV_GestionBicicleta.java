@@ -101,6 +101,11 @@ public class JMMV_GestionBicicleta extends javax.swing.JFrame {
 
         btnListar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnListar.setText("Listar");
+        btnListar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnListarActionPerformed(evt);
+            }
+        });
 
         cBoxTipos.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
@@ -257,6 +262,14 @@ public class JMMV_GestionBicicleta extends javax.swing.JFrame {
                 return;
         }
     }//GEN-LAST:event_btnCrearActionPerformed
+
+    private void btnListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarActionPerformed
+        JMMV_ListadoBicicleta listado = new JMMV_ListadoBicicleta();
+        listado.setTitle("Listado de Clientes");
+            listado.setLocationRelativeTo(null);
+            listado.setVisible(true);
+            this.dispose();
+    }//GEN-LAST:event_btnListarActionPerformed
 
     private void CargarTipos() {
         

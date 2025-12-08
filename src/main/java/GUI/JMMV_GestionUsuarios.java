@@ -449,7 +449,6 @@ public class JMMV_GestionUsuarios extends javax.swing.JFrame {
         JMMV_ListadoUsuarios listado = new JMMV_ListadoUsuarios();
         listado.setTitle("Listado de Clientes");
             listado.setLocationRelativeTo(null);
-            listado.setResizable(false);
             listado.setVisible(true);
             this.dispose();
     }//GEN-LAST:event_btnListarActionPerformed
