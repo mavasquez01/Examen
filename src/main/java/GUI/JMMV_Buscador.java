@@ -10,6 +10,8 @@ import DAO.JMMV_ReservaDAO;
 import java.util.List;
 import javax.swing.JOptionPane;
 import logica.JMMV_Cliente;
+//agregado:
+import controlador.JMMV_Controlador;
 
 /**
  *
@@ -21,6 +23,11 @@ public class JMMV_Buscador extends javax.swing.JDialog {
     JMMV_ClienteDAO clienteDAO  = new JMMV_ClienteDAO();
     private JMMV_BicicletaDAO BicicletaDAO;
     private JMMV_ReservaDAO ReservaDAO;
+    
+    //línea agregada:
+    private JMMV_Controlador controlador = new JMMV_Controlador();
+    
+    
     public JMMV_Buscador(java.awt.Frame parent, boolean modal,int seleccion) {
         super(parent, modal);
         initComponents();
@@ -110,13 +117,22 @@ public class JMMV_Buscador extends javax.swing.JDialog {
         if(seleccion == 0) {
             //
         } else if (seleccion == 1) {
-            List <JMMV_Cliente> cliente = clienteDAO.JMMV_ObtenerClientePorNombre(tfBuscar.getText().toLowerCase());
+            
+            //línea agregada
+            List <JMMV_Cliente> cliente = controlador.JMMV_ObtenerClientePorNombre(tfBuscar.getText().toLowerCase());
+            
+            //línea original sin modificar, solo comentada:
+            //List <JMMV_Cliente> cliente = clienteDAO.JMMV_ObtenerClientePorNombre(tfBuscar.getText().toLowerCase());
+            
             if(cliente.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "No se encontro al cliente, intente nuevamente", "CLIENTE NO ENCONTRADO", JOptionPane.ERROR_MESSAGE);
             } else {
                 if (cliente.size() > 1) {
                     int run = Integer.parseInt(JOptionPane.showInputDialog(this, "Existe más de un usuario con esta combinación de nombres, favor ingresar el run del cliente."));
-                    List <JMMV_Cliente> clienteRun = clienteDAO.JMMV_ObtenerClientePorRun(run);
+                    //línea agregada:
+                    List <JMMV_Cliente> clienteRun = controlador.JMMV_ObtenerClientePorRun(run);
+                    //línea original sin modificar, solo comentada:
+                    //List <JMMV_Cliente> clienteRun = clienteDAO.JMMV_ObtenerClientePorRun(run);
                     System.out.println("Cliente encontrado");
                     JMMV_Confirmacion confirmar = new JMMV_Confirmacion(null, true, clienteRun.get(0));
                     this.dispose();

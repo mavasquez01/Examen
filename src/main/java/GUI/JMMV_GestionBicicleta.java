@@ -52,7 +52,6 @@ public class JMMV_GestionBicicleta extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        btnHome.setIcon(new javax.swing.ImageIcon("C:\\Users\\Agustin\\OneDrive\\Escritorio\\examen_max\\src\\static\\home_50dp_1F1F1F_FILL0_wght400_GRAD0_opsz48.png")); // NOI18N
         btnHome.setText("Inicio");
         btnHome.setToolTipText("");
         btnHome.addActionListener(new java.awt.event.ActionListener() {
@@ -77,6 +76,11 @@ public class JMMV_GestionBicicleta extends javax.swing.JFrame {
 
         btnCrear.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnCrear.setText("Crear");
+        btnCrear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCrearActionPerformed(evt);
+            }
+        });
 
         btnModificar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnModificar.setText("Modificar");
@@ -212,6 +216,10 @@ public class JMMV_GestionBicicleta extends javax.swing.JFrame {
             buscador.setVisible(true);
             this.dispose();
     }//GEN-LAST:event_btnModificarActionPerformed
+
+    private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCrearActionPerformed
 
     private void CargarTipos() {
         

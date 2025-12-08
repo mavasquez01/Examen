@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import logica.JMMV_Cliente;
 
@@ -28,7 +29,8 @@ public class JMMV_ClienteDAO {
 
         //preparar consulta        
         String sql = "SELECT "
-                + "c.JMMV_clientes_id_cliente AS id, "
+                + "c.JMMV_clientes_id_cliente AS id_cliente, "
+                + "c.JMMV_clientes_id_usuario AS id_usuario, "
                 + "c.JMMV_clientes_run AS run, "
                 + "c.JMMV_clientes_nombres AS nombres, "
                 + "c.JMMV_clientes_apellido_paterno AS ap_pat, "
@@ -39,42 +41,46 @@ public class JMMV_ClienteDAO {
                 + "c.JMMV_clientes_telefono AS telefono, "
                 + "u.JMMV_usuarios_nom_usuario AS nombre_usuario, "
                 + "u.JMMV_usuarios_contrasena AS contrasena, "
-                + "u.JMMV_usuarios_correo AS correo"
-                + "FROM JMMV_clientes c"
-                + "JOIN JMMV_usuarios u ON c.JMMV_clientes_id_usuario = u.JMMV_usuarios_id_usuario"
-                + "JOIN JMMV_comunas co ON c.JMMV_clientes_id_comuna = co.JMMV_comunas_id_comuna"
-                + "WHERE c.JMMV_clientes_esta_activo = TRUE"
+                + "u.JMMV_usuarios_correo AS correo "
+                + "FROM JMMV_clientes c "
+                + "JOIN JMMV_usuarios u ON c.JMMV_clientes_id_usuario = u.JMMV_usuarios_id_usuario "
+                + "JOIN JMMV_comunas co ON c.JMMV_clientes_id_comuna = co.JMMV_comunas_id_comuna "
+                + "WHERE c.JMMV_clientes_esta_activo = ? "
                 + "ORDER BY c.JMMV_clientes_id_cliente ASC";
 
         //enviar consulta
-        try (Connection conn = conexion.JMMV_Conectar(); 
-                Statement stmt = conn.createStatement(); 
-                ResultSet rs = stmt.executeQuery(sql)) {
+        try (Connection conn = conexion.JMMV_Conectar(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            while (rs.next()) {
+            pstmt.setBoolean(1, true);
 
-                //obtener datos
-                int JMMV_idCliente = rs.getInt("id");
-                String JMMV_nomUsuario = rs.getString("nombre_usuario");
-                String JMMV_contrasena = rs.getString("contrasena");
-                String JMMV_correo = rs.getString("correo");
-                int JMMV_run = rs.getInt("run");
-                String JMMV_nombres = rs.getString("nombres");
-                String JMMV_apellidoPaterno = rs.getString("ap_pat");
-                String JMMV_apellidoMaterno = rs.getString("ap_mat");
-                int JMMV_comuna = rs.getInt("comuna");
-                String JMMV_calle = rs.getString("calle");
-                int JMMV_numCalle = rs.getInt("numero");
-                int JMMV_telefono = rs.getInt("telefono");                
-                
-                //obtener nombre de comuna
-                String nombreComuna = JMMV_ObtenerNombreComunaPorId(JMMV_comuna);                      
+            try (ResultSet rs = pstmt.executeQuery()) {
 
-                //crear objeto de la clase
-                JMMV_Cliente cliente = new JMMV_Cliente(JMMV_idCliente, JMMV_nomUsuario, JMMV_contrasena, JMMV_correo, JMMV_run, JMMV_nombres, JMMV_apellidoPaterno, JMMV_apellidoMaterno, nombreComuna, JMMV_calle, JMMV_numCalle, JMMV_telefono);
+                while (rs.next()) {
 
-                //agregar cliente a lista
-                listaClientes.add(cliente);
+                    //obtener datos
+                    int JMMV_idCliente = rs.getInt("id_cliente");
+                    int JMMV_idUsuario = rs.getInt("id_usuario");
+                    String JMMV_nomUsuario = rs.getString("nombre_usuario");
+                    String JMMV_contrasena = rs.getString("contrasena");
+                    String JMMV_correo = rs.getString("correo");
+                    int JMMV_run = rs.getInt("run");
+                    String JMMV_nombres = rs.getString("nombres");
+                    String JMMV_apellidoPaterno = rs.getString("ap_pat");
+                    String JMMV_apellidoMaterno = rs.getString("ap_mat");
+                    int JMMV_comuna = rs.getInt("comuna");
+                    String JMMV_calle = rs.getString("calle");
+                    int JMMV_numCalle = rs.getInt("numero");
+                    int JMMV_telefono = rs.getInt("telefono");
+
+                    //obtener nombre de comuna
+                    String nombreComuna = JMMV_ObtenerNombreComunaPorId(JMMV_comuna);
+
+                    //crear objeto de la clase
+                    JMMV_Cliente cliente = new JMMV_Cliente(JMMV_idCliente, JMMV_idUsuario, JMMV_nomUsuario, JMMV_contrasena, JMMV_correo, JMMV_run, JMMV_nombres, JMMV_apellidoPaterno, JMMV_apellidoMaterno, nombreComuna, JMMV_calle, JMMV_numCalle, JMMV_telefono);
+
+                    //agregar cliente a lista
+                    listaClientes.add(cliente);
+                }
             }
 
         } catch (SQLException e) {
@@ -93,24 +99,30 @@ public class JMMV_ClienteDAO {
         int pkInsertada = -1;
 
         //string para primer INSERT
-        String sqlUsuarios = "INSERT INTO JMMV_usuarios "
-                + "(JMMV_usuarios_nom_usuario,JMMV_usuarios_contrasena,JMMV_usuarios_correo,JMMV_usuarios_id_rol)"
-                + "VALUES(?,?,?,?)";
+        String sqlUsuarios = "INSERT INTO JMMV_usuarios ("
+                + "JMMV_usuarios_nom_usuario, "
+                + "JMMV_usuarios_contrasena, "
+                + "JMMV_usuarios_correo, "
+                + "JMMV_usuarios_id_rol, "
+                + "JMMV_usuarios_esta_activo) "
+                + "VALUES(?,?,?,?,?)";
 
         //string segundo INSERT            
         String sqlClientes = "INSERT INTO JMMV_clientes ("
-                + "JMMV_clientes_id_usuario,JMMV_clientes_run,"
+                + "JMMV_clientes_id_usuario, "
+                + "JMMV_clientes_run, "
                 + "JMMV_clientes_nombres,"
-                + "JMMV_clientes_apellido_paterno,"
-                + "JMMV_clientes_apellido_materno,"
-                + "JMMV_clientes_id_comuna,"
-                + "JMMV_clientes_calle,"
-                + "JMMV_clientes_num_calle,"
-                + "JMMV_clientes_telefono,"
-                + "JMMV_clientes_esta_activo)"
+                + "JMMV_clientes_apellido_paterno, "
+                + "JMMV_clientes_apellido_materno, "
+                + "JMMV_clientes_id_comuna, "
+                + "JMMV_clientes_calle, "
+                + "JMMV_clientes_num_calle, "
+                + "JMMV_clientes_telefono, "
+                + "JMMV_clientes_esta_activo) "
                 + "VALUES(?,?,?,?,?,?,?,?,?,?)";
 
         int idComuna = JMMV_ObtenerIdComunaPorNombre(cliente.getJMMV_Cliente_comuna());
+        System.out.println("TEST | ID comuna: "+ idComuna);
 
         try {
             conn = conexion.JMMV_Conectar();
@@ -124,10 +136,12 @@ public class JMMV_ClienteDAO {
                 pstmtUno.setString(1, cliente.getJMMV_Cliente_nomUsuario());
                 pstmtUno.setString(2, cliente.getJMMV_Cliente_contrasena());
                 pstmtUno.setString(3, cliente.getJMMV_Cliente_correo());
-                pstmtUno.setInt(4, 2);
+                pstmtUno.setInt(4, 2); //rol de cliente
+                pstmtUno.setBoolean(5, true); //usuario activo
 
                 //ejecutar primer INSERT
-                pstmtUno.executeUpdate();
+                int filaUno = pstmtUno.executeUpdate();
+                System.out.println("TEST | Agregar cliente, tabla usuarios, filas nuevas: "+filaUno);
 
                 //recuperar PK
                 try (ResultSet rs = pstmtUno.getGeneratedKeys()) {
@@ -147,10 +161,11 @@ public class JMMV_ClienteDAO {
                 pstmtDos.setString(7, cliente.getJMMV_Cliente_calle());
                 pstmtDos.setInt(8, cliente.getJMMV_Cliente_numCalle());
                 pstmtDos.setInt(9, cliente.getJMMV_Cliente_telefono());
-                pstmtDos.setBoolean(10, true);
+                pstmtDos.setBoolean(10, true); //cliente activo
 
                 //ejecutar segundo INSERT
-                pstmtDos.executeUpdate();
+                int filaDos = pstmtDos.executeUpdate();
+                System.out.println("TEST | Agregar cliente, tabla clientes, filas nuevas: "+filaDos);
 
                 //commit
                 conn.commit();
@@ -159,25 +174,38 @@ public class JMMV_ClienteDAO {
 
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            
             if (conn != null) {
                 try {
-
+                    System.out.println("Error en transacción. Se ejecutará ROLLBACK");
                     //rollback
                     conn.rollback();
                 } catch (SQLException er) {
-                    er.printStackTrace();
+                    System.out.println("Error al ejecutar ROLLBACK: "+er.getMessage());
                 }
             }
             return false;
+        }finally{
+            if (conn != null){
+                try{
+                    conn.setAutoCommit(true);
+                    conn.close();
+                    
+                }catch(SQLException e){
+                    System.out.println("Error al cerrar la conexión "+e.getMessage());
+                }
+            }
         }
     }
 
     public boolean JMMV_ActualizarCliente(JMMV_Cliente cliente) {
+        
+        Connection conn = null;
 
         //obtener id usuario        
-        int idUsuario = 1;
-        
+        //int idUsuario = JMMV_ObtenerIdUsuario(cliente.getJMMV_Cliente_idCliente());
+        System.out.println("id usuario desde dao: "+cliente.getJMMV_Cliente_idUsuario());
+
         //string para primer UPDATE
         String sqlUno = "UPDATE JMMV_usuarios "
                 + "SET "
@@ -186,36 +214,37 @@ public class JMMV_ClienteDAO {
                 + "JMMV_usuarios_correo = ? "
                 + "WHERE JMMV_usuarios_id_usuario = ? ";
 
-        try (Connection conn = conexion.JMMV_Conectar(); 
-                PreparedStatement pstmtUno = conn.prepareStatement(sqlUno)) {
-
+        //string segundo UPDATE            
+        String sqlDos = "UPDATE jmmv_clientes "
+                + "SET "
+                + "JMMV_clientes_run = ?, "
+                + "JMMV_clientes_nombres = ?, "
+                + "JMMV_clientes_apellido_paterno = ?, "
+                + "JMMV_clientes_apellido_materno = ?, "
+                + "JMMV_clientes_id_comuna = ?, "
+                + "JMMV_clientes_calle = ?, "
+                + "JMMV_clientes_num_calle = ?, "
+                + "JMMV_clientes_telefono = ? "
+                + "WHERE JMMV_clientes_id_usuario = ?";
+        
+        try {
+            conn = conexion.JMMV_Conectar();
             //desactivar auto commit
             conn.setAutoCommit(false);
 
-            //preparar valores a enviar
-            pstmtUno.setString(1, cliente.getJMMV_Cliente_nomUsuario());
-            pstmtUno.setString(2, cliente.getJMMV_Cliente_contrasena());
-            pstmtUno.setString(3, cliente.getJMMV_Cliente_correo());
-            pstmtUno.setInt(4, idUsuario);
+            try (PreparedStatement pstmtUno = conn.prepareStatement(sqlUno); 
+                    PreparedStatement pstmtDos = conn.prepareStatement(sqlDos)) {
 
-            //ejecutar primer UPDATE
-            pstmtUno.executeUpdate();
+                //preparar valores a enviar
+                pstmtUno.setString(1, cliente.getJMMV_Cliente_nomUsuario());
+                pstmtUno.setString(2, cliente.getJMMV_Cliente_contrasena());
+                pstmtUno.setString(3, cliente.getJMMV_Cliente_correo());
+                pstmtUno.setInt(4, cliente.getJMMV_Cliente_idUsuario());
 
-            //string segundo UPDATE            
-            String sqlDos = "UPDATE jmmv_clientes "
-                    + "SET "
-                    + "JMMV_clientes_run = ?, "
-                    + "JMMV_clientes_nombres = ?, "
-                    + "JMMV_clientes_apellido_paterno = ?, "
-                    + "JMMV_clientes_apellido_materno = ?, "
-                    + "JMMV_clientes_id_comuna = ?, "
-                    + "JMMV_clientes_calle = ?, "
-                    + "JMMV_clientes_num_calle = ?, "
-                    + "JMMV_clientes_telefono = ? "
-                    + "WHERE JMMV_clientes_id_cliente = ?";
+                //ejecutar primer UPDATE
+                pstmtUno.executeUpdate();
 
-            //preparar valores a enviar
-            try (PreparedStatement pstmtDos = conn.prepareStatement(sqlDos)) {
+                //preparar valores a enviar
                 pstmtDos.setInt(1, cliente.getJMMV_Cliente_run());
                 pstmtDos.setString(2, cliente.getJMMV_Cliente_nombres());
                 pstmtDos.setString(3, cliente.getJMMV_Cliente_apellidoPaterno());
@@ -224,34 +253,53 @@ public class JMMV_ClienteDAO {
                 pstmtDos.setString(6, cliente.getJMMV_Cliente_calle());
                 pstmtDos.setInt(7, cliente.getJMMV_Cliente_numCalle());
                 pstmtDos.setInt(8, cliente.getJMMV_Cliente_telefono());
-                pstmtDos.setInt(9, cliente.getJMMV_Cliente_idCliente());
+                pstmtDos.setInt(9, cliente.getJMMV_Cliente_idUsuario());
 
                 //ejecutar segundo UPDATE
                 pstmtDos.executeUpdate();
+
+                //commit
+                conn.commit();
+                return true;
             }
 
-            //commit
-            conn.commit();
-
         } catch (SQLException e) {
-            e.printStackTrace();
 
+            if (conn != null) {
+                try {
+                    System.out.println("Error en transacción. Se ejecutará ROLLBACK");
+                    //rollback
+                    conn.rollback();
+                } catch (SQLException er) {
+                    System.out.println("Error al ejecutar ROLLBACK: " + er.getMessage());
+                }
+            }
             return false;
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.setAutoCommit(true);
+                    conn.close();
+
+                } catch (SQLException e) {
+                    System.out.println("Error al cerrar la conexión " + e.getMessage());
+                }
+            }
         }
-        return true;
     }
 
     public boolean JMMV_EliminarCliente(int idCliente) {
 
-        String sql = "UPDATE JMMV_clientes"
-                + "SET"
-                + "JMMV_clientes_esta_activo = FALSE"
+        String sql = "UPDATE JMMV_clientes "
+                + "SET "
+                + "JMMV_clientes_esta_activo = ? "
                 + "WHERE JMMV_clientes_id_cliente = ?";
 
         try (Connection conn = conexion.JMMV_Conectar(); 
-                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {            
 
-            pstmt.setInt(1, idCliente);
+            pstmt.setBoolean(1, false);//desactiva cliente
+            pstmt.setInt(2, idCliente);
 
             pstmt.executeUpdate();
 
@@ -266,63 +314,24 @@ public class JMMV_ClienteDAO {
 
     }
 
-    //obtener cliente por primer nombre y apellido paterno. Utiliza LIKE para primero nombre aproximado al final.
-    public List<JMMV_Cliente> JMMV_BuscarCliente (String nombres, String apellidoPaterno){
-        
-            List<JMMV_Cliente> listaClientesEncontrados = new ArrayList<>();
 
-        String nombreBuscadoSQL = nombres + "%";
-
-        String sql = "SELECT "
-                + "c.JMMV_clientes_id_cliente AS id, "
-                + "c.JMMV_clientes_run AS run, "
-                + "CONCAT(c.JMMV_clientes_nombres, ' ' ,c.JMMV_clientes_apellido_paterno, ' ' , c.JMMV_clientes_apellido_materno) AS nombre_cliente "
-                + "FROM JMMV_clientes c "
-                + "WHERE c.JMMV_clientes_esta_activo = TRUE && c.JMMV_clientes_nombres LIKE ? && c.JMMV_clientes_apellido_paterno = ? "
-                + "ORDER BY c.JMMV_clientes_id_cliente ASC";
-
-        try (Connection conn = conexion.JMMV_Conectar(); 
-                PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-            pstmt.setString(1, nombreBuscadoSQL);
-            pstmt.setString(2, apellidoPaterno);
-
-            try (ResultSet rs = pstmt.executeQuery()) {
-
-                while (rs.next()) {
-
-                    int idCliente = rs.getInt("id");
-                    int rut = rs.getInt("rut");
-                    String nombreCompleto = rs.getString("nombre_completo");
-
-                    JMMV_Cliente cliente = new JMMV_Cliente(idCliente, rut, nombreCompleto);
-
-                    listaClientesEncontrados.add(cliente);
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return listaClientesEncontrados;
-
-    }
     //métodos auxiliares
     //obtener id de comuna por su nombre
     public int JMMV_ObtenerIdComunaPorNombre(String nombreComuna) {
 
-        String sql = "SELECT JMMV_comunas_id_comuna AS id_comuna"
-                + "FROM JMMV_comunas"
+        String sql = "SELECT JMMV_comunas_id_comuna AS id_comuna "
+                + "FROM JMMV_comunas "
                 + "WHERE JMMV_comunas_nombre = ?";
 
-        try (Connection conn = conexion.JMMV_Conectar(); 
-                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (Connection conn = conexion.JMMV_Conectar(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, nombreComuna);
-            ResultSet rs = pstmt.executeQuery();
 
-            if (rs.next()) {
-                return rs.getInt("id_comuna");
+            try (ResultSet rs = pstmt.executeQuery()) {
+
+                if (rs.next()) {
+                    return rs.getInt("id_comuna");
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -330,6 +339,7 @@ public class JMMV_ClienteDAO {
         return -1; //retorna valor no válido
     }
 
+    //no corregido, no se está usando
     //obtener nombre completo de todos los clientes activos
     public List<String> JMMV_ObtenerNombresCompletosClientesActivos() {
 
@@ -337,20 +347,23 @@ public class JMMV_ClienteDAO {
 
         //consulta
         String sql = "SELECT CONCAT(JMMV_clientes_nombres,' ',JMMV_clientes_apellido_paterno,' ',"
-                + "JMMV_clientes_apellido_materno)"
-                + "AS nombre_completo"
-                + "FROM JMMV_clientes c"
-                + "WHERE c.JMMV_clientes_esta_activo=TRUE"
-                + "ORDER BY c.JMMV_clientes_id_cliente ASC";
+                + "JMMV_clientes_apellido_materno) "
+                + "AS nombre_completo "
+                + "FROM JMMV_clientes c "
+                + "WHERE c.JMMV_clientes_esta_activo = ? "
+                + "ORDER BY c.JMMV_clientes_id_cliente ASC ";
 
         //enviar consulta
-        try (Connection conn = conexion.JMMV_Conectar(); 
-                Statement stmt = conn.createStatement(); 
-                ResultSet rs = stmt.executeQuery(sql)) {
+        try (Connection conn = conexion.JMMV_Conectar(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            while (rs.next()) {
-                //agregar nombre a la lista
-                listaNombresCompletos.add("nombre_completo");
+            pstmt.setBoolean(1, true);//cliente activo
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+
+                while (rs.next()) {
+                    //agregar nombre a la lista
+                    listaNombresCompletos.add("nombre_completo");
+                }
             }
 
         } catch (SQLException e) {
@@ -362,19 +375,19 @@ public class JMMV_ClienteDAO {
     }
 
     public String JMMV_ObtenerNombreComunaPorId(int idComuna) {
-        String sql = "SELECT JMMV_comunas_nombre AS comuna"
-                + "FROM JMMV_comunas"
+        String sql = "SELECT JMMV_comunas_nombre AS comuna "
+                + "FROM JMMV_comunas "
                 + "WHERE JMMV_comunas_id_comuna = ?";
 
-        try (Connection conn = conexion.JMMV_Conectar(); 
-                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (Connection conn = conexion.JMMV_Conectar(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setInt(1, idComuna);
-            
-            ResultSet rs = pstmt.executeQuery();
 
-            if (rs.next()) {
-                return rs.getString("comuna");
+            try (ResultSet rs = pstmt.executeQuery()) {
+
+                if (rs.next()) {
+                    return rs.getString("comuna");
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -384,20 +397,20 @@ public class JMMV_ClienteDAO {
     
     public int JMMV_ObtenerIdUsuario(int idCliente) {
         String sql = "SELECT "
-                + "u.JMMV_usuarios_id_usuario AS id_usuario"
-                + "FROM JMMV_usuarios u"
-                + "JOIN JMMV_clientes c ON u.JMMV_usuarios_id_usuario = c.JMMV_clientes_id_usuario"
+                + "u.JMMV_usuarios_id_usuario AS id_usuario "
+                + "FROM JMMV_usuarios u "
+                + "JOIN JMMV_clientes c ON u.JMMV_usuarios_id_usuario = c.JMMV_clientes_id_usuario "
                 + "WHERE c.JMMV_clientes_id_cliente = ?";
 
-        try (Connection conn = conexion.JMMV_Conectar(); 
-                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (Connection conn = conexion.JMMV_Conectar(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setInt(1, idCliente);
-            
-            ResultSet rs = pstmt.executeQuery();
 
-            if (rs.next()) {
-                return rs.getInt("id_usuario");
+            try (ResultSet rs = pstmt.executeQuery()) {
+
+                if (rs.next()) {
+                    return rs.getInt("id_usuario");
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -411,15 +424,19 @@ public class JMMV_ClienteDAO {
         String sql = "SELECT "
                 + "c.JMMV_comunas_nombre AS comuna "
                 + "FROM JMMV_comunas c "
-                + "WHERE c.JMMV_comunas_esta_activo = true "
+                + "WHERE c.JMMV_comunas_esta_activo = ? "
                 + "ORDER BY JMMV_comunas_nombre ASC";
-        try (Connection conn = conexion.JMMV_Conectar(); 
-                Statement stmt = conn.createStatement(); 
-                ResultSet rs = stmt.executeQuery(sql)) {
+        
+        try (Connection conn = conexion.JMMV_Conectar(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            while (rs.next()) {
-                listaComunas.add(rs.getString("comuna"));
-                System.out.println("comuna encontrada");
+            pstmt.setBoolean(1, true);//comuna activa
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+
+                while (rs.next()) {
+                    listaComunas.add(rs.getString("comuna"));
+                    //System.out.println("comuna encontrada");
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -432,12 +449,13 @@ public class JMMV_ClienteDAO {
     public List<JMMV_Cliente> JMMV_ObtenerClientePorNombre(String nombres) {
 
         List<JMMV_Cliente> listaClientes = new ArrayList<>();
-
+        
         //preparar consulta        
         String sql = "SELECT "
-                + "c.JMMV_clientes_id_cliente AS id, "
+                + "c.JMMV_clientes_id_cliente AS id_cliente, "
+                + "c.JMMV_clientes_id_usuario AS id_usuario, "
                 + "c.JMMV_clientes_run AS run, "
-                + "c.JMMV_clientes_nombres, "
+                + "c.JMMV_clientes_nombres AS nombres, "
                 + "c.JMMV_clientes_apellido_paterno AS ap_pat, "
                 + "c.JMMV_clientes_apellido_materno AS ap_mat, "
                 + "co.JMMV_comunas_nombre AS comuna, "
@@ -445,43 +463,46 @@ public class JMMV_ClienteDAO {
                 + "u.JMMV_usuarios_correo AS correo, "
                 + "c.JMMV_clientes_num_calle AS numero, "
                 + "c.JMMV_clientes_telefono AS telefono, "
+                + "u.JMMV_usuarios_id_usuario AS id_usuario, "
                 + "u.JMMV_usuarios_nom_usuario AS nombre_usuario, "
                 + "u.JMMV_usuarios_contrasena AS contrasena "
                 + "FROM JMMV_clientes c "
                 + "JOIN JMMV_usuarios u ON c.JMMV_clientes_id_usuario = u.JMMV_usuarios_id_usuario "
                 + "JOIN JMMV_comunas co ON c.JMMV_clientes_id_comuna = co.JMMV_comunas_id_comuna "
-                + "WHERE c.JMMV_clientes_esta_activo = TRUE && c.JMMV_clientes_nombres = ? "
+                + "WHERE c.JMMV_clientes_esta_activo = ? && CONCAT(replace(c.JMMV_clientes_nombres,' ',''),c.JMMV_clientes_apellido_paterno,c.JMMV_clientes_apellido_materno) = ? "
                 + "ORDER BY c.JMMV_clientes_id_cliente ASC";
 
         //enviar consulta
-        try (Connection conn = conexion.JMMV_Conectar(); 
-                PreparedStatement pstmt = conn.prepareStatement(sql);) {
-            
-            pstmt.setString(1, nombres);
-            
-            ResultSet rs = pstmt.executeQuery();
-            
-            while (rs.next()) {
+        try (Connection conn = conexion.JMMV_Conectar(); PreparedStatement pstmt = conn.prepareStatement(sql);) {
 
-                //obtener datos
-                int JMMV_idCliente = rs.getInt("id");
-                String JMMV_nomUsuario = rs.getString("nombre_usuario");
-                String JMMV_contrasena = rs.getString("contrasena");
-                String JMMV_correo = rs.getString("correo");
-                int JMMV_run = rs.getInt("run");
-                String JMMV_nombres = rs.getString("c.JMMV_clientes_nombres");
-                String JMMV_apellidoPaterno = rs.getString("ap_pat");
-                String JMMV_apellidoMaterno = rs.getString("ap_mat");
-                String JMMV_comuna = rs.getString("comuna");
-                String JMMV_calle = rs.getString("calle");
-                int JMMV_numCalle = rs.getInt("numero");
-                int JMMV_telefono = rs.getInt("telefono");                     
+            pstmt.setBoolean(1, true);
+            pstmt.setString(2, nombres);
 
-                //crear objeto de la clase
-                JMMV_Cliente cliente = new JMMV_Cliente(JMMV_idCliente, JMMV_nomUsuario, JMMV_contrasena, JMMV_correo, JMMV_run, JMMV_nombres, JMMV_apellidoPaterno, JMMV_apellidoMaterno, JMMV_comuna, JMMV_calle, JMMV_numCalle, JMMV_telefono);
+            try (ResultSet rs = pstmt.executeQuery()) {
 
-                //agregar cliente a lista
-                listaClientes.add(cliente);
+                while (rs.next()) {
+
+                    //obtener datos
+                    int JMMV_idCliente = rs.getInt("id_cliente");
+                    int JMMV_idUsuario = rs.getInt("id_usuario");
+                    String JMMV_nomUsuario = rs.getString("nombre_usuario");
+                    String JMMV_contrasena = rs.getString("contrasena");
+                    String JMMV_correo = rs.getString("correo");
+                    int JMMV_run = rs.getInt("run");
+                    String JMMV_nombres = rs.getString("nombres");
+                    String JMMV_apellidoPaterno = rs.getString("ap_pat");
+                    String JMMV_apellidoMaterno = rs.getString("ap_mat");
+                    String JMMV_comuna = rs.getString("comuna");
+                    String JMMV_calle = rs.getString("calle");
+                    int JMMV_numCalle = rs.getInt("numero");
+                    int JMMV_telefono = rs.getInt("telefono");
+
+                    //crear objeto de la clase 
+                    JMMV_Cliente cliente = new JMMV_Cliente(JMMV_idCliente, JMMV_idUsuario, JMMV_nomUsuario, JMMV_contrasena, JMMV_correo, JMMV_run, JMMV_nombres, JMMV_apellidoPaterno, JMMV_apellidoMaterno, JMMV_comuna, JMMV_calle, JMMV_numCalle, JMMV_telefono);
+
+                    //agregar cliente a lista
+                    listaClientes.add(cliente);
+                }
             }
 
         } catch (SQLException e) {
@@ -491,14 +512,15 @@ public class JMMV_ClienteDAO {
         return listaClientes;
 
     }
-    
+
     public List<JMMV_Cliente> JMMV_ObtenerClientePorRun(int run) {
 
         List<JMMV_Cliente> listaClientes = new ArrayList<>();
 
         //preparar consulta        
         String sql = "SELECT "
-                + "c.JMMV_clientes_id_cliente AS id, "
+                + "c.JMMV_clientes_id_cliente AS id_cliente, "
+                + "c.JMMV_clientes_id_usuario AS id_usuario, "
                 + "c.JMMV_clientes_run AS run, "
                 + "c.JMMV_clientes_nombres AS nombres, "
                 + "c.JMMV_clientes_apellido_paterno AS ap_pat, "
@@ -508,45 +530,47 @@ public class JMMV_ClienteDAO {
                 + "c.JMMV_clientes_num_calle AS numero, "
                 + "c.JMMV_clientes_telefono AS telefono, "
                 + "u.JMMV_usuarios_nom_usuario AS nombre_usuario, "
-                + "u.JMMV_usuarios_contrasena AS contrasena"
-                + "FROM JMMV_clientes c"
-                + "JOIN JMMV_usuarios u ON c.JMMV_clientes_id_usuario = u.JMMV_usuarios_id_usuario"
-                + "JOIN JMMV_comunas co ON c.JMMV_clientes_id_comuna = co.JMMV_comunas_id_comuna"
-                + "WHERE c.JMMV_clientes_esta_activo = TRUE && run = ?"
+                + "u.JMMV_usuarios_contrasena AS contrasena "
+                + "FROM JMMV_clientes c "
+                + "JOIN JMMV_usuarios u ON c.JMMV_clientes_id_usuario = u.JMMV_usuarios_id_usuario "
+                + "JOIN JMMV_comunas co ON c.JMMV_clientes_id_comuna = co.JMMV_comunas_id_comuna "
+                + "WHERE c.JMMV_clientes_esta_activo = ? && run = ? "
                 + "ORDER BY c.JMMV_clientes_id_cliente ASC";
 
         //enviar consulta
-        try (Connection conn = conexion.JMMV_Conectar(); 
-                PreparedStatement pstmt = conn.prepareStatement(sql);) {
-            
-            pstmt.setInt(1, run);
-            
-            ResultSet rs = pstmt.executeQuery();
-            
-            while (rs.next()) {
+        try (Connection conn = conexion.JMMV_Conectar(); PreparedStatement pstmt = conn.prepareStatement(sql);) {
 
-                //obtener datos
-                int JMMV_idCliente = rs.getInt("id");
-                String JMMV_nomUsuario = rs.getString("nom_usuario");
-                String JMMV_contrasena = rs.getString("contrasena");
-                String JMMV_correo = rs.getString("correo");
-                int JMMV_run = rs.getInt("run");
-                String JMMV_nombres = rs.getString("nombres");
-                String JMMV_apellidoPaterno = rs.getString("ap_pat");
-                String JMMV_apellidoMaterno = rs.getString("ap_mat");
-                int JMMV_comuna = rs.getInt("comuna");
-                String JMMV_calle = rs.getString("calle");
-                int JMMV_numCalle = rs.getInt("numero");
-                int JMMV_telefono = rs.getInt("telefono");                
-                
-                //obtener nombre de comuna
-                String nombreComuna = JMMV_ObtenerNombreComunaPorId(JMMV_comuna);                      
+            pstmt.setBoolean(1, true); //cliente activo
+            pstmt.setInt(2, run);
 
-                //crear objeto de la clase
-                JMMV_Cliente cliente = new JMMV_Cliente(JMMV_idCliente, JMMV_nomUsuario, JMMV_contrasena, JMMV_correo, JMMV_run, JMMV_nombres, JMMV_apellidoPaterno, JMMV_apellidoMaterno, nombreComuna, JMMV_calle, JMMV_numCalle, JMMV_telefono);
+            try (ResultSet rs = pstmt.executeQuery()) {
 
-                //agregar cliente a lista
-                listaClientes.add(cliente);
+                while (rs.next()) {
+
+                    //obtener datos
+                    int JMMV_idCliente = rs.getInt("id_cliente");
+                    int JMMV_idUsuario = rs.getInt("id_usuario");
+                    String JMMV_nomUsuario = rs.getString("nom_usuario");
+                    String JMMV_contrasena = rs.getString("contrasena");
+                    String JMMV_correo = rs.getString("correo");
+                    int JMMV_run = rs.getInt("run");
+                    String JMMV_nombres = rs.getString("nombres");
+                    String JMMV_apellidoPaterno = rs.getString("ap_pat");
+                    String JMMV_apellidoMaterno = rs.getString("ap_mat");
+                    int JMMV_comuna = rs.getInt("comuna");
+                    String JMMV_calle = rs.getString("calle");
+                    int JMMV_numCalle = rs.getInt("numero");
+                    int JMMV_telefono = rs.getInt("telefono");
+
+                    //obtener nombre de comuna
+                    String nombreComuna = JMMV_ObtenerNombreComunaPorId(JMMV_comuna);
+
+                    //crear objeto de la clase
+                    JMMV_Cliente cliente = new JMMV_Cliente(JMMV_idCliente, JMMV_idUsuario, JMMV_nomUsuario, JMMV_contrasena, JMMV_correo, JMMV_run, JMMV_nombres, JMMV_apellidoPaterno, JMMV_apellidoMaterno, nombreComuna, JMMV_calle, JMMV_numCalle, JMMV_telefono);
+
+                    //agregar cliente a lista
+                    listaClientes.add(cliente);
+                }
             }
 
         } catch (SQLException e) {

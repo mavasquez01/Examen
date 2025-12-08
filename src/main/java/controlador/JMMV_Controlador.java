@@ -57,13 +57,28 @@ public class JMMV_Controlador {
         
     }
     
-    public List<JMMV_Cliente> JMMV_BuscarCliente (String nombres, String apellidoPaterno){
+    
+    public List<JMMV_Cliente> JMMV_ObtenerClientePorNombre(String nombres) {
         
-        List<JMMV_Cliente> listaClientesEncontrados = clienteDAO.JMMV_BuscarCliente(nombres, apellidoPaterno);
+        //eliminar todos los espacios intermedios del ingreso
+        //no se usó REPLACE, porque solo reemplazaba espacios simples
+        String nombreBuscadoLimpio = nombres.replaceAll("\\s", "");
         
-        return listaClientesEncontrados;
-            
+        System.out.println("TEST | Controlador | NombreBuscado original: "+nombres);
+        System.out.println("TEST | Controlador | NombreBuscado limpio: "+nombreBuscadoLimpio);
+
+        List<JMMV_Cliente> listaClientes = clienteDAO.JMMV_ObtenerClientePorNombre(nombreBuscadoLimpio);
+        
+        return listaClientes;
     }
+        
+    public List<JMMV_Cliente> JMMV_ObtenerClientePorRun(int run) {
+
+        List<JMMV_Cliente> listaClientes = clienteDAO.JMMV_ObtenerClientePorRun(run);
+        
+        return listaClientes;
+        
+    }    
     
     public List<String> JMMV_ObtenerNombresCompletosClientesActivos() {
 

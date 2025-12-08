@@ -396,9 +396,18 @@ public class JMMV_GestionUsuarios extends javax.swing.JFrame {
             
             if (cliente == null) {
                 cliente = new JMMV_Cliente(user, pass, correo, runConv, nombres, apellidoP, apellidoM, comuna, nomCalle, numCalleConv, telefonoConv);
+                
+                System.out.println("Test | nombre de usuario a crear: "+cliente.getJMMV_Cliente_nomUsuario());
                 controlador.JMMV_AgregarCliente(cliente);
                 JOptionPane.showMessageDialog(this, "Usuario agregado con éxito", "Usuario Agregado", JOptionPane.INFORMATION_MESSAGE);
+                //problema: no está cerrando el cliente después de guardar cliente nuevo. 
+                //Ahora cliente no es NULL y siempre entrará en el ELSE y hará un ingreso/actualización "falso" 
+                //que no se hace en la BD.
+                //solución:
+                this.cliente = null;
+                
             } else {
+                System.out.println("Test | id usuario BOTON crear 1 : "+cliente.getJMMV_Cliente_idUsuario());
                 cliente.setJMMV_Cliente_nombres(nombres);
                 cliente.setJMMV_Cliente_apellidoPaterno(apellidoP);
                 cliente.setJMMV_Cliente_apellidoMaterno(apellidoM);
@@ -410,6 +419,7 @@ public class JMMV_GestionUsuarios extends javax.swing.JFrame {
                 cliente.setJMMV_Cliente_comuna(comuna);
                 cliente.setJMMV_Cliente_contrasena(pass);
                 cliente.setJMMV_Cliente_telefono(telefonoConv);
+                System.out.println("Test | ID usuario BOTON crear 2 : "+cliente.getJMMV_Cliente_idUsuario());
                 controlador.JMMV_ActualizarCliente(cliente);
                 JOptionPane.showMessageDialog(this, "Usuario actualizado con éxito", "Usuario Actualizado", JOptionPane.INFORMATION_MESSAGE);
                 
