@@ -168,5 +168,18 @@ public class JMMV_Controlador {
         return reservaDAO.JMMV_EliminarReserva(idReserva);
         
     }
+    
+    public List <JMMV_Cliente> JMMV_ObtenerClientePorNombre (String nombres) {
+       
+        return clienteDAO.JMMV_ObtenerClientePorNombre(nombres);
+    }
+    
+    public List <JMMV_Cliente> JMMV_ObtenerClientePorRun (int run) {
+        return clienteDAO.JMMV_ObtenerClientePorRun(run);
+    }
+    
+    public int JMMV_ObtenerBicicletaPorNombre (String bicicleta) {
+        return bicicletaDAO.JMMV_ObtenerIdBicicletaPorNombre(bicicleta);
+    }
 
 }

@@ -3,6 +3,7 @@ package GUI;
 import DAO.JMMV_BicicletaDAO;
 import DAO.JMMV_ClienteDAO;
 import DAO.JMMV_ReservaDAO;
+import controlador.JMMV_Controlador;
 import javax.swing.JOptionPane;
 import logica.*;
 
@@ -12,10 +13,9 @@ public class JMMV_Confirmacion extends javax.swing.JDialog {
     private JMMV_Cliente cliente;
     private JMMV_Bicicleta bicicleta;
     private JMMV_Reserva reserva;
-    private JMMV_ClienteDAO clienteDAO;
-    private JMMV_BicicletaDAO bicicletaDAO;
-    private JMMV_ReservaDAO reservaDAO;
     private int picker;
+    
+    JMMV_Controlador controlador = new JMMV_Controlador();
     
     public JMMV_Confirmacion(java.awt.Frame parent, boolean modal, JMMV_Cliente cliente) {
         super(parent, modal);
@@ -124,15 +124,15 @@ public class JMMV_Confirmacion extends javax.swing.JDialog {
     private void btnSiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiActionPerformed
         switch (picker) {
             case 0 -> {
-                bicicletaDAO.JMMV_EliminarBicicleta(bicicleta.getJMMV_Bicicleta_nombre());
+                controlador.JMMV_EliminarBicicleta(bicicleta.getJMMV_Bicicleta_nombre());
                 JOptionPane.showMessageDialog(this, "Bicicleta eliminada con exito", "Eliminación exitosa", JOptionPane.ERROR_MESSAGE);
             }
             case 1 -> {
-                clienteDAO.JMMV_EliminarCliente(cliente.getJMMV_Cliente_idCliente());
+                controlador.JMMV_EliminarCliente(cliente.getJMMV_Cliente_idCliente());
                 JOptionPane.showMessageDialog(this, "Cliente eliminado con exito", "Eliminación exitosa", JOptionPane.ERROR_MESSAGE);
             }
             default -> {
-                reservaDAO.JMMV_EliminarReserva(reserva.getJMMV_Reserva_idReserva());
+                controlador.JMMV_EliminarReserva(reserva.getJMMV_Reserva_idReserva());
                 JOptionPane.showMessageDialog(this, "Reserva eliminada con exito", "Eliminación exitosa", JOptionPane.ERROR_MESSAGE);
             }
         }

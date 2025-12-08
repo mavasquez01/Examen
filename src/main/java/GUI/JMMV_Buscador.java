@@ -4,9 +4,7 @@
  */
 package GUI;
 
-import DAO.JMMV_BicicletaDAO;
-import DAO.JMMV_ClienteDAO;
-import DAO.JMMV_ReservaDAO;
+import controlador.*;
 import java.util.List;
 import javax.swing.JOptionPane;
 import logica.JMMV_Cliente;
@@ -20,14 +18,7 @@ import controlador.JMMV_Controlador;
 public class JMMV_Buscador extends javax.swing.JDialog {
 
     private int seleccion;
-    JMMV_ClienteDAO clienteDAO  = new JMMV_ClienteDAO();
-    private JMMV_BicicletaDAO BicicletaDAO;
-    private JMMV_ReservaDAO ReservaDAO;
-    
-    //línea agregada:
-    private JMMV_Controlador controlador = new JMMV_Controlador();
-    
-    
+    JMMV_Controlador controlador = new JMMV_Controlador();
     public JMMV_Buscador(java.awt.Frame parent, boolean modal,int seleccion) {
         super(parent, modal);
         initComponents();
@@ -114,25 +105,28 @@ public class JMMV_Buscador extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        if(seleccion == 0) {
+ /*       if(seleccion == 0) {
+            List <JMMV_Bicicleta> bicicleta = controlador**;
+            if(bicicleta.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "No se encontro la bicicleta, intente nuevamente", "BICICLETA NO ENCONTRADO", JOptionPane.ERROR_MESSAGE);
+            } else {
+                    JMMV_GestionBicicleta gestionBici = new JMMV_GestionBicicleta(bicicleta);
+                    gestionBici.setTitle("Gestión Bicicletas");
+                    gestionBici.setLocationRelativeTo(null);
+                    gestionBici.setResizable(false);
+                    gestionBici.setVisible(true);
+                    this.dispose();
+                    
+            }
             //
         } else if (seleccion == 1) {
-            
-            //línea agregada
             List <JMMV_Cliente> cliente = controlador.JMMV_ObtenerClientePorNombre(tfBuscar.getText().toLowerCase());
-            
-            //línea original sin modificar, solo comentada:
-            //List <JMMV_Cliente> cliente = clienteDAO.JMMV_ObtenerClientePorNombre(tfBuscar.getText().toLowerCase());
-            
             if(cliente.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "No se encontro al cliente, intente nuevamente", "CLIENTE NO ENCONTRADO", JOptionPane.ERROR_MESSAGE);
             } else {
                 if (cliente.size() > 1) {
                     int run = Integer.parseInt(JOptionPane.showInputDialog(this, "Existe más de un usuario con esta combinación de nombres, favor ingresar el run del cliente."));
-                    //línea agregada:
                     List <JMMV_Cliente> clienteRun = controlador.JMMV_ObtenerClientePorRun(run);
-                    //línea original sin modificar, solo comentada:
-                    //List <JMMV_Cliente> clienteRun = clienteDAO.JMMV_ObtenerClientePorRun(run);
                     System.out.println("Cliente encontrado");
                     JMMV_Confirmacion confirmar = new JMMV_Confirmacion(null, true, clienteRun.get(0));
                     this.dispose();
@@ -151,7 +145,7 @@ public class JMMV_Buscador extends javax.swing.JDialog {
                     this.dispose();
                 } 
             }
-        }
+        }*/
     }//GEN-LAST:event_btnBuscarActionPerformed
 
    

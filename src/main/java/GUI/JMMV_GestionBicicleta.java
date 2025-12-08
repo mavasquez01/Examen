@@ -4,6 +4,7 @@ package GUI;
 
 import controlador.JMMV_Controlador;
 import java.util.List;
+import javax.swing.JOptionPane;
 import logica.JMMV_Bicicleta;
 
 
@@ -218,7 +219,43 @@ public class JMMV_GestionBicicleta extends javax.swing.JFrame {
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
-        // TODO add your handling code here:
+        String nombre = tfNombre.getText();
+        String tipo = (String)cBoxTipos.getSelectedItem();
+        boolean disponible = chBoxDisponible.isSelected();
+        
+        if (nombre.isEmpty() || tipo.equals("-1")) {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Todos los campos son obligatorios.",
+                    "Campos vacios",
+                    JOptionPane.ERROR_MESSAGE
+            );
+
+            return;
+        }
+        
+        try {
+            if (bicicleta == null) {
+                bicicleta = new JMMV_Bicicleta(nombre, tipo, null, disponible, true);
+                controlador.JMMV_AgregarBicicleta(bicicleta);
+                JOptionPane.showMessageDialog(this, "Bicicleta agregada con éxito", "Bicicleta Agregada", JOptionPane.INFORMATION_MESSAGE);
+                
+            } else {
+                bicicleta.setJMMV_Bicicleta_nombre(nombre);
+                bicicleta.setJMMV_Bicicleta_tipoBicicleta(tipo);
+                bicicleta.setJMMV_Bicicleta_estaDisponible(disponible);
+                controlador.JMMV_ActualizarBicicleta(bicicleta);
+                JOptionPane.showMessageDialog(this, "Bicicleta actualizada con éxito", "Bicicleta Actualizada", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(
+                        this,
+                        "Existe un problema con los datos, intente nuevamente.",
+                        "Valores invalidos",
+                        JOptionPane.ERROR_MESSAGE
+                );
+                return;
+        }
     }//GEN-LAST:event_btnCrearActionPerformed
 
     private void CargarTipos() {
