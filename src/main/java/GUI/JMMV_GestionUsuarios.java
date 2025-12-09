@@ -333,21 +333,22 @@ public class JMMV_GestionUsuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHomeActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-            JMMV_Buscador buscador = new JMMV_Buscador(this,true,1,0);
-            buscador.setTitle("Buscar Usuario");
-            buscador.setLocationRelativeTo(null);
-            buscador.setResizable(false);
-            buscador.setVisible(true);
+            JMMV_ListadoUsuarios listado = new JMMV_ListadoUsuarios();
+            listado.setTitle("Buscar Usuario");
+            listado.setLocationRelativeTo(null);
+            listado.setResizable(false);
+            listado.setVisible(true);
             this.dispose();
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         if(cliente == null) {
-            JMMV_Buscador buscador = new JMMV_Buscador(this,true,1,1);
-            buscador.setTitle("Buscar Usuario");
-            buscador.setLocationRelativeTo(null);
-            buscador.setResizable(false);
-            buscador.setVisible(true); 
+            JMMV_ListadoUsuarios listado = new JMMV_ListadoUsuarios();
+            listado.setTitle("Buscar Usuario");
+            listado.setLocationRelativeTo(null);
+            listado.setResizable(false);
+            listado.setVisible(true);
+            this.dispose();
         } else {
             JMMV_Confirmacion confirmar = new JMMV_Confirmacion(this, true, cliente);
             confirmar.setTitle("Confirmar eliminación");

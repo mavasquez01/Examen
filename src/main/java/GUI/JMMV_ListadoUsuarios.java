@@ -6,16 +6,45 @@ package GUI;
 
 import controlador.JMMV_Controlador;
 import java.util.List;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import logica.JMMV_Cliente;
 
 public class JMMV_ListadoUsuarios extends javax.swing.JFrame {
     
     JMMV_Controlador controlador = new JMMV_Controlador();
-
+    String nombreCliente = "";
+    List<JMMV_Cliente> cliente;
+    
     public JMMV_ListadoUsuarios() {
+        
         initComponents();
         CargarTabla();
+        ListSelectionModel selectionModel = tbListado.getSelectionModel();
+        selectionModel.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (!e.getValueIsAdjusting()) {
+                    int selectedRow = tbListado.getSelectedRow();
+                    if (selectedRow != -1) {
+                        Object nombresCliente = tbListado.getValueAt(selectedRow, 0);
+                        System.out.println(nombresCliente.toString());
+                        nombreCliente = nombresCliente.toString();
+                        cliente = controlador.JMMV_ObtenerClientePorNombre(nombreCliente);
+                        JMMV_GestionUsuarios gestionUser = new JMMV_GestionUsuarios(cliente.get(0));
+                        gestionUser.setTitle("Editar Cliente");
+                        gestionUser.setResizable(false);
+                        gestionUser.setLocationRelativeTo(null);
+                        gestionUser.setVisible(true);
+
+                    }
+                }
+            }
+        });
+        
+        this.dispose();
     }
 
     
