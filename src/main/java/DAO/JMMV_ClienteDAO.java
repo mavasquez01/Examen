@@ -361,7 +361,7 @@ public class JMMV_ClienteDAO {
 
                 while (rs.next()) {
                     //agregar nombre a la lista
-                    listaNombresCompletos.add("nombre_completo");
+                    listaNombresCompletos.add(rs.getString("nombre_completo"));
                 }
             }
 
@@ -468,7 +468,7 @@ public class JMMV_ClienteDAO {
                 + "FROM JMMV_clientes c "
                 + "JOIN JMMV_usuarios u ON c.JMMV_clientes_id_usuario = u.JMMV_usuarios_id_usuario "
                 + "JOIN JMMV_comunas co ON c.JMMV_clientes_id_comuna = co.JMMV_comunas_id_comuna "
-                + "WHERE c.JMMV_clientes_esta_activo = ? && CONCAT(replace(c.JMMV_clientes_nombres,' ',''),c.JMMV_clientes_apellido_paterno,c.JMMV_clientes_apellido_materno) = ? "
+                + "WHERE c.JMMV_clientes_esta_activo = ? && c.JMMV_clientes_nombres = ? "
                 + "ORDER BY c.JMMV_clientes_id_cliente ASC";
 
         //enviar consulta
@@ -501,7 +501,7 @@ public class JMMV_ClienteDAO {
 
                     //agregar cliente a lista
                     listaClientes.add(cliente);
-                    listaClientes.size();
+                    System.out.println(listaClientes.size());
                 }
             }
 

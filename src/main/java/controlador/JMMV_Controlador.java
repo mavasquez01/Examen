@@ -60,14 +60,31 @@ public class JMMV_Controlador {
     
     public List<JMMV_Cliente> JMMV_ObtenerClientePorNombre(String nombres) {
         
-        //eliminar todos los espacios intermedios del ingreso
-        //no se usó REPLACE, porque solo reemplazaba espacios simples
-        String nombreBuscadoLimpio = nombres.replaceAll("\\s", "");
-        
-        System.out.println("TEST | Controlador | NombreBuscado original: "+nombres);
-        System.out.println("TEST | Controlador | NombreBuscado limpio: "+nombreBuscadoLimpio);
+       
 
-        List<JMMV_Cliente> listaClientes = clienteDAO.JMMV_ObtenerClientePorNombre(nombreBuscadoLimpio);
+
+        List<JMMV_Cliente> listaClientes = clienteDAO.JMMV_ObtenerClientePorNombre(nombres);
+        System.out.println(listaClientes.size());
+        
+        return listaClientes;
+    }
+    
+    public List<JMMV_Cliente> JMMV_ObtenerClienteDeCBox(String nombreCompleto) {
+        String[] transformador = nombreCompleto.split("\\s+");
+        System.out.println(transformador.length);
+        String nombre = "";
+        System.out.println(transformador[0]);
+        System.out.println(transformador[1]);
+        
+        for (int i = 0; i < 2; i++) {
+            if (i == 1) {
+               nombre = nombre.concat(transformador[i]); 
+            } else {
+                nombre = nombre.concat(transformador[i] + " ");
+            }
+        }
+        System.out.println(nombre);
+        List<JMMV_Cliente> listaClientes = clienteDAO.JMMV_ObtenerClientePorNombre(nombre);
         System.out.println(listaClientes.size());
         
         return listaClientes;

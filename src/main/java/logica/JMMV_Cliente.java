@@ -42,7 +42,7 @@ public class JMMV_Cliente {
     //constructor sin: rol, estaActivo: para OBTENER y ACTUALIZAR
     public JMMV_Cliente(int JMMV_Cliente_idCliente,int JMMV_Cliente_idUsuario, String JMMV_Cliente_nomUsuario, String JMMV_Cliente_contrasena, String JMMV_Cliente_correo, int JMMV_Cliente_run, String JMMV_Cliente_nombres, String JMMV_Cliente_apellidoPaterno, String JMMV_Cliente_apellidoMaterno, String JMMV_Cliente_comuna, String JMMV_Cliente_calle, int JMMV_Cliente_numCalle, int JMMV_Cliente_telefono) {
         this.JMMV_Cliente_idCliente = JMMV_Cliente_idCliente;
-        this.JMMV_Cliente_idCliente = JMMV_Cliente_idUsuario;
+        this.JMMV_Cliente_idUsuario = JMMV_Cliente_idUsuario;
         this.JMMV_Cliente_nomUsuario = JMMV_Cliente_nomUsuario;
         this.JMMV_Cliente_contrasena = JMMV_Cliente_contrasena;
         this.JMMV_Cliente_correo = JMMV_Cliente_correo;

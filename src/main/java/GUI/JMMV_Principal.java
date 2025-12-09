@@ -142,7 +142,7 @@ public class JMMV_Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBicicletasActionPerformed
 
     private void btnReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReservasActionPerformed
-        JMMV_GestionBicicleta gestionReservas = new JMMV_GestionBicicleta();
+        JMMV_GestionReserva gestionReservas = new JMMV_GestionReserva();
         gestionReservas.setTitle("Gestion Reservas");
         gestionReservas.setLocationRelativeTo(null);
         gestionReservas.setResizable(false);

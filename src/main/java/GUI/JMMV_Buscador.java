@@ -11,6 +11,7 @@ import logica.JMMV_Cliente;
 //agregado:
 import controlador.JMMV_Controlador;
 import logica.JMMV_Bicicleta;
+import logica.JMMV_Reserva;
 
 /**
  *
@@ -106,47 +107,65 @@ public class JMMV_Buscador extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-      if(seleccion == 0) {
-            JMMV_Bicicleta bicicleta = controlador.JMMV_ObtenerBicicletaPorNombre(tfBuscar.getText().toLowerCase());
-            
-            if(bicicleta == null) {
-                JOptionPane.showMessageDialog(this, "No se encontro la bicicleta, intente nuevamente", "BICICLETA NO ENCONTRADO", JOptionPane.ERROR_MESSAGE);
-            } else {
+        switch (seleccion) {
+            case 0 -> {
+                JMMV_Bicicleta bicicleta = controlador.JMMV_ObtenerBicicletaPorNombre(tfBuscar.getText().toLowerCase());
+                if (bicicleta == null) {
+                    JOptionPane.showMessageDialog(this, "No se encontro la bicicleta, intente nuevamente", "BICICLETA NO ENCONTRADO", JOptionPane.ERROR_MESSAGE);
+                } else {
                     JMMV_GestionBicicleta gestionBici = new JMMV_GestionBicicleta(bicicleta);
                     gestionBici.setTitle("Gestión Bicicletas");
                     gestionBici.setLocationRelativeTo(null);
                     gestionBici.setResizable(false);
                     gestionBici.setVisible(true);
                     this.dispose();
-                    
-            }
-            //
-        } else if (seleccion == 1) {
-            List <JMMV_Cliente> cliente = controlador.JMMV_ObtenerClientePorNombre(tfBuscar.getText().toLowerCase());
-            System.out.println(cliente.size());
-            if(!cliente.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "No se encontro al cliente, intente nuevamente", "CLIENTE NO ENCONTRADO", JOptionPane.ERROR_MESSAGE);
-            } else {
-                if (cliente.size() > 1) {
-                    int run = Integer.parseInt(JOptionPane.showInputDialog(this, "Existe más de un usuario con esta combinación de nombres, favor ingresar el run del cliente."));
-                    List <JMMV_Cliente> clienteRun = controlador.JMMV_ObtenerClientePorRun(run);
-                    System.out.println("Cliente encontrado");
-                    JMMV_Confirmacion confirmar = new JMMV_Confirmacion(null, true, clienteRun.get(1));
-                    this.dispose();
-                } else if (cliente.size() == 1) {
-                    JMMV_GestionUsuarios gestionUser = new JMMV_GestionUsuarios(cliente.get(1));
-                    gestionUser.setTitle("Gestión Clientes");
-                    gestionUser.setLocationRelativeTo(null);
-                    gestionUser.setResizable(false);
-                    gestionUser.setVisible(true);
-                    this.dispose();
-
                 }
+                //
+            }
+            case 1 -> {
+                List <JMMV_Cliente> cliente = controlador.JMMV_ObtenerClientePorNombre(tfBuscar.getText().toLowerCase());
+                System.out.println(cliente.size());
+                if(cliente.isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "No se encontro al cliente, intente nuevamente", "CLIENTE NO ENCONTRADO", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    if (cliente.size() > 1) {
+                        int run = Integer.parseInt(JOptionPane.showInputDialog(this, "Existe más de un usuario con esta combinación de nombres, favor ingresar el run del cliente."));
+                        List <JMMV_Cliente> clienteRun = controlador.JMMV_ObtenerClientePorRun(run);
+                        System.out.println("Cliente encontrado");
+                        JMMV_Confirmacion confirmar = new JMMV_Confirmacion(null, true, clienteRun.get(0));
+                        this.dispose();
+                    } else if (cliente.size() == 1) {
+                        JMMV_GestionUsuarios gestionUser = new JMMV_GestionUsuarios(cliente.get(0));
+                        gestionUser.setTitle("Gestión Clientes");
+                        gestionUser.setLocationRelativeTo(null);
+                        gestionUser.setResizable(false);
+                        gestionUser.setVisible(true);
+                        this.dispose();
+                        
+                    }
                     else {
-                    System.out.println("Cliente encontrado");
-                    JMMV_Confirmacion confirmar = new JMMV_Confirmacion(null, true, cliente.get(1));
-                    this.dispose();
-                } 
+                        System.out.println("Cliente encontrado");
+                        JMMV_Confirmacion confirmar = new JMMV_Confirmacion(null, true, cliente.get(0));
+                        this.dispose();
+                    }
+                }
+            }
+            case 2 -> {
+                List <JMMV_Reserva> reserva = controlador.JMMV_ObtenerTodasLasReservasActivas();
+                if (reserva.isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "No se encontro al cliente, intente nuevamente", "CLIENTE NO ENCONTRADO", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    if (reserva.size() >= 1) {
+                        JMMV_GestionReserva gestionReserva = new JMMV_GestionReserva(reserva.get(0));
+                        gestionReserva.setTitle("Gestión Reserva");
+                        gestionReserva.setLocationRelativeTo(null);
+                        gestionReserva.setResizable(false);
+                        gestionReserva.setVisible(true);
+                        this.dispose();
+                    }
+                }
+            }
+            default -> {
             }
         }
     }//GEN-LAST:event_btnBuscarActionPerformed

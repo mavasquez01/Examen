@@ -91,6 +91,7 @@ public class JMMV_ReservaDAO {
 
             //ejecutar INSERT
             pstmt.executeUpdate();
+            System.out.println("consulta hecha");
             return true;
 
         } catch (SQLException e) {

@@ -327,7 +327,7 @@ public class JMMV_BicicletaDAO {
 
             try (ResultSet rs = pstmt.executeQuery()) {
 
-                if (rs.next()) {
+                while (rs.next()) {
                     listaNombresBicicletas.add(rs.getString("nombre"));
                 }
             }
