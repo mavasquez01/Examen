@@ -191,5 +191,21 @@ public class JMMV_Controlador {
     public int JMMV_ObtenerIdBicicletaPorNombre (String bicicleta) {
         return bicicletaDAO.JMMV_ObtenerIdBicicletaPorNombre(bicicleta);
     }
+    
+    //probar
+    public int JMMV_ContarReservasVigentesDeClientes (String nombres){
+        
+        int idCliente = clienteDAO.JMMV_ObtenerIdClientePorNombres(nombres);
+        
+        if (idCliente <= 0){
+            System.out.println("No se encontró el cliente por sus nombres");
+            return -1;
+            
+        }
+        
+        return clienteDAO.JMMV_ContarReservasVigentesDeClientesPorIdCliente(idCliente);
+        
+        
+    }
 
 }

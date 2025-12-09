@@ -504,10 +504,14 @@ public class JMMV_ClienteDAO {
                     listaClientes.add(cliente);
                     System.out.println(listaClientes.size());
                 }
-            }
+            }catch (SQLException e) {
+            e.printStackTrace();
+                System.out.println("Error en ResultSet.");
+        }
 
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("Error en envío de consulta.");
         }
 
         return listaClientes;
@@ -535,7 +539,7 @@ public class JMMV_ClienteDAO {
                 + "FROM JMMV_clientes c "
                 + "JOIN JMMV_usuarios u ON c.JMMV_clientes_id_usuario = u.JMMV_usuarios_id_usuario "
                 + "JOIN JMMV_comunas co ON c.JMMV_clientes_id_comuna = co.JMMV_comunas_id_comuna "
-                + "WHERE c.JMMV_clientes_esta_activo = ? && run = ? "
+                + "WHERE c.JMMV_clientes_esta_activo = ? && c.JMMV_clientes_run = ? "
                 + "ORDER BY c.JMMV_clientes_id_cliente ASC";
 
         //enviar consulta
@@ -571,15 +575,74 @@ public class JMMV_ClienteDAO {
 
                     //agregar cliente a lista
                     listaClientes.add(cliente);
+                    System.out.println("TEST | cliente encontrado por run.");
                 }
-            }
+            }catch (SQLException e) {
+            e.printStackTrace();
+                System.out.println("Error en ResultSet.");
+        }
 
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("Error en envío de consulta");
         }
 
         return listaClientes;
 
+    }
+    
+    
+    //necesita verificación, es necesario para el método de buscar si cliente tiene reservas vigentes
+    public int JMMV_ObtenerIdClientePorNombres(String nombres) {
+        String sql = "SELECT  "
+                + "c.JMMV_clientes_id_cliente AS id_cliente "
+                + "FROM JMMV_clientes c "
+                + "WHERE c.JMMV_clientes_nombres = ?";
+
+        try (Connection conn = conexion.JMMV_Conectar(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, nombres);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+
+                if (rs.next()) {
+                    return rs.getInt("id_cliente");
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                System.out.println("Error ResultSet");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1; //retorna valor no válido
+    }
+ 
+    //devuelve el número de reservas vigentes del cliente (vigente= la fecha de fin es mayor o igual a hoy)
+    //necesito verificar si NOW funciona en java
+    public int JMMV_ContarReservasVigentesDeClientesPorIdCliente(int idCliente) {
+        String sql = "SELECT "
+                + "COUNT(*) "
+                + "FROM JMMV_reservas r "
+                + "JOIN jmmv_clientes c "
+                + "WHERE c.JMMV_clientes_id_cliente = ? && r.JMMV_reservas_fecha_fin >= NOW() && c.JMMV_clientes_esta_activo = ?";
+
+        try (Connection conn = conexion.JMMV_Conectar(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, idCliente);
+            pstmt.setBoolean(2, true);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+
+                if (rs.next()) {
+                    System.out.println("TEST | reservas vigentes encontradas");
+                    return rs.getInt(1);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1; //retorna valor no válido
     }
 
 }
