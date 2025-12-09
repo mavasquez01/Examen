@@ -636,6 +636,7 @@ public class JMMV_ClienteDAO {
 
                 if (rs.next()) {
                     System.out.println("TEST | reservas vigentes encontradas");
+                    System.out.println(rs.getInt(1));
                     return rs.getInt(1);
                 }
             }

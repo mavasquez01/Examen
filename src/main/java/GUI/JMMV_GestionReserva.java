@@ -38,10 +38,10 @@ public class JMMV_GestionReserva extends javax.swing.JFrame {
         cBoxClientes.setSelectedItem(reserva.getJMMV_Reserva_nomCliente());
         dcInicio.setDate(timeMachine.asDate(reserva.getJMMV_Reserva_fechaInicio()));
         dcTermino.setDate(timeMachine.asDate(reserva.getJMMV_Reserva_fechaFin()));
-         
+
     }
-    
-    public JMMV_GestionReserva(List <JMMV_Reserva> reservas) {
+
+    public JMMV_GestionReserva(List<JMMV_Reserva> reservas) {
         initComponents();
         CargarBicicletas();
         CargarClientesDeReserva(reservas);
@@ -49,7 +49,6 @@ public class JMMV_GestionReserva extends javax.swing.JFrame {
         dcTermino.setDate(comprobacion);
         this.reserva = null;
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -228,12 +227,12 @@ public class JMMV_GestionReserva extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHomeActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        if(reserva == null) {
-            JMMV_Buscador buscador = new JMMV_Buscador(this,true,2,1);
+        if (reserva == null) {
+            JMMV_Buscador buscador = new JMMV_Buscador(this, true, 2, 1);
             buscador.setTitle("Buscar Reserva");
             buscador.setLocationRelativeTo(null);
             buscador.setResizable(false);
-            buscador.setVisible(true); 
+            buscador.setVisible(true);
         } else {
             JMMV_Confirmacion confirmar = new JMMV_Confirmacion(this, true, reserva);
             confirmar.setTitle("Confirmar eliminación");
@@ -241,24 +240,24 @@ public class JMMV_GestionReserva extends javax.swing.JFrame {
             confirmar.setResizable(false);
             confirmar.setVisible(true);
         }
-                             
+
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-            JMMV_Buscador buscador = new JMMV_Buscador(this,true,2,0);
-            buscador.setTitle("Buscar Reserva");
-            buscador.setLocationRelativeTo(null);
-            buscador.setResizable(false);
-            buscador.setVisible(true);
-            this.dispose();
+        JMMV_Buscador buscador = new JMMV_Buscador(this, true, 2, 0);
+        buscador.setTitle("Buscar Reserva");
+        buscador.setLocationRelativeTo(null);
+        buscador.setResizable(false);
+        buscador.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
-        String nombres = (String)cBoxClientes.getSelectedItem();
-        String bicicleta = (String)cBoxBicicletas.getSelectedItem();
+        String nombres = (String) cBoxClientes.getSelectedItem();
+        String bicicleta = (String) cBoxBicicletas.getSelectedItem();
         Date fechaInic = dcInicio.getDate();
         Date fechaTer = dcTermino.getDate();
-        
+
         if (nombres.isEmpty() || bicicleta.isEmpty() || fechaInic.equals(comprobacion) || fechaTer.equals(comprobacion)) {
             JOptionPane.showMessageDialog(
                     this,
@@ -267,31 +266,46 @@ public class JMMV_GestionReserva extends javax.swing.JFrame {
                     JOptionPane.ERROR_MESSAGE
             );
             return;
-        } 
-        
+        }
+
         try {
             LocalDate fechaInicConv = timeMachine.asLocalDate(fechaInic);
             LocalDate fechaTerConv = timeMachine.asLocalDate(fechaTer);
             List<JMMV_Cliente> cliente = controlador.JMMV_ObtenerClienteDeCBox(nombres);
             int idCliente = cliente.get(0).getJMMV_Cliente_idCliente();
+            System.out.println(idCliente);
             int idBicicleta = controlador.JMMV_ObtenerIdBicicletaPorNombre(bicicleta);
-            
-            if(reserva == null) {
-                reserva = new JMMV_Reserva(idCliente, nombres, idBicicleta, bicicleta, fechaInicConv, fechaTerConv);
-                controlador.JMMV_AgregarReserva(reserva);
-                JOptionPane.showMessageDialog(this, "Reserva agregada con éxito", "Reserva Agregada", JOptionPane.INFORMATION_MESSAGE);
+            int numReservas = controlador.JMMV_ContarReservasVigentesDeClientes(cliente.get(0).getJMMV_Cliente_nombres());
+
+            if (numReservas == -1) {
+                return;
+            } else if (numReservas > 0) {
+                JOptionPane.showMessageDialog(
+                        this,
+                        "El cliente ya cuenta con una reserva activa, intente con otro",
+                        "Reserva activa",
+                        JOptionPane.ERROR_MESSAGE
+                );
+                return;
             } else {
-                reserva.setJMMV_Reserva_nomCliente(nombres);
-                reserva.setJMMV_Reserva_idCliente(idCliente);
-                reserva.setJMMV_Reserva_nomBicicleta(bicicleta);
-                reserva.setJMMV_Reserva_idBicicleta(idBicicleta);
-                reserva.setJMMV_Reserva_fechaInicio(fechaInicConv);
-                reserva.setJMMV_Reserva_fechaFin(fechaTerConv);
-                controlador.JMMV_ActualizarReserva(reserva);
-                JOptionPane.showMessageDialog(this, "Reserva actualizada con éxito", "Reserva Actualizada", JOptionPane.INFORMATION_MESSAGE);
+                if (reserva == null) {
+                    reserva = new JMMV_Reserva(idCliente, nombres, idBicicleta, bicicleta, fechaInicConv, fechaTerConv);
+                    controlador.JMMV_AgregarReserva(reserva);
+                    JOptionPane.showMessageDialog(this, "Reserva agregada con éxito", "Reserva Agregada", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    reserva.setJMMV_Reserva_nomCliente(nombres);
+                    reserva.setJMMV_Reserva_idCliente(idCliente);
+                    reserva.setJMMV_Reserva_nomBicicleta(bicicleta);
+                    reserva.setJMMV_Reserva_idBicicleta(idBicicleta);
+                    reserva.setJMMV_Reserva_fechaInicio(fechaInicConv);
+                    reserva.setJMMV_Reserva_fechaFin(fechaTerConv);
+                    controlador.JMMV_ActualizarReserva(reserva);
+                    JOptionPane.showMessageDialog(this, "Reserva actualizada con éxito", "Reserva Actualizada", JOptionPane.INFORMATION_MESSAGE);
+                }
+
             }
-            
-            
+
+
         } catch (DateTimeException e) {
             JOptionPane.showMessageDialog(
                         this,

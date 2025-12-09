@@ -72,13 +72,19 @@ public class JMMV_Controlador {
         String nombre = "";
         System.out.println(transformador[0]);
         System.out.println(transformador[1]);
-        
+
         for (int i = 0; i < 2; i++) {
-            if (i == 1) {
-               nombre = nombre.concat(transformador[i]); 
+            if (transformador.length == 3) {
+                nombre = nombre.concat(transformador[i]);
+                break;
             } else {
-                nombre = nombre.concat(transformador[i] + " ");
+                if (i == 1) {
+                    nombre = nombre.concat(transformador[i]);
+                } else {
+                    nombre = nombre.concat(transformador[i] + " ");
+                }
             }
+
         }
         System.out.println(nombre);
         List<JMMV_Cliente> listaClientes = clienteDAO.JMMV_ObtenerClientePorNombre(nombre);
