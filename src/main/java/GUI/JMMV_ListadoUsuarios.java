@@ -61,7 +61,6 @@ public class JMMV_ListadoUsuarios extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         btnInicio.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnInicio.setIcon(new javax.swing.ImageIcon("C:\\Users\\Agustin\\OneDrive\\Escritorio\\examen_max\\src\\static\\home_50dp_1F1F1F_FILL0_wght400_GRAD0_opsz48.png")); // NOI18N
         btnInicio.setText("Inicio");
         btnInicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -98,10 +97,23 @@ public class JMMV_ListadoUsuarios extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nombres", "Apellido Paterno", "Apellido Materno", "Run", "Comuna", "Calle", "Número Calle", "Correo", "Teléfono"
+                "Id Cliente", "Nombres", "Apellido Paterno", "Apellido Materno", "Run", "Comuna", "Calle", "Número Calle", "Correo", "Teléfono"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tbListado.setRowHeight(30);
+        tbListado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbListadoMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbListado);
 
         jPanel2.add(jScrollPane1);
@@ -136,6 +148,12 @@ public class JMMV_ListadoUsuarios extends javax.swing.JFrame {
         menu.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnInicioActionPerformed
+
+    private void tbListadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbListadoMouseClicked
+
+            this.dispose();
+
+    }//GEN-LAST:event_tbListadoMouseClicked
 
    private void CargarTabla() {
        List <JMMV_Cliente> clientesActivos = controlador.JMMV_ObtenerTodosLosClientesActivos();

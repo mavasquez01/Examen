@@ -215,7 +215,7 @@ public class JMMV_ClienteDAO {
 
         //string segundo UPDATE            
         String sqlDos = "UPDATE jmmv_clientes "
-                + "SET "
+                + "SET "                
                 + "JMMV_clientes_run = ?, "
                 + "JMMV_clientes_nombres = ?, "
                 + "JMMV_clientes_apellido_paterno = ?, "
@@ -223,6 +223,7 @@ public class JMMV_ClienteDAO {
                 + "JMMV_clientes_id_comuna = ?, "
                 + "JMMV_clientes_calle = ?, "
                 + "JMMV_clientes_num_calle = ?, "
+                + "JMMV_clientes_correo = ?, "
                 + "JMMV_clientes_telefono = ? "
                 + "WHERE JMMV_clientes_id_usuario = ?";
         
