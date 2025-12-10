@@ -13,19 +13,19 @@ public class JMMV_TimeMachine {
 
 
 
-  public static Date asDate(LocalDate localDate) {
+  public static Date JMMV_asDate(LocalDate localDate) {
     return Date.from(localDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
   }
 
-  public static Date asDate(LocalDateTime localDateTime) {
+  public static Date JMMV_asDate(LocalDateTime localDateTime) {
     return Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
   }
 
-  public static LocalDate asLocalDate(Date date) {
+  public static LocalDate JMMV_asLocalDate(Date date) {
     return Instant.ofEpochMilli(date.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
   }
 
-  public static LocalDateTime asLocalDateTime(Date date) {
+  public static LocalDateTime JMMV_asLocalDateTime(Date date) {
     return Instant.ofEpochMilli(date.getTime()).atZone(ZoneId.systemDefault()).toLocalDateTime();
   }
 }

@@ -21,7 +21,7 @@ public class JMMV_GestionReserva extends javax.swing.JFrame {
         initComponents();
         CargarBicicletas();
         CargarClientes();
-        comprobacion = timeMachine.asDate(LocalDate.now());
+        comprobacion = timeMachine.JMMV_asDate(LocalDate.now());
         dcInicio.setDate(comprobacion);
         dcTermino.setDate(comprobacion);
         this.reserva = null;
@@ -35,11 +35,11 @@ public class JMMV_GestionReserva extends javax.swing.JFrame {
         this.reserva = reserva;
         btnCrear.setText("Modificar");
         btnModificar.setText("Seleccionar otro");
-        comprobacion = timeMachine.asDate(LocalDate.now());
+        comprobacion = timeMachine.JMMV_asDate(LocalDate.now());
         cBoxBicicletas.setSelectedItem(reserva.getJMMV_Reserva_nomBicicleta());
         cBoxClientes.setSelectedItem(reserva.getJMMV_Reserva_nomCliente());
-        dcInicio.setDate(timeMachine.asDate(reserva.getJMMV_Reserva_fechaInicio()));
-        dcTermino.setDate(timeMachine.asDate(reserva.getJMMV_Reserva_fechaFin()));
+        dcInicio.setDate(timeMachine.JMMV_asDate(reserva.getJMMV_Reserva_fechaInicio()));
+        dcTermino.setDate(timeMachine.JMMV_asDate(reserva.getJMMV_Reserva_fechaFin()));
 
     }
 
@@ -49,7 +49,7 @@ public class JMMV_GestionReserva extends javax.swing.JFrame {
         CargarBicicletas();
         CargarClientesDeReserva(reservas);
         System.out.println("aca entre 3");
-        comprobacion = timeMachine.asDate(LocalDate.now());
+        comprobacion = timeMachine.JMMV_asDate(LocalDate.now());
         dcInicio.setDate(comprobacion);
         dcTermino.setDate(comprobacion);
         this.reserva = null;
@@ -284,8 +284,8 @@ public class JMMV_GestionReserva extends javax.swing.JFrame {
         }
 
         try {
-            LocalDate fechaInicConv = timeMachine.asLocalDate(fechaInic);
-            LocalDate fechaTerConv = timeMachine.asLocalDate(fechaTer);
+            LocalDate fechaInicConv = timeMachine.JMMV_asLocalDate(fechaInic);
+            LocalDate fechaTerConv = timeMachine.JMMV_asLocalDate(fechaTer);
             List<JMMV_Cliente> cliente = controlador.JMMV_ObtenerClienteDeCBox(nombres);
             int idCliente = cliente.get(0).getJMMV_Cliente_idCliente();
             int idBicicleta = controlador.JMMV_ObtenerIdBicicletaPorNombre(bicicleta);
