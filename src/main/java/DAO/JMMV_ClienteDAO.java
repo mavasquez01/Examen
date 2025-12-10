@@ -346,6 +346,52 @@ public class JMMV_ClienteDAO {
         return -1; //retorna valor no válido
     }
 
+    public List<JMMV_Cliente> JMMV_ObtenerNombreApellidoYNombresCompletosClientesActivos() {
+
+        List<JMMV_Cliente> listaNombreApellidoYNombreCompleto = new ArrayList<>();
+
+        //consulta
+        String sql = "SELECT "
+                + "SUBSTRING_INDEX(c.JMMV_clientes_nombres, ' ' ,1) AS primer_nombre, "
+                + "c.JMMV_clientes_apellido_paterno AS ap_pat, "
+                + "CONCAT(JMMV_clientes_nombres,' ',JMMV_clientes_apellido_paterno,' ',COALESCE(JMMV_clientes_apellido_materno,'')) AS nombre_completo "
+                + "FROM JMMV_clientes c "
+                + "WHERE c.JMMV_clientes_esta_activo = ? "
+                + "ORDER BY c.JMMV_clientes_nombres ASC";
+
+        //enviar consulta
+        try (Connection conn = conexion.JMMV_Conectar(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setBoolean(1, true);//cliente activo
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+
+                while (rs.next()) {
+                    //agregar nombre a la lista
+                    String JMMV_primerNombre = rs.getString("primer_nombre");
+                    String JMMV_apellidoPaterno = rs.getString("ap_pat");                    
+                    String JMMV_nombreCompleto = rs.getString("nombre_completo");
+                    
+                    //crear objeto de la clase
+                    JMMV_Cliente cliente = new JMMV_Cliente(JMMV_primerNombre,JMMV_apellidoPaterno,JMMV_nombreCompleto);
+                    
+                    //agregar cliente a lista
+                    listaNombreApellidoYNombreCompleto.add(cliente);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                System.out.println("Error en obtención de lista de clientes activos.");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Error en obtención de lista de clientes activos.");
+        }
+
+        return listaNombreApellidoYNombreCompleto;
+
+    }
+
     
     //obtener nombre completo de todos los clientes activos, COMBOBOX de reservas
     public List<String> JMMV_ObtenerNombresCompletosClientesActivos() {

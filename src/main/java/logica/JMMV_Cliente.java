@@ -19,6 +19,7 @@ public class JMMV_Cliente {
     private int JMMV_Cliente_numCalle;
     private int JMMV_Cliente_telefono;
     private boolean JMMV_Cliente_estaActivo = true;
+    private String JMMV_Cliente_primerNombre;
     private String JMMV_Cliente_nombreCompleto;
 
     public JMMV_Cliente(int JMMV_Cliente_idUsuario,int JMMV_Cliente_idCliente, String JMMV_Cliente_nomUsuario, String JMMV_Cliente_contrasena, String JMMV_Cliente_correo, int JMMV_Cliente_rol, int JMMV_Cliente_run, String JMMV_Cliente_nombres, String JMMV_Cliente_apellidoPaterno, String JMMV_Cliente_apellidoMaterno, String JMMV_Cliente_comuna, String JMMV_Cliente_calle, int JMMV_Cliente_numCalle, int JMMV_Cliente_telefono, boolean JMMV_Cliente_estaActivo) {
@@ -77,7 +78,12 @@ public class JMMV_Cliente {
         this.JMMV_Cliente_numCalle = JMMV_Cliente_numCalle;
         this.JMMV_Cliente_telefono = JMMV_Cliente_telefono;
     }
-    
+
+    public JMMV_Cliente(String JMMV_Cliente_primerNombre, String JMMV_Cliente_apellidoPaterno, String JMMV_Cliente_nombreCompleto) {
+        this.JMMV_Cliente_primerNombre = JMMV_Cliente_primerNombre;
+        this.JMMV_Cliente_apellidoPaterno = JMMV_Cliente_apellidoPaterno;
+        this.JMMV_Cliente_nombreCompleto = JMMV_Cliente_nombreCompleto;
+    }    
 
     public int getJMMV_Cliente_idUsuario() {
         return JMMV_Cliente_idUsuario;
@@ -207,5 +213,12 @@ public class JMMV_Cliente {
         this.JMMV_Cliente_nombreCompleto = JMMV_Cliente_nombreCompleto;
     }
 
-    
+    public String getJMMV_Cliente_primerNombre() {
+        return JMMV_Cliente_primerNombre;
+    }
+
+    public void setJMMV_Cliente_primerNombre(String JMMV_Cliente_primerNombre) {
+        this.JMMV_Cliente_primerNombre = JMMV_Cliente_primerNombre;
+    }
+
 }

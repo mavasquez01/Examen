@@ -66,6 +66,13 @@ public class JMMV_Controlador {
         return listaClientes;
     }
     
+    public List<JMMV_Cliente> JMMV_ObtenerNombreApellidoYNombresCompletosClientesActivos() {
+
+        List<JMMV_Cliente> listaNombreApellidoYNombreCompleto = clienteDAO.JMMV_ObtenerTodosLosClientesActivos();
+        
+        return listaNombreApellidoYNombreCompleto;
+    }
+    
     public List<JMMV_Cliente> JMMV_ObtenerClienteDeCBox(String nombreCompleto) {
         String[] transformador = nombreCompleto.split("\\s+");
         System.out.println(transformador.length);
