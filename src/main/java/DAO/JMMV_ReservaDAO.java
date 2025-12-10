@@ -24,22 +24,24 @@ public class JMMV_ReservaDAO {
 
         String sql = "SELECT "
                 + "r.JMMV_reservas_id_reserva AS id, "
-                + "r.JMMV_reservas_id_cliente AS id_cliente, "               
-                + "CONCAT(JMMV_clientes_nombres,' ',JMMV_clientes_apellido_paterno,' ',COALESCE(JMMV_clientes_apellido_materno,'')) AS nombre_cliente, "
-                + "r.JMMV_reservas_id_bicicleta AS id_bicicleta, "
-                + "b.JMMV_bicicletas_nombre AS nombre_bicicleta, "
-                + "r.JMMV_reservas_fecha_inicio AS fecha_inicio, "
-                + "r.JMMV_reservas_fecha_fin AS fecha_fin "
-                + "FROM JMMV_reservas r "
-                + "JOIN JMMV_clientes c ON r.JMMV_reservas_id_cliente = c.JMMV_clientes_id_cliente "
-                + "JOIN JMMV_bicicletas b ON r.JMMV_reservas_id_bicicleta = b.JMMV_bicicletas_id_bicicleta "
-                + "WHERE r.JMMV_reservas_esta_activo = ? "
+                + "r.JMMV_reservas_id_cliente AS id_cliente, "
+                + "CONCAT(JMMV_clientes_nombres,' ',JMMV_clientes_apellido_paterno,' ',COALESCE(JMMV_clientes_apellido_materno,'')) AS nombre_cliente,  "
+                + "r.JMMV_reservas_id_bicicleta AS id_bicicleta,  "
+                + "b.JMMV_bicicletas_nombre AS nombre_bicicleta,  "
+                + "r.JMMV_reservas_fecha_inicio AS fecha_inicio,  "
+                + "r.JMMV_reservas_fecha_fin AS fecha_fin  "
+                + "FROM JMMV_reservas r  "
+                + "JOIN JMMV_clientes c ON r.JMMV_reservas_id_cliente = c.JMMV_clientes_id_cliente  "
+                + "JOIN JMMV_bicicletas b ON r.JMMV_reservas_id_bicicleta = b.JMMV_bicicletas_id_bicicleta  "
+                + "WHERE r.JMMV_reservas_esta_activo = ? && c.JMMV_clientes_esta_activo = ? && b.JMMV_bicicletas_esta_activo = ? "
                 + "ORDER BY r.JMMV_reservas_id_reserva ASC";
 
         try (Connection conn = conexion.JMMV_Conectar(); 
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
             
             pstmt.setBoolean(1, true); //reserva activa
+            pstmt.setBoolean(2, true); //cliente activo
+            pstmt.setBoolean(3, true); //bici activa
 
             try (ResultSet rs = pstmt.executeQuery()) {
 

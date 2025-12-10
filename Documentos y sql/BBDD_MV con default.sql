@@ -170,7 +170,13 @@ VALUES
 (NULL,'usuarioC11','Pass1111',2,TRUE),
 (NULL,'usuarioC12','Pass1212',2,TRUE),
 (NULL,'usuarioC13','Pass1313',2,TRUE),
-(NULL,'usuarioC14','Pass1414',2,TRUE)
+(NULL,'usuarioC14','Pass1414',2,TRUE),
+(NULL,'usuarioC15','Pass1515',2,TRUE),
+(NULL,'usuarioC16','Pass1616',2,TRUE),
+(NULL,'usuarioC17','Pass1717',2,TRUE),
+(NULL,'usuarioC18','Pass1818',2,TRUE),
+(NULL,'usuarioC19','Pass1919',2,TRUE),
+(NULL,'usuarioC20','Pass2020',2,TRUE)
 ;
 
 INSERT INTO JMMV_clientes
@@ -179,16 +185,22 @@ VALUES
 (NULL,4,'correo2@dominio.com',85792520,'Rodrigo Marcos','Carrasco','Pedrero',1,'Arturo Prat',222,987654321,TRUE),
 (NULL,5,'correo3@dominio.com',185455793,'Natalia Andrea','Silva','Rojas',1,'Los Alerces',333,985263741,FALSE),
 (NULL,6,'correo4@dominio.com',117678148,'Carla Alicia','Lastra','Montes',1,'Santo Domingo',444,965487321,TRUE),
-(NULL,7,'correo5@dominio.com',144361857,'Pedro Pablo Alfredo','Peirano','Olate',1,'Obispo',555,974185263,TRUE),
+(NULL,7,'correo5@dominio.com',144361857,'Pedro Pablo','Peirano','Olate',1,'Obispo',555,974185263,TRUE),
 (NULL,8,'correo6@dominio.com',140257974,'Carla Alicia','Lastra','Montes',1,'Alameda',666,978456123,TRUE),
 (NULL,9,'correo7@dominio.com',125794246,'Alonso Felipe','Oliva','Olivos',1,'Aromos',777,952147863,FALSE),
 (NULL,10,'correo8@dominio.com',68364477,'Sandra Camila','Parra','Salgado',1,'Las Rosas',888,957846321,TRUE),
 (NULL,11,'correo9@dominio.com',555555555,'Alex David','Smith',DEFAULT,1,'Arauco',999,956123478,TRUE),
-(NULL,12,'correo10@dominio.com',136270508,'Roberto Javier Alonso','Escobar','Vidal',8,'Los Copihues',1010,951847623,TRUE),
+(NULL,12,'correo10@dominio.com',136270508,'Roberto Javier','Escobar','Vidal',8,'Los Copihues',1010,951847623,TRUE),
 (NULL,13,'correo11@dominio.com',121839857,'Amelia Fernanda','Molina','Soto',1,'Agustinas',1111,954613287,TRUE),
 (NULL,14,'correo12@dominio.com',202554342,'Patricio','Bravo','Araya',10,'Independencia',1212,963147852,TRUE),
 (NULL,15,'correo13@dominio.com',259885167,'Ausguste','Smith',DEFAULT,3,'Violetas',1350,956177478,TRUE),
-(NULL,16,'correo14@dominio.com',147339755,'Gladys Alejandra','Contreras','Labra',1,'Los Peumos',2314,976123478,TRUE);
+(NULL,16,'correo14@dominio.com',147339755,'Gladys Alejandra','Contreras','Labra',1,'Los Peumos',2314,976123478,TRUE),
+(NULL,17,'correo15@dominio.com',92212394,'Felipe Alberto','Vargas','Vidal',8,'Los Mares',85,951847223,TRUE),
+(NULL,18,'correo16@dominio.com',272180458,'Paulina Alicia','Molina','Contreras',1,'Alameda',65,954611287,TRUE),
+(NULL,19,'correo17@dominio.com',203823061,'Jorge Domingo','Rosales','Araya',10,'Conquistadores',142,963197852,TRUE),
+(NULL,20,'correo18@dominio.com',113716487,'Pablo','Jorquera','Rojas',3,'Libertad',35,956177778,TRUE),
+(NULL,21,'correo19@dominio.com',209783886,'Isabel Margarita','Leiva','Sutil',1,'Patricio Lynch',41,976823478,TRUE),
+(NULL,22,'correo20@dominio.com',155453737,'Carolina Andrea','Jaque','Lillo',1,'Baquedano',74,977123478,TRUE);
 
 INSERT INTO JMMV_bicicletas
 VALUES
@@ -211,32 +223,44 @@ VALUES
 (NULL,'Collosus',2,TRUE,TRUE),
 (NULL,'Rival',1,TRUE,TRUE),
 (NULL,'New Pro',6,TRUE,TRUE),
-(NULL,'Stereo',5,TRUE,TRUE)
+(NULL,'Stereo',5,TRUE,TRUE),
+(NULL,'Laser',4,TRUE,TRUE),
+(NULL,'Limbo',3,TRUE,TRUE),
+(NULL,'Master',2,TRUE,TRUE),
+(NULL,'Fallout',1,TRUE,TRUE),
+(NULL,'Goat',6,TRUE,TRUE),
+(NULL,'Sparks',5,TRUE,TRUE)
 ;
 
 INSERT INTO JMMV_reservas
 VALUES
-(NULL,2,2,'2025-11-01','2025-11-08',TRUE),
-(NULL,7,1,'2025-11-02','2025-11-09',TRUE),
-(NULL,4,5,'2025-12-02','2025-12-09',TRUE),
-(NULL,6,1,'2025-12-03','2025-12-10',TRUE),
-(NULL,3,2,'2025-12-04','2025-12-11',TRUE),
-(NULL,8,3,'2025-12-04','2025-12-11',TRUE),
-(NULL,1,4,'2025-12-05','2025-12-12',TRUE),
-(NULL,12,2,'2025-12-04','2025-12-11',TRUE),
-(NULL,11,3,'2025-12-04','2025-12-11',TRUE),
-(NULL,2,4,'2025-12-05','2025-12-12',TRUE),
-(NULL,1,5,'2025-12-06','2025-12-13',TRUE),
-(NULL,6,6,'2025-12-06','2025-12-13',TRUE),
-(NULL,12,7,'2025-12-07','2025-12-14',TRUE),
-(NULL,3,8,'2025-12-08','2025-12-15',TRUE),
-(NULL,10,9,'2025-12-08','2025-12-15',TRUE),
-(NULL,4,10,'2025-12-09','2025-12-16',TRUE),
-(NULL,7,11,'2025-12-10','2025-12-17',TRUE),
-(NULL,11,12,'2025-12-10','2025-12-17',TRUE),
-(NULL,1,13,'2025-12-11','2025-12-18',TRUE),
-(NULL,8,14,'2025-12-30','2026-01-07',TRUE),
-(NULL,3,13,'2026-01-08','2026-01-15',TRUE)
+(NULL,2,3,'2025-11-01','2025-11-08',TRUE),
+(NULL,3,6,'2025-11-02','2025-11-09',TRUE),
+(NULL,4,4,'2025-12-02','2025-12-09',TRUE),
+(NULL,6,7,'2025-12-03','2025-12-10',TRUE),
+(NULL,7,8,'2025-12-04','2025-12-11',TRUE),
+(NULL,8,9,'2025-12-04','2025-12-11',TRUE),
+(NULL,10,10,'2025-12-05','2025-12-12',TRUE),
+(NULL,11,11,'2025-12-04','2025-12-11',TRUE),
+(NULL,12,12,'2025-12-04','2025-12-11',TRUE),
+(NULL,13,13,'2025-12-05','2025-12-12',TRUE),
+(NULL,14,3,'2025-12-06','2025-12-13',TRUE),
+(NULL,15,4,'2025-12-06','2025-12-13',TRUE),
+(NULL,16,5,'2025-12-07','2025-12-14',TRUE),
+(NULL,17,6,'2025-12-07','2025-12-14',TRUE),
+(NULL,18,7,'2025-12-07','2025-12-14',TRUE),
+(NULL,19,8,'2025-12-07','2025-12-14',TRUE),
+(NULL,20,9,'2025-12-08','2025-12-15',TRUE),
+(NULL,1,10,'2025-12-08','2025-12-15',TRUE),
+(NULL,2,11,'2025-12-08','2025-12-15',TRUE),
+(NULL,3,12,'2025-12-08','2025-12-15',TRUE),
+(NULL,4,13,'2026-12-08','2025-12-15',TRUE),
+(NULL,17,17,'2025-12-09','2025-12-16',TRUE),
+(NULL,7,18,'2025-12-10','2025-12-17',TRUE),
+(NULL,8,19,'2025-12-10','2025-12-17',TRUE),
+(NULL,9,21,'2025-12-10','2025-12-17',TRUE),
+(NULL,20,20,'2025-12-10','2025-12-17',TRUE),
+(NULL,11,22,'2026-01-10','2026-01-17',TRUE)
 ;
 
 ##########################################
