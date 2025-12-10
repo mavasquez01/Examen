@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
 public class JMMV_Login extends javax.swing.JFrame {
 
     JMMV_Controlador controlador = new JMMV_Controlador();
-
+    
     public JMMV_Login() {
         initComponents();
         controlador.InitReservas();
@@ -145,6 +145,7 @@ public class JMMV_Login extends javax.swing.JFrame {
             usuario = controlador.JMMV_VerificarLogin(nombreUsuario, pass);
             if (usuario != null) {
                 JMMV_Principal ventanaPrincipal = new JMMV_Principal();
+                ventanaPrincipal.JMMV_SaludarUsuario(usuario);
                 ventanaPrincipal.setTitle("Menu");
                 ventanaPrincipal.setLocationRelativeTo(null);
                 ventanaPrincipal.setResizable(false);

@@ -1,11 +1,11 @@
 package GUI;
 
 public class JMMV_Principal extends javax.swing.JFrame {
-
+ 
     public JMMV_Principal() {
         initComponents();
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -44,7 +44,6 @@ public class JMMV_Principal extends javax.swing.JFrame {
         });
 
         btnHomePrincipal.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnHomePrincipal.setIcon(new javax.swing.ImageIcon("C:\\Users\\Agustin\\OneDrive\\Escritorio\\examen_max\\src\\static\\home_50dp_1F1F1F_FILL0_wght400_GRAD0_opsz48.png")); // NOI18N
         btnHomePrincipal.setText("Inicio");
         btnHomePrincipal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -53,26 +52,27 @@ public class JMMV_Principal extends javax.swing.JFrame {
         });
 
         lbBienvenida.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        lbBienvenida.setText("Bienvenido ");
+        lbBienvenida.setText("PH saludo");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(btnUsuarios)
-                .addGap(18, 18, 18)
-                .addComponent(btnBicicletas, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnReservas, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnHomePrincipal)
+                        .addGap(62, 62, 62)
+                        .addComponent(lbBienvenida, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(btnUsuarios)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnBicicletas, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnReservas, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(33, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnHomePrincipal)
-                .addGap(62, 62, 62)
-                .addComponent(lbBienvenida, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(207, 207, 207))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -139,7 +139,12 @@ public class JMMV_Principal extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnHomePrincipalActionPerformed
 
-
+    public void JMMV_SaludarUsuario(String nombreUsuario){
+        
+        lbBienvenida.setText("Bienvenido "+nombreUsuario);
+        
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBicicletas;
