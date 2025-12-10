@@ -369,5 +369,31 @@ public class JMMV_BicicletaDAO {
         return listaTiposBicicletas;
         
     }
+    
+    public boolean JMMV_NombreBicicletaYaRegistrado(String nombreBicicleta) {
+        String sql = "SELECT  "
+                + "COUNT(*) "
+                + "FROM jmmv_bicicletas b "
+                + "WHERE b.JMMV_bicicletas_nombre = ?";
+
+        try (Connection conn = conexion.JMMV_Conectar(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, nombreBicicleta);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+
+                while (rs.next()) {
+
+                    return rs.getInt(1) > 0;
+                }
+            }
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+            System.out.println("Error en verificación: " + e.getMessage());
+
+        }
+        return false;
+    }
 
 }

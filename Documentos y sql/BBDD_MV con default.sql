@@ -1,7 +1,7 @@
 #Creación de base de datos
 CREATE DATABASE sistema_reserva_bicicletas;
 
-#
+#use
 USE sistema_reserva_bicicletas;
 
 #Creación de tablas
@@ -304,15 +304,67 @@ WHERE JMMV_reservas_id_reserva = 10;
 
 ## 3 Eliminaciones de datos de reservas
 #borrado físico no aplicado
-DELETE FROM jmmv_reservas WHERE jmmv_reservas_id_cliente = 6;
-DELETE FROM jmmv_reservas WHERE jmmv_reservas_id_cliente = 11;
+#DELETE FROM jmmv_reservas WHERE jmmv_reservas_id_cliente = 6;
+#DELETE FROM jmmv_reservas WHERE jmmv_reservas_id_cliente = 11;
+#DELETE FROM jmmv_reservas WHERE jmmv_reservas_id_cliente = 8;
 
 
 ## 3 Eliminaciones de datos de usuarios: CLIENTES
 #borrado físico no aplicado
-DELETE FROM jmmv_clientes WHERE jmmv_clientes_id_cliente = 1;
-DELETE FROM jmmv_clientes WHERE jmmv_clientes_id_cliente = 7;
+#DELETE FROM jmmv_clientes WHERE jmmv_clientes_id_cliente = 6;
+#DELETE FROM jmmv_clientes WHERE jmmv_clientes_id_cliente = 11;
+#DELETE FROM jmmv_clientes WHERE jmmv_clientes_id_cliente = 8;
 
 
 ## 6 Consultas utilizadas en la aplicación
-cualquier consulta usada en la app
+SELECT
+b.JMMV_bicicletas_id_bicicleta AS id,
+b.JMMV_bicicletas_nombre AS nombre,
+b.JMMV_bicicletas_id_tipo_bicicleta AS tipo,
+b.JMMV_bicicletas_esta_disponible AS disponibilidad
+FROM JMMV_bicicletas AS b
+JOIN JMMV_tipos_bicicletas AS t ON b.JMMV_bicicletas_id_tipo_bicicleta = t.JMMV_tipos_bicicletas_id_tipo_bicicleta
+WHERE b.JMMV_bicicletas_esta_activo = TRUE
+ORDER BY b.JMMV_bicicletas_id_bicicleta ASC;
+
+SELECT b.JMMV_bicicletas_nombre AS nombre
+FROM JMMV_bicicletas AS b
+WHERE b.JMMV_bicicletas_esta_activo = TRUE
+ORDER BY b.JMMV_bicicletas_nombre ASC;
+
+SELECT t.JMMV_tipos_bicicletas_nombre AS tipo_bicicleta
+FROM JMMV_tipos_bicicletas t
+WHERE t.JMMV_tipos_bicicletas_esta_activo = TRUE
+ORDER BY t.JMMV_tipos_bicicletas_nombre ASC;
+
+SELECT
+c.JMMV_clientes_id_cliente AS id_cliente,
+c.JMMV_clientes_id_usuario AS id_usuario,
+c.JMMV_clientes_run AS run,
+c.JMMV_clientes_nombres AS nombres,
+c.JMMV_clientes_apellido_paterno AS ap_pat,
+c.JMMV_clientes_apellido_materno AS ap_mat,
+c.JMMV_clientes_id_comuna AS comuna,
+c.JMMV_clientes_calle AS calle,
+c.JMMV_clientes_num_calle AS numero,
+c.JMMV_clientes_telefono AS telefono,
+u.JMMV_usuarios_nom_usuario AS nombre_usuario,
+u.JMMV_usuarios_contrasena AS contrasena,
+c.JMMV_clientes_correo AS correo
+FROM JMMV_clientes c
+JOIN JMMV_usuarios u ON c.JMMV_clientes_id_usuario = u.JMMV_usuarios_id_usuario
+WHERE c.JMMV_clientes_esta_activo = TRUE
+ORDER BY c.JMMV_clientes_id_cliente ASC;
+
+SELECT
+c.JMMV_comunas_nombre AS comuna
+FROM JMMV_comunas c
+WHERE c.JMMV_comunas_esta_activo = TRUE
+ORDER BY JMMV_comunas_nombre ASC;
+
+SELECT CONCAT(
+JMMV_clientes_nombres,' ',JMMV_clientes_apellido_paterno, 
+IF(JMMV_clientes_apellido_materno = 'NA','',CONCAT(' ',JMMV_clientes_apellido_materno))) AS nombre_completo
+FROM JMMV_clientes c
+WHERE c.JMMV_clientes_esta_activo = TRUE
+ORDER BY c.JMMV_clientes_nombres ASC;
