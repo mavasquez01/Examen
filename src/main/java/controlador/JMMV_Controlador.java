@@ -290,31 +290,24 @@ public class JMMV_Controlador {
         return rutRegistrado;
 
     }
-    
-     public boolean JMMV_nombreClienteYaRegistrado(String nombres, String apPat, String apMat) {
-
-        boolean nombreClienteRegistrado = clienteDAO.JMMV_nombreClienteYaRegistrado(nombres,apPat,apMat);
-        return nombreClienteRegistrado;
-
-    }
      
-     public boolean JMMV_nombreUsuarioYaRegistrado(String nombreUsuario) {
+     public boolean JMMV_NombreUsuarioYaRegistrado(String nombreUsuario) {
 
-        boolean nombreUsuarioRegistrado = clienteDAO.JMMV_nombreUsuarioYaRegistrado(nombreUsuario);
+        boolean nombreUsuarioRegistrado = clienteDAO.JMMV_NombreUsuarioYaRegistrado(nombreUsuario);
         return nombreUsuarioRegistrado;
 
     }
      
-      public boolean JMMV_correoYaRegistrado(String correo) {
+      public boolean JMMV_CorreoYaRegistrado(String correo) {
 
-        boolean correoClienteRegistrado = clienteDAO.JMMV_nombreUsuarioYaRegistrado(correo);
+        boolean correoClienteRegistrado = clienteDAO.JMMV_CorreoYaRegistrado(correo);
         return correoClienteRegistrado;
 
     }
       
       public boolean JMMV_NombreBicicletaYaRegistrado(String nombreBicicleta) {
 
-        boolean nombreBicicletaRegistrado = clienteDAO.JMMV_nombreUsuarioYaRegistrado(nombreBicicleta);
+        boolean nombreBicicletaRegistrado = bicicletaDAO.JMMV_NombreBicicletaYaRegistrado(nombreBicicleta);
         return nombreBicicletaRegistrado;
 
     }
