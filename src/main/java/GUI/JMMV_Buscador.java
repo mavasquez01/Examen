@@ -63,6 +63,11 @@ public class JMMV_Buscador extends javax.swing.JDialog {
         btnBuscar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                evtWindowCLosed(evt);
+            }
+        });
 
         lbBuscar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lbBuscar.setText("Buscar \"algo\" por nombre:");
@@ -221,6 +226,32 @@ public class JMMV_Buscador extends javax.swing.JDialog {
             }
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void evtWindowCLosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_evtWindowCLosed
+        switch (ventanaPadre) {
+            case 0 -> {
+                JMMV_GestionBicicleta gestionBici = new JMMV_GestionBicicleta();
+                gestionBici.setTitle("Gestión Bicicletas");
+                gestionBici.setLocationRelativeTo(null);
+                gestionBici.setResizable(false);
+                gestionBici.setVisible(true);
+            }
+            case 1 -> {
+                JMMV_GestionUsuarios gestionUser = new JMMV_GestionUsuarios();
+                            gestionUser.setTitle("Gestión Clientes");
+                            gestionUser.setLocationRelativeTo(null);
+                            gestionUser.setResizable(false);
+                            gestionUser.setVisible(true);
+            }
+            case 2-> {
+                JMMV_GestionReserva gestionReserva = new JMMV_GestionReserva();
+                gestionReserva.setTitle("Gestión Reserva");
+                gestionReserva.setLocationRelativeTo(null);
+                gestionReserva.setResizable(false);
+                gestionReserva.setVisible(true);
+            }
+        }
+    }//GEN-LAST:event_evtWindowCLosed
 
 
 

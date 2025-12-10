@@ -4,6 +4,7 @@ public class JMMV_Principal extends javax.swing.JFrame {
  
     public JMMV_Principal() {
         initComponents();
+        
     }
     
     @SuppressWarnings("unchecked")

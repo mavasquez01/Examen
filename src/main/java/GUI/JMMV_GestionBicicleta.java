@@ -53,7 +53,7 @@ public class JMMV_GestionBicicleta extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         btnHome.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnHome.setIcon(new javax.swing.ImageIcon("C:\\Users\\Agustin\\OneDrive\\Escritorio\\examen_max\\src\\static\\home_50dp_1F1F1F_FILL0_wght400_GRAD0_opsz48.png")); // NOI18N
+        btnHome.setIcon(new javax.swing.ImageIcon("C:\\Users\\FSOS\\Desktop\\Examen\\src\\main\\java\\GUI\\home_50dp_1F1F1F_FILL0_wght400_GRAD0_opsz48.png")); // NOI18N
         btnHome.setText("Inicio");
         btnHome.setToolTipText("");
         btnHome.addActionListener(new java.awt.event.ActionListener() {
@@ -144,7 +144,7 @@ public class JMMV_GestionBicicleta extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(70, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lbNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(tfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
