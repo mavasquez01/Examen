@@ -84,7 +84,6 @@ public class JMMV_ListadoBicicleta extends javax.swing.JFrame {
         jPanel1.add(jPanel5);
 
         btnInicio.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnInicio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logica/stat/home_50dp_1F1F1F_FILL0_wght400_GRAD0_opsz48.png"))); // NOI18N
         btnInicio.setText("Inicio");
         btnInicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
