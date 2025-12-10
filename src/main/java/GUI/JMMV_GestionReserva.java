@@ -82,7 +82,7 @@ public class JMMV_GestionReserva extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         btnHome.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnHome.setIcon(new javax.swing.ImageIcon("C:\\Users\\FSOS\\Desktop\\Examen\\src\\main\\java\\GUI\\home_50dp_1F1F1F_FILL0_wght400_GRAD0_opsz48.png")); // NOI18N
+        btnHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logica/stat/home_50dp_1F1F1F_FILL0_wght400_GRAD0_opsz48.png"))); // NOI18N
         btnHome.setText("Inicio");
         btnHome.setToolTipText("");
         btnHome.addActionListener(new java.awt.event.ActionListener() {
