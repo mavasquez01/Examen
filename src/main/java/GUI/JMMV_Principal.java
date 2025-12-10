@@ -44,10 +44,7 @@ public class JMMV_Principal extends javax.swing.JFrame {
         });
 
         btnHomePrincipal.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-<<<<<<< HEAD
         btnHomePrincipal.setIcon(new javax.swing.ImageIcon("C:\\Users\\FSOS\\Desktop\\Examen\\src\\main\\java\\GUI\\home_50dp_1F1F1F_FILL0_wght400_GRAD0_opsz48.png")); // NOI18N
-=======
->>>>>>> 33fb91311e6eb0def3f0fe318a56f9b17b8ea288
         btnHomePrincipal.setText("Inicio");
         btnHomePrincipal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
