@@ -24,8 +24,7 @@ public class JMMV_ReservaDAO {
 
         String sql = "SELECT "
                 + "r.JMMV_reservas_id_reserva AS id, "
-                + "r.JMMV_reservas_id_cliente AS id_cliente, "
-               
+                + "r.JMMV_reservas_id_cliente AS id_cliente, "               
                 + "CONCAT(JMMV_clientes_nombres,' ',JMMV_clientes_apellido_paterno,' ',COALESCE(JMMV_clientes_apellido_materno,'')) AS nombre_cliente, "
                 + "r.JMMV_reservas_id_bicicleta AS id_bicicleta, "
                 + "b.JMMV_bicicletas_nombre AS nombre_bicicleta, "
@@ -79,7 +78,7 @@ public class JMMV_ReservaDAO {
                 + "JMMV_reservas_fecha_inicio, "
                 + "JMMV_reservas_fecha_fin, "
                 + "JMMV_reservas_esta_activo) "
-                + "VALUES(?,?,?,?,?)";
+                + "VALUES(?, ?, ?, ?, ?)";
 
         try (Connection conn = conexion.JMMV_Conectar(); 
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -93,7 +92,9 @@ public class JMMV_ReservaDAO {
 
             //ejecutar INSERT
             pstmt.executeUpdate();
-            System.out.println("Reserva agregada");
+            
+            System.out.println("TEST | Reserva agregada");
+            
             return true;
 
         } catch (SQLException e) {
