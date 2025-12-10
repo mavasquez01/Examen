@@ -716,7 +716,7 @@ public class JMMV_ClienteDAO {
 
         String sql = "SELECT "
                 + "COUNT(*) "
-                + "FROM jmmv_clientes c "
+                + "FROM JMMV_clientes c "
                 + "WHERE c.JMMV_clientes_run = ?";
 
         try (Connection conn = conexion.JMMV_Conectar(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -739,42 +739,12 @@ public class JMMV_ClienteDAO {
         return false;
     }
     
-     public boolean JMMV_nombreClienteYaRegistrado(String nombres, String apPat, String apMat) {
+     public boolean JMMV_NombreUsuarioYaRegistrado(String nombreUsuario) {
 
          String sql = "SELECT "
                  + "COUNT(*) "
-                 + "FROM jmmv_clientes c "
-                 + "WHERE c.JMMV_clientes_nombres = ? && C.JMMV_clientes_apellido_paterno = ? && C.JMMV_clientes_apellido_materno = ?";
-
-         try (Connection conn = conexion.JMMV_Conectar(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-             pstmt.setString(1, nombres);
-             pstmt.setString(2, apPat);
-             pstmt.setString(3, apMat);          
-             
-
-            try (ResultSet rs = pstmt.executeQuery()) {
-
-                while (rs.next()) {
-
-                    return rs.getInt(1) > 0;
-                }
-            }
-        } catch (SQLException e) {
-
-            e.printStackTrace();
-            System.out.println("Error en verificación: " + e.getMessage());
-
-        }
-        return false;
-    }
-    
-     public boolean JMMV_nombreUsuarioYaRegistrado(String nombreUsuario) {
-
-         String sql = "SELECT "
-                 + "COUNT(*) "
-                 + "FROM jmmv_clientes c "
-                 + "WHERE c.JMMV_clientes_correo = ?;";
+                 + "FROM JMMV_usuarios u "
+                 + "WHERE u.JMMV_usuarios_nom_usuario = ?";
 
          try (Connection conn = conexion.JMMV_Conectar(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -797,12 +767,12 @@ public class JMMV_ClienteDAO {
     }
      
      
-     public boolean JMMV_correoYaRegistrado(String correo) {
+     public boolean JMMV_CorreoYaRegistrado(String correo) {
 
          String sql = "SELECT "
                  + "COUNT(*) "
-                 + "FROM jmmv_usuarios u "
-                 + "WHERE u.JMMV_usuarios_nom_usuario = ?";
+                 + "FROM JMMV_clientes c "
+                 + "WHERE c.JMMV_clientes_correo = ?";
 
          try (Connection conn = conexion.JMMV_Conectar(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
