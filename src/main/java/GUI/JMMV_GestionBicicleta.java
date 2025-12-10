@@ -239,6 +239,16 @@ public class JMMV_GestionBicicleta extends javax.swing.JFrame {
 
             return;
         }
+        
+        if(controlador.JMMV_NombreBicicletaYaRegistrado(nombre)) {
+            JOptionPane.showMessageDialog(
+                            this,
+                            "El Nombre de la bicicleta ya se encuentra registrado, por favor intente con otro.",
+                            "Nombre de bicicleta ya resgitrado",
+                            JOptionPane.ERROR_MESSAGE
+                    );
+                    return;
+        }
 
         try {
             if (bicicleta == null) {

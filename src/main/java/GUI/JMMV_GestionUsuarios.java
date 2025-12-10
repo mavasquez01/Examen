@@ -411,21 +411,41 @@ public class JMMV_GestionUsuarios extends javax.swing.JFrame {
                 );
                 return;
             } 
-                if (nombresLimpiados.length > 2) {
-                    JOptionPane.showMessageDialog(
-                            this,
-                            "Por favor, solo utilice los primeros 2 nombres del cliente.",
-                            "Valores inválidos",
-                            JOptionPane.ERROR_MESSAGE
-                    );
-                    return;
-                }
+            if (nombresLimpiados.length > 2) {
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Por favor, solo utilice los primeros 2 nombres del cliente.",
+                        "Valores inválidos",
+                        JOptionPane.ERROR_MESSAGE
+                );
+                return;
+            }
             
             if (controlador.JMMV_RunYaRegistrado(runConv)) {
                 JOptionPane.showMessageDialog(
                             this,
                             "El Run ya se encuentra registrado, por faovr intente con otro.",
-                            "Valores inválidos",
+                            "Run inválido",
+                            JOptionPane.ERROR_MESSAGE
+                    );
+                    return;
+            }
+            
+            if (controlador.JMMV_NombreUsuarioYaRegistrado(nombres)) {
+                 JOptionPane.showMessageDialog(
+                            this,
+                            "El Nombre de Usuario ya se encuentra registrado, por favor intente con otro.",
+                            "Nombre de Usuario inválido",
+                            JOptionPane.ERROR_MESSAGE
+                    );
+                    return;
+            }
+            
+            if (controlador.JMMV_CorreoYaRegistrado(correo)) {
+                JOptionPane.showMessageDialog(
+                            this,
+                            "El Correo ya se encuentra registrado, por favor intente con otro.",
+                            "Correo inválido",
                             JOptionPane.ERROR_MESSAGE
                     );
                     return;
