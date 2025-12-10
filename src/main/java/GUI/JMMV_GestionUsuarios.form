@@ -212,9 +212,6 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="btnHome">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\Agustin\OneDrive\Escritorio\examen_max\src\static\home_50dp_1F1F1F_FILL0_wght400_GRAD0_opsz48.png"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="Inicio"/>
             <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
@@ -227,7 +224,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="18" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Nombre de Usuario"/>
+            <Property name="text" type="java.lang.String" value="Nombre de Usuario *"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="tfNombre">
@@ -242,7 +239,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="18" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Nombres"/>
+            <Property name="text" type="java.lang.String" value="Nombres *"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btnCrear">
@@ -308,7 +305,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="18" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Nombre de calle"/>
+            <Property name="text" type="java.lang.String" value="Nombre de calle *"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JComboBox" name="cBoxComunas">
@@ -329,7 +326,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="18" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Comuna"/>
+            <Property name="text" type="java.lang.String" value="Comuna *"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lbPass">
@@ -337,7 +334,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="18" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Contrase&#xf1;a"/>
+            <Property name="text" type="java.lang.String" value="Contrase&#xf1;a *"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JPasswordField" name="pfPass">
@@ -352,7 +349,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="18" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="N&#xfa;mero de calle"/>
+            <Property name="text" type="java.lang.String" value="N&#xfa;mero de calle *"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="tfNumCalle">
@@ -374,7 +371,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="18" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Apellido Paterno"/>
+            <Property name="text" type="java.lang.String" value="Apellido Paterno *"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="tfApellidoM">
@@ -405,7 +402,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="18" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="RUN"/>
+            <Property name="text" type="java.lang.String" value="RUN *"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="tfTelefono">
@@ -420,7 +417,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="18" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Telefono"/>
+            <Property name="text" type="java.lang.String" value="Telefono *"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="tfCorreo">
@@ -435,7 +432,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="18" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Correo"/>
+            <Property name="text" type="java.lang.String" value="Correo *"/>
           </Properties>
         </Component>
       </SubComponents>

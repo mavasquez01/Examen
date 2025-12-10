@@ -90,9 +90,6 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="tfUsuario">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Nombre de usuario"/>
-              </Properties>
             </Component>
           </SubComponents>
         </Container>

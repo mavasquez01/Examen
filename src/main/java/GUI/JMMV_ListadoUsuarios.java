@@ -39,7 +39,6 @@ public class JMMV_ListadoUsuarios extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         btnInicio.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnInicio.setIcon(new javax.swing.ImageIcon("C:\\Users\\Agustin\\OneDrive\\Escritorio\\examen_max\\src\\static\\home_50dp_1F1F1F_FILL0_wght400_GRAD0_opsz48.png")); // NOI18N
         btnInicio.setText("Inicio");
         btnInicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -76,11 +75,11 @@ public class JMMV_ListadoUsuarios extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id Cliente", "Nombres", "Apellido Paterno", "Apellido Materno", "Run", "Comuna", "Calle", "Número Calle", "Correo", "Teléfono"
+                "Nombres", "Apellido Paterno", "Apellido Materno", "Run", "Comuna", "Calle", "Número Calle", "Correo", "Teléfono"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

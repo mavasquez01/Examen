@@ -36,8 +36,6 @@ public class JMMV_Login extends javax.swing.JFrame {
 
         lbUsuario.setText("Nombre de Usuario:");
 
-        tfUsuario.setText("Nombre de usuario");
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(

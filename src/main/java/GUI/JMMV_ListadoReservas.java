@@ -88,7 +88,6 @@ public class JMMV_ListadoReservas extends javax.swing.JFrame {
         jPanel1.add(jPanel5);
 
         btnInicio.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnInicio.setIcon(new javax.swing.ImageIcon("C:\\Users\\Agustin\\OneDrive\\Escritorio\\examen_max\\src\\static\\home_50dp_1F1F1F_FILL0_wght400_GRAD0_opsz48.png")); // NOI18N
         btnInicio.setText("Inicio");
         btnInicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -146,7 +145,15 @@ public class JMMV_ListadoReservas extends javax.swing.JFrame {
             new String [] {
                 "Nombre Cliente", "Nombre Bicicleta", "Fecha Inicio", "Fecha Fin"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tbListado.setRowHeight(30);
         tbListado.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
