@@ -154,6 +154,7 @@ public class JMMV_ListadoUsuarios extends javax.swing.JFrame {
                         gestionUser.setResizable(false);
                         gestionUser.setLocationRelativeTo(null);
                         gestionUser.setVisible(true);
+                        JMMV_ListadoUsuarios.this.dispose();
                     }
                 }
             }

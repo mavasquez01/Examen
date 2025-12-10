@@ -228,6 +228,7 @@ public class JMMV_ListadoBicicleta extends javax.swing.JFrame {
                         gestionBicicleta.setResizable(false);
                         gestionBicicleta.setLocationRelativeTo(null);
                         gestionBicicleta.setVisible(true);
+                        JMMV_ListadoBicicleta.this.dispose();
                     }
                 }
             }
