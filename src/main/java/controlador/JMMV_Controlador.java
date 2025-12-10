@@ -274,7 +274,7 @@ public class JMMV_Controlador {
 
     }
 
-    public void InitReservas() {
+    public void JMMV_InitReservas() {
         List<JMMV_Reserva> reservasActivas = reservaDAO.JMMV_ObtenerTodasLasReservasActivas();
         for (JMMV_Reserva reservaActiva : reservasActivas) {
             System.out.println(LocalDate.now());

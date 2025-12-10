@@ -13,14 +13,14 @@ public class JMMV_GestionUsuarios extends javax.swing.JFrame {
 
     public JMMV_GestionUsuarios() {
         initComponents();
-        CargarComunas();
+        JMMV_CargarComunas();
         this.cliente = null;
 
     }
 
     public JMMV_GestionUsuarios(JMMV_Cliente cliente) {
         initComponents();
-        CargarComunas();
+        JMMV_CargarComunas();
         this.cliente = cliente;
         tfNombre.setText(cliente.getJMMV_Cliente_nombres());
         tfApellidoP.setText(cliente.getJMMV_Cliente_apellidoPaterno());
@@ -410,7 +410,7 @@ public class JMMV_GestionUsuarios extends javax.swing.JFrame {
                         JOptionPane.ERROR_MESSAGE
                 );
                 return;
-            } else {
+            } 
                 if (nombresLimpiados.length > 2) {
                     JOptionPane.showMessageDialog(
                             this,
@@ -420,6 +420,15 @@ public class JMMV_GestionUsuarios extends javax.swing.JFrame {
                     );
                     return;
                 }
+            
+            if (controlador.JMMV_RunYaRegistrado(runConv)) {
+                JOptionPane.showMessageDialog(
+                            this,
+                            "El Run ya se encuentra registrado, por faovr intente con otro.",
+                            "Valores inválidos",
+                            JOptionPane.ERROR_MESSAGE
+                    );
+                    return;
             }
 
             if (cliente == null) {
@@ -431,11 +440,11 @@ public class JMMV_GestionUsuarios extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "Usuario agregado con éxito", "Usuario Agregado", JOptionPane.INFORMATION_MESSAGE);
                     
                     this.cliente = null;
-                    CompositorLimpio();
+                    JMMV_CompositorLimpio();
                 } else {
                     JOptionPane.showMessageDialog(this, "Error de inserción, intente nuevamente");
                     this.cliente = null;
-                    CompositorLimpio();
+                    JMMV_CompositorLimpio();
                 }
 
             } else {
@@ -454,7 +463,7 @@ public class JMMV_GestionUsuarios extends javax.swing.JFrame {
                 System.out.println("Test | ID usuario BOTON crear 2 : " + cliente.getJMMV_Cliente_idUsuario());
                 controlador.JMMV_ActualizarCliente(cliente);
                 JOptionPane.showMessageDialog(this, "Usuario actualizado con éxito", "Usuario Actualizado", JOptionPane.INFORMATION_MESSAGE);
-                CompositorLimpio();
+                JMMV_CompositorLimpio();
             }
 
         } catch (NumberFormatException e) {
@@ -478,7 +487,7 @@ public class JMMV_GestionUsuarios extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnListarActionPerformed
 
-    private void CargarComunas() {
+    private void JMMV_CargarComunas() {
 
         List<String> comunas = controlador.JMMV_ObtenerComunasActivas();
 
@@ -487,7 +496,7 @@ public class JMMV_GestionUsuarios extends javax.swing.JFrame {
         }
     }
 
-    private void CompositorLimpio() {
+    private void JMMV_CompositorLimpio() {
         JMMV_GestionUsuarios gestionUsuarios = new JMMV_GestionUsuarios();
         gestionUsuarios.setTitle("Gestión Usuarios");
         gestionUsuarios.setLocationRelativeTo(null);

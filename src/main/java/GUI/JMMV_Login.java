@@ -14,7 +14,7 @@ public class JMMV_Login extends javax.swing.JFrame {
     
     public JMMV_Login() {
         initComponents();
-        controlador.InitReservas();
+        controlador.JMMV_InitReservas();
 
     }
 
@@ -29,7 +29,7 @@ public class JMMV_Login extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         lbPass = new javax.swing.JLabel();
         pfPass = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
+        btnIngresar = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -65,11 +65,11 @@ public class JMMV_Login extends javax.swing.JFrame {
 
         pfPass.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton1.setText("INGRESAR");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnIngresar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnIngresar.setText("INGRESAR");
+        btnIngresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnIngresarActionPerformed(evt);
             }
         });
 
@@ -86,7 +86,7 @@ public class JMMV_Login extends javax.swing.JFrame {
                             .addComponent(pfPass, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(144, 144, 144)
-                        .addComponent(jButton1)))
+                        .addComponent(btnIngresar)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -96,7 +96,7 @@ public class JMMV_Login extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pfPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(btnIngresar)
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
@@ -144,7 +144,7 @@ public class JMMV_Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
         JMMV_Controlador controlador = new JMMV_Controlador();
         String nombreUsuario = tfUsuario.getText();
         String pass = new String(pfPass.getPassword());
@@ -167,14 +167,14 @@ public class JMMV_Login extends javax.swing.JFrame {
             Logger.getLogger(JMMV_Login.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnIngresarActionPerformed
 
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnIngresar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

@@ -24,8 +24,8 @@ public class JMMV_ListadoReservas extends javax.swing.JFrame {
 
     public JMMV_ListadoReservas() {
         initComponents();
-        CargarTabla();
-        SeleccionadorDeTabla(tbListado);
+        JMMV_CargarTabla();
+        JMMV_SeleccionadorDeTabla(tbListado);
     }
 
     @SuppressWarnings("unchecked")
@@ -203,7 +203,7 @@ public class JMMV_ListadoReservas extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_lbListadoMouseClicked
 
-    private void CargarTabla() {
+    private void JMMV_CargarTabla() {
         List<JMMV_Reserva> ReservasActivas = controlador.JMMV_ObtenerTodasLasReservasActivas();
         DefaultTableModel modelo = (DefaultTableModel) tbListado.getModel();
         for (JMMV_Reserva reserva : ReservasActivas) {
@@ -211,7 +211,7 @@ public class JMMV_ListadoReservas extends javax.swing.JFrame {
         }
     }
 
-    private void SeleccionadorDeTabla(JTable tabla) {
+    private void JMMV_SeleccionadorDeTabla(JTable tabla) {
         ListSelectionModel selectionModel = tabla.getSelectionModel();
         selectionModel.addListSelectionListener(new ListSelectionListener() {
             @Override

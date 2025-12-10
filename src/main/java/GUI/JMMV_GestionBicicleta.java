@@ -12,13 +12,13 @@ public class JMMV_GestionBicicleta extends javax.swing.JFrame {
 
     public JMMV_GestionBicicleta() {
         initComponents();
-        CargarTipos();
+        JMMV_CargarTipos();
         this.bicicleta = null;
     }
 
     public JMMV_GestionBicicleta(JMMV_Bicicleta bicicleta) {
         initComponents();
-        CargarTipos();
+        JMMV_CargarTipos();
         this.bicicleta = bicicleta;
         btnModificar.setText("Seleccionar otro");
         btnCrear.setText("Modificar");
@@ -250,7 +250,7 @@ public class JMMV_GestionBicicleta extends javax.swing.JFrame {
                 } else {
                     JOptionPane.showMessageDialog(this, "Bicicleta agregada con éxito", "Bicicleta Agregada", JOptionPane.INFORMATION_MESSAGE);
                     this.bicicleta = null;
-                    CompositorLimpio();
+                    JMMV_CompositorLimpio();
                 }
 
             } else {
@@ -262,7 +262,7 @@ public class JMMV_GestionBicicleta extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "No se pudo actualizar la bicicleta, intente nuevamente", "FALLO AL ACTUALIZAR", JOptionPane.ERROR_MESSAGE);
                 } else {
                     JOptionPane.showMessageDialog(this, "Bicicleta actualizada con éxito", "Bicicleta Actualizada", JOptionPane.INFORMATION_MESSAGE);
-                    CompositorLimpio();
+                    JMMV_CompositorLimpio();
                 }
             }
         } catch (Exception e) {
@@ -284,7 +284,7 @@ public class JMMV_GestionBicicleta extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnListarActionPerformed
 
-    private void CargarTipos() {
+    private void JMMV_CargarTipos() {
 
         List<String> tipos = controlador.JMMV_ObtenerTiposDeBicicletaActivos();
 
@@ -293,7 +293,7 @@ public class JMMV_GestionBicicleta extends javax.swing.JFrame {
         }
     }
 
-    private void CompositorLimpio() {
+    private void JMMV_CompositorLimpio() {
         JMMV_GestionBicicleta gestionBicicleta = new JMMV_GestionBicicleta();
         gestionBicicleta.setTitle("Gestión Bicicleta");
         gestionBicicleta.setLocationRelativeTo(null);

@@ -20,8 +20,8 @@ public class JMMV_ListadoBicicleta extends javax.swing.JFrame {
 
     public JMMV_ListadoBicicleta() {
         initComponents();
-        CargarTabla();
-        SeleccionadorDeTabla(tbListado);
+        JMMV_CargarTabla();
+        JMMV_SeleccionadorDeTabla(tbListado);
     }
 
     @SuppressWarnings("unchecked")
@@ -199,7 +199,7 @@ public class JMMV_ListadoBicicleta extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_tbListadoMouseClicked
 
-    private void CargarTabla() {
+    private void JMMV_CargarTabla() {
         List<JMMV_Bicicleta> bicicletasActivas = controlador.JMMV_ObtenerTodasLasBicicletasActivas();
         DefaultTableModel modelo = (DefaultTableModel) tbListado.getModel();
         for (JMMV_Bicicleta bicicleta : bicicletasActivas) {
@@ -213,7 +213,7 @@ public class JMMV_ListadoBicicleta extends javax.swing.JFrame {
         }
     }
 
-    private void SeleccionadorDeTabla(JTable tabla) {
+    private void JMMV_SeleccionadorDeTabla(JTable tabla) {
         ListSelectionModel selectionModel = tabla.getSelectionModel();
         selectionModel.addListSelectionListener(new ListSelectionListener() {
             @Override

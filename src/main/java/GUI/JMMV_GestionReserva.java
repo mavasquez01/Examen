@@ -19,8 +19,8 @@ public class JMMV_GestionReserva extends javax.swing.JFrame {
 
     public JMMV_GestionReserva() {
         initComponents();
-        CargarBicicletas();
-        CargarClientes();
+        JMMV_CargarBicicletas();
+        JMMV_CargarClientes();
         comprobacion = timeMachine.JMMV_asDate(LocalDate.now());
         dcInicio.setDate(comprobacion);
         dcTermino.setDate(comprobacion);
@@ -29,8 +29,8 @@ public class JMMV_GestionReserva extends javax.swing.JFrame {
 
     public JMMV_GestionReserva(JMMV_Reserva reserva) {
         initComponents();
-        CargarBicicletas();
-        CargarClientes();
+        JMMV_CargarBicicletas();
+        JMMV_CargarClientes();
         System.out.println("aca entre 2");
         this.reserva = reserva;
         btnCrear.setText("Modificar");
@@ -46,8 +46,8 @@ public class JMMV_GestionReserva extends javax.swing.JFrame {
     public JMMV_GestionReserva(List<JMMV_Reserva> reservas) {
 
         initComponents();
-        CargarBicicletas();
-        CargarClientesDeReserva(reservas);
+        JMMV_CargarBicicletas();
+        JMMV_CargarClientesDeReserva(reservas);
         System.out.println("aca entre 3");
         comprobacion = timeMachine.JMMV_asDate(LocalDate.now());
         dcInicio.setDate(comprobacion);
@@ -320,7 +320,7 @@ public class JMMV_GestionReserva extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(this, "No se pudo crear la reserva, intente nuevamene", "ERROR AL AGREGAR RESERVA", JOptionPane.ERROR_MESSAGE);
                     } else {
                         JOptionPane.showMessageDialog(this, "Reserva agregada con éxito", "Reserva Agregada", JOptionPane.INFORMATION_MESSAGE);
-                        CompositorLimpio();
+                        JMMV_CompositorLimpio();
                     }
 
                 } else {
@@ -346,7 +346,7 @@ public class JMMV_GestionReserva extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(this, "No se pudo acualizar la reserva, intente nuevamene", "ERROR AL ACTUALIZAR RESERVA", JOptionPane.ERROR_MESSAGE);
                     } else {
                         JOptionPane.showMessageDialog(this, "Reserva actualizada con éxito", "Reserva Actualizada", JOptionPane.INFORMATION_MESSAGE);
-                        CompositorLimpio();
+                        JMMV_CompositorLimpio();
                     }
 
                 }
@@ -373,7 +373,7 @@ public class JMMV_GestionReserva extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnListarActionPerformed
 
-    private void CargarBicicletas() {
+    private void JMMV_CargarBicicletas() {
 
         List<String> bicicletas = controlador.JMMV_ObtenerNombresBicicletasActivas();
 
@@ -382,7 +382,7 @@ public class JMMV_GestionReserva extends javax.swing.JFrame {
         }
     }
 
-    private void CargarClientes() {
+    private void JMMV_CargarClientes() {
 
         List<String> clientes = controlador.JMMV_ObtenerNombresCompletosClientesActivos();
 
@@ -391,13 +391,13 @@ public class JMMV_GestionReserva extends javax.swing.JFrame {
         }
     }
 
-    private void CargarClientesDeReserva(List<JMMV_Reserva> reservas) {
+    private void JMMV_CargarClientesDeReserva(List<JMMV_Reserva> reservas) {
         for (JMMV_Reserva reserva : reservas) {
             cBoxClientes.addItem(reserva.getJMMV_Reserva_nomCliente());
         }
     }
 
-    private void CompositorLimpio() {
+    private void JMMV_CompositorLimpio() {
         JMMV_GestionReserva gestionReservas = new JMMV_GestionReserva();
         gestionReservas.setTitle("Gestion Reservas");
         gestionReservas.setLocationRelativeTo(null);

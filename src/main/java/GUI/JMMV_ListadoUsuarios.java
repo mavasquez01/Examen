@@ -22,8 +22,8 @@ public class JMMV_ListadoUsuarios extends javax.swing.JFrame {
     public JMMV_ListadoUsuarios() {
 
         initComponents();
-        CargarTabla();
-        SeleccionadorDeTabla(tbListado);
+        JMMV_CargarTabla();
+        JMMV_SeleccionadorDeTabla(tbListado);
     }
 
     @SuppressWarnings("unchecked")
@@ -132,7 +132,7 @@ public class JMMV_ListadoUsuarios extends javax.swing.JFrame {
 
     }//GEN-LAST:event_tbListadoMouseClicked
 
-    private void CargarTabla() {
+    private void JMMV_CargarTabla() {
         List<JMMV_Cliente> clientesActivos = controlador.JMMV_ObtenerTodosLosClientesActivos();
         DefaultTableModel modelo = (DefaultTableModel) tbListado.getModel();
         for (JMMV_Cliente cliente : clientesActivos) {
@@ -142,7 +142,7 @@ public class JMMV_ListadoUsuarios extends javax.swing.JFrame {
         }
     }
 
-    private void SeleccionadorDeTabla(JTable tabla) {
+    private void JMMV_SeleccionadorDeTabla(JTable tabla) {
         ListSelectionModel selectionModel = tabla.getSelectionModel();
         selectionModel.addListSelectionListener(new ListSelectionListener() {
             @Override
