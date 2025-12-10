@@ -712,4 +712,116 @@ public class JMMV_ClienteDAO {
         return -1; //retorna valor no válido
     }
 
+    public boolean JMMV_RunYaRegistrado(int run) {
+
+        String sql = "SELECT "
+                + "COUNT(*) "
+                + "FROM jmmv_clientes c "
+                + "WHERE c.JMMV_clientes_run = ?";
+
+        try (Connection conn = conexion.JMMV_Conectar(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, run);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+
+                while (rs.next()) {
+
+                    return rs.getInt(1) > 0;
+                }
+            }
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+            System.out.println("Error en verificación: " + e.getMessage());
+
+        }
+        return false;
+    }
+    
+     public boolean JMMV_nombreClienteYaRegistrado(String nombres, String apPat, String apMat) {
+
+         String sql = "SELECT "
+                 + "COUNT(*) "
+                 + "FROM jmmv_clientes c "
+                 + "WHERE c.JMMV_clientes_nombres = ? && C.JMMV_clientes_apellido_paterno = ? && C.JMMV_clientes_apellido_materno = ?";
+
+         try (Connection conn = conexion.JMMV_Conectar(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+             pstmt.setString(1, nombres);
+             pstmt.setString(2, apPat);
+             pstmt.setString(3, apMat);          
+             
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+
+                while (rs.next()) {
+
+                    return rs.getInt(1) > 0;
+                }
+            }
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+            System.out.println("Error en verificación: " + e.getMessage());
+
+        }
+        return false;
+    }
+    
+     public boolean JMMV_nombreUsuarioYaRegistrado(String nombreUsuario) {
+
+         String sql = "SELECT "
+                 + "COUNT(*) "
+                 + "FROM jmmv_clientes c "
+                 + "WHERE c.JMMV_clientes_correo = ?;";
+
+         try (Connection conn = conexion.JMMV_Conectar(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+             pstmt.setString(1, nombreUsuario);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+
+                while (rs.next()) {
+
+                    return rs.getInt(1) > 0;
+                }
+            }
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+            System.out.println("Error en verificación: " + e.getMessage());
+
+        }
+        return false;
+    }
+     
+     
+     public boolean JMMV_correoYaRegistrado(String correo) {
+
+         String sql = "SELECT "
+                 + "COUNT(*) "
+                 + "FROM jmmv_usuarios u "
+                 + "WHERE u.JMMV_usuarios_nom_usuario = ?";
+
+         try (Connection conn = conexion.JMMV_Conectar(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+             pstmt.setString(1, correo);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+
+                while (rs.next()) {
+
+                    return rs.getInt(1) > 0;
+                }
+            }
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+            System.out.println("Error en verificación: " + e.getMessage());
+
+        }
+        return false;
+    }
+    
 }

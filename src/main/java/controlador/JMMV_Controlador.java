@@ -283,5 +283,41 @@ public class JMMV_Controlador {
             }
         }
     }
+    
+    public boolean JMMV_RunYaRegistrado(int run) {
+
+        boolean rutRegistrado = clienteDAO.JMMV_RunYaRegistrado(run);
+        return rutRegistrado;
+
+    }
+    
+     public boolean JMMV_nombreClienteYaRegistrado(String nombres, String apPat, String apMat) {
+
+        boolean nombreClienteRegistrado = clienteDAO.JMMV_nombreClienteYaRegistrado(nombres,apPat,apMat);
+        return nombreClienteRegistrado;
+
+    }
+     
+     public boolean JMMV_nombreUsuarioYaRegistrado(String nombreUsuario) {
+
+        boolean nombreUsuarioRegistrado = clienteDAO.JMMV_nombreUsuarioYaRegistrado(nombreUsuario);
+        return nombreUsuarioRegistrado;
+
+    }
+     
+      public boolean JMMV_correoYaRegistrado(String correo) {
+
+        boolean correoClienteRegistrado = clienteDAO.JMMV_nombreUsuarioYaRegistrado(correo);
+        return correoClienteRegistrado;
+
+    }
+      
+      public boolean JMMV_NombreBicicletaYaRegistrado(String nombreBicicleta) {
+
+        boolean nombreBicicletaRegistrado = clienteDAO.JMMV_nombreUsuarioYaRegistrado(nombreBicicleta);
+        return nombreBicicletaRegistrado;
+
+    }
+     
 
 }
