@@ -44,7 +44,7 @@ public class JMMV_Principal extends javax.swing.JFrame {
         });
 
         btnHomePrincipal.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnHomePrincipal.setIcon(new javax.swing.ImageIcon("C:\\Users\\Agustin\\OneDrive\\Escritorio\\examen_max\\src\\static\\home_50dp_1F1F1F_FILL0_wght400_GRAD0_opsz48.png")); // NOI18N
+        btnHomePrincipal.setIcon(new javax.swing.ImageIcon("C:\\Users\\FSOS\\Desktop\\Examen\\src\\main\\java\\GUI\\home_50dp_1F1F1F_FILL0_wght400_GRAD0_opsz48.png")); // NOI18N
         btnHomePrincipal.setText("Inicio");
         btnHomePrincipal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

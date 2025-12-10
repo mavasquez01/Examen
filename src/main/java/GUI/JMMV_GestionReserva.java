@@ -81,7 +81,8 @@ public class JMMV_GestionReserva extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        btnHome.setIcon(new javax.swing.ImageIcon("C:\\Users\\Agustin\\OneDrive\\Escritorio\\examen_max\\src\\static\\home_50dp_1F1F1F_FILL0_wght400_GRAD0_opsz48.png")); // NOI18N
+        btnHome.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnHome.setIcon(new javax.swing.ImageIcon("C:\\Users\\FSOS\\Desktop\\Examen\\src\\main\\java\\GUI\\home_50dp_1F1F1F_FILL0_wght400_GRAD0_opsz48.png")); // NOI18N
         btnHome.setText("Inicio");
         btnHome.setToolTipText("");
         btnHome.addActionListener(new java.awt.event.ActionListener() {
@@ -127,8 +128,13 @@ public class JMMV_GestionReserva extends javax.swing.JFrame {
         lbInicio.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lbInicio.setText("Fecha Inicio");
 
+        dcInicio.setForeground(new java.awt.Color(255, 255, 255));
+        dcInicio.setMinSelectableDate(new java.util.Date(1735704090000L));
+
         lbTermino.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lbTermino.setText("Fecha Termino");
+
+        dcTermino.setForeground(new java.awt.Color(255, 255, 255));
 
         btnCrear.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnCrear.setText("Crear");
