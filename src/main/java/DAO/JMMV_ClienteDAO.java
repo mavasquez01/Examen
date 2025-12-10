@@ -399,9 +399,8 @@ public class JMMV_ClienteDAO {
         List<String> listaNombresCompletos = new ArrayList<>();
 
         //consulta
-        String sql = "SELECT CONCAT(JMMV_clientes_nombres,' ',JMMV_clientes_apellido_paterno,' ',COALESCE(JMMV_clientes_apellido_materno,''))  "
-                + "AS nombre_completo  "
-                + "FROM JMMV_clientes c  "
+        String sql = "SELECT CONCAT(JMMV_clientes_nombres,' ',JMMV_clientes_apellido_paterno, IF(JMMV_clientes_apellido_materno = 'NA','',CONCAT(' ',JMMV_clientes_apellido_materno))) AS nombre_completo "
+                + "FROM JMMV_clientes c "
                 + "WHERE c.JMMV_clientes_esta_activo = ? "
                 + "ORDER BY c.JMMV_clientes_nombres ASC";
 
