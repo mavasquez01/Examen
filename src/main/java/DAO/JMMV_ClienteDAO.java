@@ -678,24 +678,34 @@ public class JMMV_ClienteDAO {
         String sql = "SELECT "
                 + "COUNT(*) "
                 + "FROM JMMV_reservas r "
-                + "JOIN jmmv_clientes c "
-                + "WHERE c.JMMV_clientes_id_cliente = ? AND r.JMMV_reservas_esta_activo = true AND c.JMMV_clientes_esta_activo = ?";
+                + "JOIN jmmv_clientes c ON r.JMMV_reservas_id_cliente = c.JMMV_clientes_id_cliente "
+                + "WHERE c.JMMV_clientes_id_cliente = ? && r.JMMV_reservas_esta_activo = ? && c.JMMV_clientes_esta_activo = ?";
 
         try (Connection conn = conexion.JMMV_Conectar(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setInt(1, idCliente);
             pstmt.setBoolean(2, true);
+            pstmt.setBoolean(3, true);
 
             try (ResultSet rs = pstmt.executeQuery()) {
 
                 if (rs.next()) {
-                    System.out.println("TEST | reservas vigentes encontradas");
-                    System.out.println(rs.getInt(1));
+                    
+                    System.out.println("TEST | reservas vigentes encontradas: "+rs.getInt(1));           
+                    
                     return rs.getInt(1);
                 }
-            }
-        } catch (SQLException e) {
+            }catch (SQLException e) {
+                
             e.printStackTrace();
+            
+            System.out.println("Error al contar las reservas vigentes de cliente: "+e.getMessage());
+        }
+        } catch (SQLException e) {
+            
+            e.printStackTrace();
+            
+            System.out.println(e.getMessage());
         }
         return -1; //retorna valor no válido
     }
