@@ -77,7 +77,6 @@ public class JMMV_GestionUsuarios extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        btnHome.setIcon(new javax.swing.ImageIcon("C:\\Users\\Agustin\\OneDrive\\Escritorio\\examen_max\\src\\static\\home_50dp_1F1F1F_FILL0_wght400_GRAD0_opsz48.png")); // NOI18N
         btnHome.setText("Inicio");
         btnHome.setToolTipText("");
         btnHome.addActionListener(new java.awt.event.ActionListener() {
@@ -87,12 +86,12 @@ public class JMMV_GestionUsuarios extends javax.swing.JFrame {
         });
 
         lbUser.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lbUser.setText("Nombre de Usuario");
+        lbUser.setText("Nombre de Usuario *");
 
         tfNombre.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         lbNombre.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lbNombre.setText("Nombres");
+        lbNombre.setText("Nombres *");
 
         btnCrear.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnCrear.setText("Crear");
@@ -131,27 +130,27 @@ public class JMMV_GestionUsuarios extends javax.swing.JFrame {
         tfNomCalle.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         lbNomCalle.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lbNomCalle.setText("Nombre de calle");
+        lbNomCalle.setText("Nombre de calle *");
 
         cBoxComunas.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         lbComuna.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lbComuna.setText("Comuna");
+        lbComuna.setText("Comuna *");
 
         lbPass.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lbPass.setText("Contraseña");
+        lbPass.setText("Contraseña *");
 
         pfPass.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         lbNumCalle.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lbNumCalle.setText("Número de calle");
+        lbNumCalle.setText("Número de calle *");
 
         tfNumCalle.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         tfApellidoP.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         lbApellidoP.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lbApellidoP.setText("Apellido Paterno");
+        lbApellidoP.setText("Apellido Paterno *");
 
         tfApellidoM.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
@@ -162,17 +161,17 @@ public class JMMV_GestionUsuarios extends javax.swing.JFrame {
         tfRun.setToolTipText("Ingresar RUN sin puntos ni guion. Si su rut termina en K, reemplazelo con un 0. ");
 
         lbRun.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lbRun.setText("RUN");
+        lbRun.setText("RUN *");
 
         tfTelefono.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         lbTelefono.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lbTelefono.setText("Telefono");
+        lbTelefono.setText("Telefono *");
 
         tfCorreo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         lbCorreo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lbCorreo.setText("Correo");
+        lbCorreo.setText("Correo *");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -372,15 +371,18 @@ public class JMMV_GestionUsuarios extends javax.swing.JFrame {
         String pass = new String(pfPass.getPassword());
         String telefono = tfTelefono.getText();
 
-        if (nombres.isEmpty() || apellidoP.isEmpty() || apellidoM.isEmpty()
+        //saqué apellidoM.isEmpty()
+        if (nombres.isEmpty() || apellidoP.isEmpty() 
                 || user.isEmpty() || run.isEmpty() || correo.isEmpty()
                 || nomCalle.isEmpty() || numCalle.isEmpty() || comuna.isEmpty()
                 || pass.isEmpty() || telefono.isEmpty()) {
 
             JOptionPane.showMessageDialog(
                     this,
-                    "Todos los campos son obligatorios.",
-                    "Campos vacios",
+                    "Los campos * son obligatorios.",
+                    //cambio:
+                    //"Todos los campos son obligatorios.",
+                    "Campos vacíos",
                     JOptionPane.ERROR_MESSAGE
             );
 
@@ -392,12 +394,18 @@ public class JMMV_GestionUsuarios extends javax.swing.JFrame {
             int runConv = Integer.parseInt(run);
             int numCalleConv = Integer.parseInt(numCalle);
             int telefonoConv = Integer.parseInt(telefono);
+            
+            //agregado:            
+            String apellidoMConv = apellidoM;
+            if(apellidoMConv.isEmpty() || apellidoMConv.equals("")){
+                apellidoMConv = "NA";
+            }
 
             if (runConv < 10000000 || numCalleConv <= 0 || telefonoConv <= 900000000) {
                 JOptionPane.showMessageDialog(
                         this,
                         "El RUN, número de calle o teléfono contiene valores inválidos.",
-                        "Valores invalidos",
+                        "Valores inválidos",
                         JOptionPane.ERROR_MESSAGE
                 );
                 return;
@@ -406,7 +414,7 @@ public class JMMV_GestionUsuarios extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(
                             this,
                             "Por favor, solo utilice los primeros 2 nombres del cliente.",
-                            "Valores invalidos",
+                            "Valores inválidos",
                             JOptionPane.ERROR_MESSAGE
                     );
                     return;
@@ -414,7 +422,7 @@ public class JMMV_GestionUsuarios extends javax.swing.JFrame {
             }
 
             if (cliente == null) {
-                cliente = new JMMV_Cliente(user, pass, correo, runConv, nombres, apellidoP, apellidoM, comuna, nomCalle, numCalleConv, telefonoConv);
+                cliente = new JMMV_Cliente(user, pass, correo, runConv, nombres, apellidoP, apellidoMConv, comuna, nomCalle, numCalleConv, telefonoConv);
 
                 System.out.println("Test | nombre de usuario a crear: " + cliente.getJMMV_Cliente_nomUsuario());
                 boolean exito = controlador.JMMV_AgregarCliente(cliente);
@@ -455,7 +463,7 @@ public class JMMV_GestionUsuarios extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(
                     this,
                     "El RUN, número de calle o teléfono contiene valores inválidos.",
-                    "Valores invalidos",
+                    "Valores inválidos",
                     JOptionPane.ERROR_MESSAGE
             );
             return;
@@ -483,7 +491,7 @@ public class JMMV_GestionUsuarios extends javax.swing.JFrame {
 
     private void CompositorLimpio() {
         JMMV_GestionUsuarios gestionUsuarios = new JMMV_GestionUsuarios();
-        gestionUsuarios.setTitle("Gestion Usuarios");
+        gestionUsuarios.setTitle("Gestión Usuarios");
         gestionUsuarios.setLocationRelativeTo(null);
         gestionUsuarios.setResizable(false);
         gestionUsuarios.setVisible(true);
