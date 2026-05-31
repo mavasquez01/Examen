@@ -13,12 +13,12 @@ Aplicación de escritorio para administrar un inventario de bicicletas, permitie
 
 ## Características
 
-- ✅ Interfaz gráfica de usuario con Java Swing
-- ✅ Gestión de inventario de bicicletas
-- ✅ Control de disponibilidad
-- ✅ Sistema de reservas
-- ✅ Base de datos SQL integrada
-- ✅ Registro de mantenimiento
+- Interfaz gráfica de usuario con Java Swing
+- Gestión de inventario de bicicletas
+- Control de disponibilidad
+- Sistema de reservas
+- Base de datos SQL integrada
+- Registro de mantenimiento
 
 ## Requisitos
 
@@ -33,14 +33,8 @@ git clone https://github.com/mavasquez01/Gestion_Bicicleta.git
 cd Gestion_Bicicleta
 mvn clean install
 ```
+El proyecto fue creado en Netbeans pero puede ser ejecutado directamente desde tu IDE (NetBeans, Eclipse, IntelliJ):
 
-## Ejecución
-
-```bash
-mvn javafx:run
-```
-
-O ejecutar directamente desde tu IDE favorito (NetBeans, Eclipse, IntelliJ):
 1. Abrir el proyecto
 2. Click derecho en el proyecto → Run
 
@@ -64,8 +58,4 @@ BBDD_Mardonez_Vasquez.sql
 
 ## Autor
 
-mavasquez01
-
-## Licencia
-
-Este proyecto está bajo licencia MIT.
+mavasquez01 - jmardonez
