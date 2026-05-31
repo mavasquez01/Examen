@@ -57,7 +57,11 @@ BBDD_Mardonez_Vasquez.sql
 ```
 ## Demo
 
-[![Watch the video](https://youtube.com)](https://youtu.be/IxUAuAt7R_g)
+<p align="center">
+  <a href="https://youtu.be/IxUAuAt7R_g">
+    <img src="https://img.youtube.com/vi/IxUAuAt7R_g/maxresdefault.jpg" alt="Watch the demo" width="700">
+  </a>
+</p>
 
 ## Imagenes
 1. Login
