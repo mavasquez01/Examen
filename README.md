@@ -57,7 +57,7 @@ BBDD_Mardonez_Vasquez.sql
 ```
 ## Demo
 
-https://github.com/user-attachments/assets/165346b7-c6eb-4d78-8c56-a62b5d61e226
+https://github.com/user-attachments/assets/d5ab5152-3086-4e5f-8fca-b2c549f1ba08
 
 ## Imagenes
 1. Login
