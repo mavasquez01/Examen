@@ -224,7 +224,7 @@ public class JMMV_ListadoBicicleta extends javax.swing.JFrame {
                         System.out.println(nombreBicicleta.toString());
                         bicicleta = controlador.JMMV_ObtenerBicicletaPorNombre(nombreBicicleta.toString());
                         JMMV_GestionBicicleta gestionBicicleta = new JMMV_GestionBicicleta(bicicleta);
-                        gestionBicicleta.setTitle("Editar Cliente");
+                        gestionBicicleta.setTitle("Editar Bicicleta");
                         gestionBicicleta.setResizable(false);
                         gestionBicicleta.setLocationRelativeTo(null);
                         gestionBicicleta.setVisible(true);

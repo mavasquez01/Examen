@@ -18,6 +18,7 @@ public class JMMV_Confirmacion extends javax.swing.JDialog {
         initComponents();
         this.cliente = cliente;
         this.picker = 1;
+        lbNombre.setText(cliente.getJMMV_Cliente_nombreCompleto());
     }
 
     public JMMV_Confirmacion(java.awt.Frame parent, boolean modal, JMMV_Bicicleta bicicleta) {
@@ -25,6 +26,7 @@ public class JMMV_Confirmacion extends javax.swing.JDialog {
         initComponents();
         this.bicicleta = bicicleta;
         this.picker = 0;
+        lbNombre.setText(bicicleta.getJMMV_Bicicleta_nombre());
     }
 
     public JMMV_Confirmacion(java.awt.Frame parent, boolean modal, JMMV_Reserva reserva) {
@@ -32,6 +34,7 @@ public class JMMV_Confirmacion extends javax.swing.JDialog {
         initComponents();
         this.reserva = reserva;
         this.picker = 2;
+        lbNombre.setText(reserva.getJMMV_Reserva_nomCliente());
     }
 
     /**
