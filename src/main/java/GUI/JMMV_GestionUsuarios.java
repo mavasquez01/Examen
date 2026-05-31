@@ -413,38 +413,37 @@ public class JMMV_GestionUsuarios extends javax.swing.JFrame {
                 );
                 return;
             }
-            
-            if (controlador.JMMV_RunYaRegistrado(runConv)) {
-                JOptionPane.showMessageDialog(
+
+            if (cliente == null) { 
+                if (controlador.JMMV_RunYaRegistrado(runConv)) {
+                    JOptionPane.showMessageDialog(
                             this,
                             "El Run ya se encuentra registrado, por faovr intente con otro.",
                             "Run inválido",
                             JOptionPane.ERROR_MESSAGE
                     );
                     return;
-            }
-            
-            if (controlador.JMMV_NombreUsuarioYaRegistrado(nombres)) {
-                 JOptionPane.showMessageDialog(
+                }
+
+                if (controlador.JMMV_NombreUsuarioYaRegistrado(nombres)) {
+                    JOptionPane.showMessageDialog(
                             this,
                             "El Nombre de Usuario ya se encuentra registrado, por favor intente con otro.",
                             "Nombre de Usuario inválido",
                             JOptionPane.ERROR_MESSAGE
                     );
                     return;
-            }
-            
-            if (controlador.JMMV_CorreoYaRegistrado(correo)) {
-                JOptionPane.showMessageDialog(
+                }
+
+                if (controlador.JMMV_CorreoYaRegistrado(correo)) {
+                    JOptionPane.showMessageDialog(
                             this,
                             "El Correo ya se encuentra registrado, por favor intente con otro.",
                             "Correo inválido",
                             JOptionPane.ERROR_MESSAGE
                     );
                     return;
-            }
-
-            if (cliente == null) {
+                }
                 cliente = new JMMV_Cliente(user, pass, correo, runConv, nombres, apellidoP, apellidoMConv, comuna, nomCalle, numCalleConv, telefonoConv);
 
                 System.out.println("Test | nombre de usuario a crear: " + cliente.getJMMV_Cliente_nomUsuario());
